@@ -149,6 +149,7 @@ body {
     width: 100%;
     position: relative;
     overflow: hidden;
+    scroll-padding-top: 600px;
 }
 
 .carousel__viewport {
@@ -158,7 +159,6 @@ body {
     display: flex;
     overflow-x: hidden;
     counter-reset: item;
-    scroll-behavior: smooth;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -297,12 +297,33 @@ body {
     background-color: #17a2b8;
 }
 
-#carousel__slide1:target ~ .carousel__navigation .carousel__navigation-list li:nth-child(1) .carousel__navigation-button,
-#carousel__slide2:target ~ .carousel__navigation .carousel__navigation-list li:nth-child(2) .carousel__navigation-button,
-#carousel__slide3:target ~ .carousel__navigation .carousel__navigation-list li:nth-child(3) .carousel__navigation-button {
-    background-color: #17a2b8;
-    width: 35px;
-    border-radius: 10px;
+/* Todos los indicadores por defecto (gris, redondo) */
+.carousel__navigation-button {
+    background-color: #cbd5e1 !important;
+    width: 12px !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease;
+}
+
+/* Cuando slide 1 está visible (es :target) */
+.hero-carousel:has(#carousel__slide1:target) .carousel__navigation-item:nth-child(1) .carousel__navigation-button {
+    background-color: #17a2b8 !important;
+    width: 35px !important;
+    border-radius: 10px !important;
+}
+
+/* Cuando slide 2 está visible */
+.hero-carousel:has(#carousel__slide2:target) .carousel__navigation-item:nth-child(2) .carousel__navigation-button {
+    background-color: #17a2b8 !important;
+    width: 35px !important;
+    border-radius: 10px !important;
+}
+
+/* Cuando slide 3 está visible */
+.hero-carousel:has(#carousel__slide3:target) .carousel__navigation-item:nth-child(3) .carousel__navigation-button {
+    background-color: #17a2b8 !important;
+    width: 35px !important;
+    border-radius: 10px !important;
 }
 
 
