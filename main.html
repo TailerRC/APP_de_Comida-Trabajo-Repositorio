@@ -33,71 +33,91 @@
         </nav>
     </header>
 
-    <!-- Hero Carousel CSS-only -->
+    <!-- Hero Carousel -->
     <section class="hero-carousel" id="home" aria-label="Hero Carousel">
-        <ol class="carousel__viewport">
-            <li id="carousel__slide1" class="carousel__slide carousel__slide--1">
-                <div class="carousel__snapper">
-                    <div class="slide-content">
-                        <div style="background: url('images/Landing/Carrusel_1.jpg') center / cover no-repeat, linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 0; position: relative;">
-                            <div style="position: absolute; inset: 0;"></div>
-                            <div style="text-align: center; color: white; z-index: 10; max-width: 600px; padding: 2rem;">
-                                <h2 style="font-size: 3rem; margin-bottom: 20px;">Descubre el Futuro con el Quantum X Pro</h2>
-                                <p style="font-size: 1.2rem; margin-bottom: 30px;">Rendimiento inigualable, diseño revolucionario</p>
-                                <button class="cta-btn">Comprar Ahora</button>
-                            </div>
-                        </div>
+        <!-- Radio buttons ocultos para controlar qué slide se muestra -->
+        <input type="radio" id="slide1" name="carousel" class="carousel-radio" checked>
+        <input type="radio" id="slide2" name="carousel" class="carousel-radio">
+        <input type="radio" id="slide3" name="carousel" class="carousel-radio">
+
+        <!-- Contenedor de slides -->
+        <div class="carousel-slides">
+            <!-- Slide 1 -->
+            <div class="carousel-slide carousel-slide-1">
+                <div style="background: url('images/Landing/Carrusel_1.jpg') center / cover no-repeat, linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 0; position: relative;">
+                    <div style="position: absolute; inset: 0;"></div>
+                    <div style="text-align: center; color: white; z-index: 10; max-width: 600px; padding: 2rem;">
+                        <h2 style="font-size: 3rem; margin-bottom: 20px;">Descubre el Futuro con el Quantum X Pro</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 30px;">Rendimiento inigualable, diseño revolucionario</p>
+                        <button class="cta-btn">Comprar Ahora</button>
                     </div>
-                    <a href="#carousel__slide3" class="carousel__prev"><i class="fas fa-chevron-left"></i></a>
-                    <a href="#carousel__slide2" class="carousel__next"><i class="fas fa-chevron-right"></i></a>
                 </div>
-            </li>
-            <li id="carousel__slide2" class="carousel__slide carousel__slide--2">
-                <div class="carousel__snapper">
-                    <div class="slide-content">
-                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 0;">
-                            <div style="text-align: center; color: white;">
-                                <h2 style="font-size: 3rem; margin-bottom: 20px;">Nueva Colección Gaming 2024</h2>
-                                <p style="font-size: 1.2rem; margin-bottom: 30px;">Equipamiento profesional para verdaderos gamers</p>
-                                <button class="cta-btn">Ver Colección</button>
-                            </div>
-                        </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-slide carousel-slide-2">
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 0;">
+                    <div style="text-align: center; color: white;">
+                        <h2 style="font-size: 3rem; margin-bottom: 20px;">Nueva Colección Gaming 2024</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 30px;">Equipamiento profesional para verdaderos gamers</p>
+                        <button class="cta-btn">Ver Colección</button>
                     </div>
-                    <a href="#carousel__slide1" class="carousel__prev"><i class="fas fa-chevron-left"></i></a>
-                    <a href="#carousel__slide3" class="carousel__next"><i class="fas fa-chevron-right"></i></a>
                 </div>
-            </li>
-            <li id="carousel__slide3" class="carousel__slide carousel__slide--3">
-                <div class="carousel__snapper">
-                    <div class="slide-content">
-                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 0;">
-                            <div style="text-align: center; color: white;">
-                                <h2 style="font-size: 3rem; margin-bottom: 20px;">Ofertas Exclusivas Black Friday</h2>
-                                <p style="font-size: 1.2rem; margin-bottom: 30px;">Hasta 50% de descuento en productos seleccionados</p>
-                                <button class="cta-btn">Explorar Ofertas</button>
-                            </div>
-                        </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-slide carousel-slide-3">
+                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 0;">
+                    <div style="text-align: center; color: white;">
+                        <h2 style="font-size: 3rem; margin-bottom: 20px;">Ofertas Exclusivas Black Friday</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 30px;">Hasta 50% de descuento en productos seleccionados</p>
+                        <button class="cta-btn">Explorar Ofertas</button>
                     </div>
-                    <a href="#carousel__slide2" class="carousel__prev"><i class="fas fa-chevron-left"></i></a>
-                    <a href="#carousel__slide1" class="carousel__next"><i class="fas fa-chevron-right"></i></a>
                 </div>
-            </li>
-        </ol>
-        
-        <aside class="carousel__navigation">
-            <ol class="carousel__navigation-list">
-                <li class="carousel__navigation-item">
-                    <a href="#carousel__slide1" class="carousel__navigation-button"></a>
-                </li>
-                <li class="carousel__navigation-item">
-                    <a href="#carousel__slide2" class="carousel__navigation-button"></a>
-                </li>
-                <li class="carousel__navigation-item">
-                    <a href="#carousel__slide3" class="carousel__navigation-button"></a>
-                </li>
-            </ol>
-        </aside>
+            </div>
+        </div>
+
+        <!-- Botones Anterior/Siguiente -->
+        <button class="carousel-control carousel-prev" onclick="carouselPrev()"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-control carousel-next" onclick="carouselNext()"><i class="fas fa-chevron-right"></i></button>
+
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+            <label for="slide1" class="carousel-indicator carousel-indicator-1"></label>
+            <label for="slide2" class="carousel-indicator carousel-indicator-2"></label>
+            <label for="slide3" class="carousel-indicator carousel-indicator-3"></label>
+        </div>
     </section>
+
+    <script>
+        function carouselPrev() {
+            const slide1 = document.getElementById('slide1');
+            const slide2 = document.getElementById('slide2');
+            const slide3 = document.getElementById('slide3');
+
+            if (slide1.checked) {
+                slide3.checked = true;
+            } else if (slide2.checked) {
+                slide1.checked = true;
+            } else if (slide3.checked) {
+                slide2.checked = true;
+            }
+        }
+
+        function carouselNext() {
+            const slide1 = document.getElementById('slide1');
+            const slide2 = document.getElementById('slide2');
+            const slide3 = document.getElementById('slide3');
+
+            if (slide1.checked) {
+                slide2.checked = true;
+            } else if (slide2.checked) {
+                slide3.checked = true;
+            } else if (slide3.checked) {
+                slide1.checked = true;
+            }
+        }
+    </script>
 
     <!-- Lo que ofrecemos -->
     <section class="features">

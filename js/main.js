@@ -1,70 +1,3 @@
-// Carousel functionality
-class Carousel {
-    constructor() {
-        this.slides = document.querySelectorAll('.carousel-slide');
-        this.indicators = document.querySelectorAll('.indicator');
-        this.prevBtn = document.querySelector('.prev-btn');
-        this.nextBtn = document.querySelector('.next-btn');
-        this.currentSlide = 0;
-        this.slideInterval = null;
-        
-        this.init();
-    }
-    
-    init() {
-        // Event listeners for buttons
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        
-        // Event listeners for indicators
-        this.indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => this.goToSlide(index));
-        });
-        
-        // Start auto-play
-        this.startAutoPlay();
-        
-        // Pause on hover
-        const carouselContainer = document.querySelector('.carousel-container');
-        carouselContainer.addEventListener('mouseenter', () => this.stopAutoPlay());
-        carouselContainer.addEventListener('mouseleave', () => this.startAutoPlay());
-    }
-    
-    showSlide(index) {
-        // Remove active class from all slides and indicators
-        this.slides.forEach(slide => slide.classList.remove('active'));
-        this.indicators.forEach(indicator => indicator.classList.remove('active'));
-        
-        // Add active class to current slide and indicator
-        this.slides[index].classList.add('active');
-        this.indicators[index].classList.add('active');
-        this.currentSlide = index;
-    }
-    
-    nextSlide() {
-        let nextIndex = (this.currentSlide + 1) % this.slides.length;
-        this.showSlide(nextIndex);
-    }
-    
-    prevSlide() {
-        let prevIndex = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-        this.showSlide(prevIndex);
-    }
-    
-    goToSlide(index) {
-        this.showSlide(index);
-    }
-    
-    startAutoPlay() {
-        this.slideInterval = setInterval(() => this.nextSlide(), 3000);
-    }
-    
-    stopAutoPlay() {
-        if (this.slideInterval) {
-            clearInterval(this.slideInterval);
-        }
-    }
-}
 
 // Product Card Interactions
 class ProductCards {
@@ -405,8 +338,8 @@ class ScrollAnimations {
 
 // Initialize all components when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize carousel
-    new Carousel();
+    // Initialize carousel - DISABLED (using CSS radio buttons instead)
+    // new Carousel();
     
     // Initialize product cards
     new ProductCards();
