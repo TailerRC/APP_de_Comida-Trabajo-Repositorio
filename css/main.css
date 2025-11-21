@@ -33,7 +33,6 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
 }
 
 /* Header */
@@ -92,8 +91,7 @@ body {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 1rem;
-    margin-left: 1rem;
+    gap: 1.5rem;
 }
 
 .nav-menu a {
@@ -111,7 +109,7 @@ body {
 .nav-icons {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 3rem;
     margin-left: auto;
 }
 
@@ -144,19 +142,27 @@ body {
 
 /* Hero Carousel */
 .hero-carousel {
-    background-color: var(--bg-light);
+    background-color: transparent;
     padding: 0;
+    margin: 0;
+    /* Altura mínima para que el carrusel sea más alto y centrado */
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
     position: relative;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    border-bottom: 1px solid var(--section-border);
+    overflow: hidden;
 }
+
 
 .carousel-container {
     width: 100%;
+    height: 100%;
     margin: 0;
     position: relative;
     padding: 0;
@@ -166,15 +172,23 @@ body {
     overflow: hidden;
     border-radius: 0;
     box-shadow: none;
+    width: 100%;
+    height: 100%;
 }
 
 .carousel-slide {
     display: none;
     animation: fadeIn 0.5s;
+    height: 100%;
+    width: 100%;
 }
 
 .carousel-slide.active {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 @keyframes fadeIn {
@@ -188,6 +202,25 @@ body {
 
 .slide-content {
     padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Asegurar que el div con gradiente dentro del slide ocupe toda la altura */
+.slide-content > div {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .cta-btn {
@@ -237,14 +270,19 @@ body {
 }
 
 .next-btn {
-    right: 20px;
+    right: 40px;
 }
 
 .carousel-indicators {
     display: flex;
     justify-content: center;
     gap: 0.8rem;
-    margin: 1rem 0 0.6rem;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 101;
+    margin: 0;
 }
 
 .indicator {
@@ -751,6 +789,11 @@ body {
 
     .carousel-container {
         padding: 0 20px;
+    }
+
+    /* Reducir altura del carrusel en pantallas pequeñas */
+    .hero-carousel {
+        min-height: 450px;
     }
 
     .carousel-btn {
