@@ -56,7 +56,7 @@ class Carousel {
     }
     
     startAutoPlay() {
-        this.slideInterval = setInterval(() => this.nextSlide(), 5000);
+        this.slideInterval = setInterval(() => this.nextSlide(), 3000);
     }
     
     stopAutoPlay() {
@@ -274,20 +274,54 @@ class SmoothScroll {
     }
     
     init() {
+        // Smooth scroll with header offset
+        const header = document.querySelector('.header');
+        const getHeaderOffset = () => (header ? header.offsetHeight : 0) + 8; // small extra gap
+
+        const scrollToElement = (el) => {
+            if (!el) return;
+            const headerOffset = getHeaderOffset();
+            const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = Math.max(elementPosition - headerOffset, 0);
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        };
+
+        // Intercept anchor clicks
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
                 const href = anchor.getAttribute('href');
-                if (href !== '#' && href !== '') {
-                    e.preventDefault();
+                if (href && href !== '#' && href !== '') {
                     const target = document.querySelector(href);
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        e.preventDefault();
+                        // Update URL without jumping
+                        history.pushState(null, '', href);
+                        scrollToElement(target);
                     }
                 }
             });
+        });
+
+        // If page loads with a hash, adjust scroll after layout
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const target = document.querySelector(hash);
+                if (target) setTimeout(() => scrollToElement(target), 50);
+            }
+        });
+
+        // Handle programmatic hash changes
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const target = document.querySelector(hash);
+                if (target) scrollToElement(target);
+            }
         });
     }
 }
