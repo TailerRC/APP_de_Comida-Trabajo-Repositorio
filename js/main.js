@@ -1,4 +1,33 @@
 
+// ===== Carousel Functions =====
+function carouselPrev() {
+    const slide1 = document.getElementById('slide1');
+    const slide2 = document.getElementById('slide2');
+    const slide3 = document.getElementById('slide3');
+
+    if (slide1.checked) {
+        slide3.checked = true;
+    } else if (slide2.checked) {
+        slide1.checked = true;
+    } else if (slide3.checked) {
+        slide2.checked = true;
+    }
+}
+
+function carouselNext() {
+    const slide1 = document.getElementById('slide1');
+    const slide2 = document.getElementById('slide2');
+    const slide3 = document.getElementById('slide3');
+
+    if (slide1.checked) {
+        slide2.checked = true;
+    } else if (slide2.checked) {
+        slide3.checked = true;
+    } else if (slide3.checked) {
+        slide1.checked = true;
+    }
+}
+
 // Product Card Interactions
 class ProductCards {
     constructor() {
