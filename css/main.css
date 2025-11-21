@@ -140,74 +140,59 @@ body {
     cursor: pointer;
 }
 
-/* Hero Carousel */
+/* Hero Carousel CSS-only */
 .hero-carousel {
     background-color: transparent;
     padding: 0;
     margin: 0;
-    /* Altura mínima para que el carrusel sea más alto y centrado */
     height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     position: relative;
     overflow: hidden;
 }
 
-
-.carousel-container {
+.carousel__viewport {
+    position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    overflow-x: hidden;
+    counter-reset: item;
+    scroll-behavior: smooth;
+    list-style: none;
     margin: 0;
-    position: relative;
     padding: 0;
 }
 
-.carousel-slides {
-    overflow: hidden;
-    border-radius: 0;
-    box-shadow: none;
+.carousel__slide {
+    position: relative;
+    flex: 0 0 100%;
     width: 100%;
     height: 100%;
+    counter-increment: item;
+    scroll-snap-align: center;
 }
 
-.carousel-slide {
-    display: none;
-    animation: fadeIn 0.5s;
-    height: 100%;
+.carousel__snapper {
+    position: relative;
     width: 100%;
-}
-
-.carousel-slide.active {
+    height: 100%;
+    scroll-snap-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 .slide-content {
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Asegurar que el div con gradiente dentro del slide ocupe toda la altura */
 .slide-content > div {
     width: 100% !important;
     height: 100% !important;
@@ -217,6 +202,44 @@ body {
     border-radius: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
+}
+
+/* Botones del carrusel */
+.carousel__prev,
+.carousel__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: #1e293b;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.carousel__prev:hover,
+.carousel__next:hover {
+    background-color: #45c4ba;
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel__prev {
+    left: 20px;
+}
+
+.carousel__next {
+    right: 40px;
 }
 
 .cta-btn {
@@ -238,63 +261,50 @@ body {
     background-color: #f8fafc;
 }
 
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: white;
-    color: #1e293b;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-    box-shadow: var(--shadow-lg);
-    transition: all 0.3s;
-    z-index: 100;
-}
-
-.carousel-btn:hover {
-    background-color: #45c4ba;
-    color: white;
-    transform: translateY(-50%) scale(1.1);
-}
-
-.prev-btn {
-    left: 20px;
-}
-
-.next-btn {
-    right: 40px;
-}
-
-.carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
+/* Indicadores/navegación del carrusel */
+.carousel__navigation {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 101;
-    margin: 0;
 }
 
-.indicator {
+.carousel__navigation-list {
+    display: flex;
+    gap: 0.8rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel__navigation-item {
+    display: inline-block;
+}
+
+.carousel__navigation-button {
+    display: inline-block;
     width: 12px;
     height: 12px;
-    border-radius: 50%;
     background-color: #cbd5e1;
+    border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s;
+    text-decoration: none;
 }
 
-.indicator.active {
+.carousel__navigation-button:hover {
+    background-color: #17a2b8;
+}
+
+#carousel__slide1:target ~ .carousel__navigation .carousel__navigation-list li:nth-child(1) .carousel__navigation-button,
+#carousel__slide2:target ~ .carousel__navigation .carousel__navigation-list li:nth-child(2) .carousel__navigation-button,
+#carousel__slide3:target ~ .carousel__navigation .carousel__navigation-list li:nth-child(3) .carousel__navigation-button {
     background-color: #17a2b8;
     width: 35px;
     border-radius: 10px;
 }
+
 
 /* Features Section */
 .features {
@@ -783,16 +793,13 @@ body {
         justify-content: center;
     }
 
-    .carousel-container {
-        padding: 0 20px;
-    }
-
     /* Reducir altura del carrusel en pantallas pequeñas */
     .hero-carousel {
-        min-height: 450px;
+        height: 450px;
     }
 
-    .carousel-btn {
+    .carousel__prev,
+    .carousel__next {
         width: 35px;
         height: 35px;
         font-size: 1rem;
