@@ -7,432 +7,374 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .perfil-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .header-perfil {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .volver-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #495057;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .volver-btn:hover {
-            background-color: #e9ecef;
-            border-color: #adb5bd;
-            text-decoration: none;
-            color: #495057;
-        }
-
-        .titulo-perfil {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #495057;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .perfil-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr 300px;
-            gap: 2rem;
-            align-items: start;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
         }
 
-        .perfil-section {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #f8f9fa;
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            background-color: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 10px;
+            font-size: 16px;
+            color: #6b2c91;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.08s;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.6);
         }
 
-        .foto-perfil-container {
+        .back-button i {
+            color: inherit;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .back-button:visited {
+            color: #6b2c91;
+        }
+
+        .back-button:hover {
+            background-color: #ffffff;
+            color: #5a1f78;
+            border-color: rgba(107,44,145,0.12);
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            color: #2c3e50;
+            margin-bottom: 50px;
+        }
+
+        .content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .section {
+            flex: 1;
+        }
+
+        .section {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
         }
 
-        .foto-perfil {
+        .section h2 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .photo-container {
             width: 120px;
             height: 120px;
-            background-color: #e9ecef;
-            border-radius: 12px;
+            background-color: #d3d3d3;
+            margin: 0 auto 10px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
-            position: relative;
-            overflow: hidden;
         }
 
-        .cambiar-foto-btn {
-            background-color: #6c757d;
+        .change-photo {
+            padding: 8px 16px;
+            background-color: #9e9e9e;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .cambiar-foto-btn:hover {
-            background-color: #5a6268;
+            font-size: 14px;
+            margin: 0 auto 30px;
+            display: block;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            font-weight: 500;
-            color: #495057;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
         }
 
-        .input-group {
-            position: relative;
+        .input-wrapper {
             display: flex;
             align-items: center;
+            gap: 12px;
+            border: 1px solid #ececec;
+            border-radius: 6px;
+            padding: 8px 12px;
+            transition: border-color 0.3s;
         }
 
-        .form-control {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            color: #495057;
-            background-color: #f8f9fa;
-            transition: all 0.3s;
+        .input-wrapper:focus-within {
+            border-color: #5b9cf5;
         }
 
-        .form-control:focus {
+        .input-wrapper input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 15px;
+            padding: 0;
+            transition: color 0.3s;
+        }
+
+        .input-wrapper input:focus {
             outline: none;
-            border-color: #17a2b8;
-            background-color: white;
-            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
+            color: #2c3e50;
         }
 
-        .form-control:disabled {
-            background-color: #e9ecef;
+        .input-wrapper input:readonly {
+            color: #6c757d;
+        }
+
+        .input-wrapper input:disabled {
             color: #6c757d;
         }
 
         .edit-icon {
-            position: absolute;
-            right: 0.75rem;
-            color: #6c757d;
+            color: #999;
             cursor: pointer;
-            font-size: 0.9rem;
-            padding: 0.25rem;
+            font-size: 16px;
+            transition: color 0.3s;
+            flex-shrink: 0;
         }
 
         .edit-icon:hover {
-            color: #17a2b8;
+            color: #5b9cf5;
         }
 
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .sidebar-section {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 1rem;
-        }
-
-        .toggle-switch {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #495057;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 24px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #17a2b8;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(20px);
-        }
-
-        .action-btn {
+        .button-primary {
             width: 100%;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 0.75rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #17a2b8 0%, #20c997 100%);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-        }
-
-        .edit-perfil-btn, .cambiar-password-btn {
-            background: linear-gradient(135deg, #4285f4 0%, #1976d2 100%);
+            padding: 15px;
+            background-color: #5b9cf5;
             color: white;
             border: none;
-            padding: 0.75rem 2rem;
             border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: 17px;
+            font-weight: 600;
             cursor: pointer;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .button-primary:hover {
+            background-color: #4a8ae4;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 5px 0;
+        }
+
+        .toggle-label {
+            font-size: 15px;
+            color: #555;
+            flex: 1;
+            margin-right: 15px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background-color: #ccc;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle.active {
+            background-color: #5b9cf5;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle.active .toggle-slider {
+            transform: translateX(24px);
+        }
+
+        .button-secondary {
+            width: 100%;
+            padding: 15px;
+            background-color: white;
+            color: #5b9cf5;
+            border: 2px solid #5b9cf5;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
             transition: all 0.3s;
-            margin-right: 1rem;
-            margin-top: 1rem;
         }
 
-        .edit-perfil-btn:hover, .cambiar-password-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+        .button-secondary:hover {
+            background-color: #f0f7ff;
         }
 
-        @media (max-width: 768px) {
-            .perfil-content {
+        .button-logout {
+            width: 100%;
+            padding: 14px;
+            background-color: #b91c1c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-logout:hover {
+            background-color: #991b1b;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
                 grid-template-columns: 1fr;
-            }
-
-            .header-perfil {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .perfil-container {
-                padding: 0 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="perfil-container">
-        <div class="header-perfil">
-            <a href="main.html" class="volver-btn">
-                <i class="fas fa-arrow-left"></i>
-                Volver
-            </a>
-            <h1 class="titulo-perfil">Mi Perfil</h1>
-            <div></div>
-        </div>
+    <div class="container">
+        <a href="main.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </a>
 
-        <div class="perfil-content">
+        <h1>Mi Perfil</h1>
+
+        <div class="content">
             <!-- Información Personal -->
-            <div class="perfil-section">
-                <h2 class="section-title">Información Personal</h2>
+            <div class="section">
+                <h2>Información Personal</h2>
                 
-                <div class="foto-perfil-container">
-                    <div class="foto-perfil" id="fotoPerfil">
-                        <i class="fas fa-user" style="font-size: 3rem; color: #adb5bd;"></i>
-                    </div>
-                    <button class="cambiar-foto-btn" onclick="cambiarFoto()">Cambiar Foto</button>
-                    <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                <div class="photo-container" id="fotoPerfil">
+                    <i class="fas fa-user" style="font-size: 3rem; color: #adb5bd;"></i>
                 </div>
+                <button class="change-photo" onclick="cambiarFoto()">Cambiar Foto</button>
+                <input type="file" id="inputFoto" accept="image/*" style="display: none;">
 
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre Completo</label>
-                    <div class="input-group">
-                        <input type="text" id="nombreCompleto" class="form-control" disabled>
+                    <div class="input-wrapper">
+                        <input type="text" id="nombreCompleto" readonly>
                         <i class="fas fa-edit edit-icon" onclick="editarCampo('nombreCompleto')"></i>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="correoElectronico">Correo Electrónico</label>
-                    <div class="input-group">
-                        <input type="email" id="correoElectronico" class="form-control" disabled>
+                    <div class="input-wrapper">
+                        <input type="email" id="correoElectronico" readonly>
                         <i class="fas fa-edit edit-icon" onclick="editarCampo('correoElectronico')"></i>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="numeroTelefono">Número de Teléfono</label>
-                    <div class="input-group">
-                        <input type="tel" id="numeroTelefono" class="form-control" disabled>
+                    <div class="input-wrapper">
+                        <input type="tel" id="numeroTelefono" readonly>
                         <i class="fas fa-edit edit-icon" onclick="editarCampo('numeroTelefono')"></i>
                     </div>
                 </div>
-
-                <button class="edit-perfil-btn" onclick="guardarCambios()">Editar Perfil</button>
-                <button class="cambiar-password-btn" onclick="cambiarPassword()">Cambiar Contraseña</button>
             </div>
 
             <!-- Detalles Adicionales y Seguridad -->
-            <div class="perfil-section">
-                <h2 class="section-title">Detalles Adicionales y Seguridad</h2>
+            <div class="section">
+                <h2>Detalles Adicionales y Seguridad</h2>
 
                 <div class="form-group">
                     <label for="tipoDocumento">Tipo de Documento</label>
-                    <div class="input-group">
-                        <input type="text" id="tipoDocumento" class="form-control" disabled>
+                    <div class="input-wrapper">
+                        <input type="text" id="tipoDocumento" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="numeroDocumento">Número de Documento</label>
-                    <div class="input-group">
-                        <input type="text" id="numeroDocumento" class="form-control" disabled>
+                    <div class="input-wrapper">
+                        <input type="text" id="numeroDocumento" readonly>
                         <i class="fas fa-edit edit-icon" onclick="editarCampo('numeroDocumento')"></i>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="direccion">Dirección</label>
-                    <div class="input-group">
-                        <input type="text" id="direccion" class="form-control" placeholder="Ingresa tu dirección">
+                    <div class="input-wrapper">
+                        <input type="text" id="direccion" placeholder="Ingresa tu dirección" readonly>
                         <i class="fas fa-edit edit-icon" onclick="editarCampo('direccion')"></i>
                     </div>
                 </div>
 
-                <button class="edit-perfil-btn" onclick="guardarCambios()">Editar Perfil</button>
-                <button class="cambiar-password-btn" onclick="cambiarPassword()">Cambiar Contraseña</button>
+                <button class="button-primary" onclick="guardarCambios()">Editar Perfil</button>
+                <button class="button-secondary" onclick="cambiarPassword()">Cambiar Contraseña</button>
             </div>
 
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Preferencias -->
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Preferencias</h3>
-                    
-                    <div class="toggle-switch">
-                        <span>Recibir Notificaciones por Correo Electrónico</span>
-                        <label class="switch">
-                            <input type="checkbox" id="notificaciones" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
+            <!-- Preferencias -->
+            <div class="section">
+                <h2>Preferencias</h2>
 
-                    <div class="toggle-switch">
-                        <span>Mostrar promociones</span>
-                        <label class="switch">
-                            <input type="checkbox" id="promociones" checked>
-                            <span class="slider"></span>
-                        </label>
+                <div class="toggle-container">
+                    <span class="toggle-label">Recibir Notificaciones por Correo Electrónico</span>
+                    <div class="toggle" onclick="toggleSwitch(this)">
+                        <div class="toggle-slider"></div>
+                        <input type="checkbox" id="notificaciones" checked style="display: none;">
                     </div>
                 </div>
 
-                <!-- Acciones -->
-                <div class="sidebar-section">
-                    <button class="action-btn btn-primary" onclick="irMetodoPago()">Método de Pago</button>
-                    <button class="action-btn btn-secondary" onclick="irMisPedidos()">Mis Pedidos</button>
-                    <button class="action-btn btn-danger" onclick="cerrarSesion()">Cerrar sesión</button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Mostrar promociones</span>
+                    <div class="toggle" onclick="toggleSwitch(this)">
+                        <div class="toggle-slider"></div>
+                        <input type="checkbox" id="promociones" checked style="display: none;">
+                    </div>
                 </div>
+
+                <button class="button-secondary" onclick="irMetodoPago()" style="margin-top: 30px;">Método de Pago</button>
+                <button class="button-secondary" onclick="irMisPedidos()">Mis Pedidos</button>
+                <button class="button-logout" onclick="cerrarSesion()">Cerrar sesión</button>
             </div>
         </div>
     </div>
@@ -454,7 +396,7 @@
             // Cargar foto si existe
             if (currentUser.fotoPerfil) {
                 const fotoPerfil = document.getElementById('fotoPerfil');
-                fotoPerfil.innerHTML = `<img src="${currentUser.fotoPerfil}" alt="Foto de perfil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">`;
+                fotoPerfil.innerHTML = `<img src="${currentUser.fotoPerfil}" alt="Foto de perfil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">`;
             }
         });
 
@@ -560,9 +502,9 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const fotoPerfil = document.getElementById('fotoPerfil');
-                    fotoPerfil.innerHTML = `<img src="${e.target.result}" alt="Foto de perfil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">`;
+                    fotoPerfil.innerHTML = `<img src="${e.target.result}" alt="Foto de perfil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">`;
                     
-                    // Guardar la foto en localStorage (nota: esto es para demo, en producción se subiría a un servidor)
+                    // Guardar la foto en localStorage
                     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
                     currentUser.fotoPerfil = e.target.result;
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -601,6 +543,12 @@
             alert('Función de Mis Pedidos - Por implementar');
         }
 
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+            const checkbox = element.parentElement.querySelector('input[type="checkbox"]');
+            checkbox.checked = element.classList.contains('active');
+        }
+
         function cerrarSesion() {
             if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
                 localStorage.removeItem('currentUser');
@@ -613,8 +561,17 @@
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             if (currentUser && currentUser.fotoPerfil) {
                 const fotoPerfil = document.getElementById('fotoPerfil');
-                fotoPerfil.innerHTML = `<img src="${currentUser.fotoPerfil}" alt="Foto de perfil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">`;
+                fotoPerfil.innerHTML = `<img src="${currentUser.fotoPerfil}" alt="Foto de perfil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">`;
             }
+            
+            // Inicializar toggles
+            const switches = document.querySelectorAll('.toggle');
+            switches.forEach(switchEl => {
+                const checkbox = switchEl.parentElement.querySelector('input[type="checkbox"]');
+                if (checkbox && checkbox.checked) {
+                    switchEl.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
