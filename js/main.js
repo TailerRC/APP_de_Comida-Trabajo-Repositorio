@@ -28,6 +28,39 @@ function carouselNext() {
     }
 }
 
+// ===== Authentication Functions =====
+function checkUserSession() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const perfilBtn = document.getElementById('perfil-btn');
+    const perfilText = document.getElementById('perfil-text');
+    
+    if (currentUser) {
+        // Usuario logueado
+        if (perfilText) {
+            perfilText.textContent = currentUser.nombreCompleto.split(' ')[0];
+        }
+        if (perfilBtn) {
+            perfilBtn.href = 'perfil.html';
+            perfilBtn.onclick = null; // Permitir navegación normal
+        }
+    } else {
+        // Usuario no logueado
+        if (perfilText) {
+            perfilText.textContent = 'Perfil';
+        }
+        if (perfilBtn) {
+            perfilBtn.href = '#';
+            perfilBtn.onclick = function(e) {
+                e.preventDefault();
+                const modal = document.getElementById('login-modal');
+                if (modal) modal.classList.add('active');
+                return false;
+            };
+        }
+    }
+}
+
+
 // Product Card Interactions
 class ProductCards {
     constructor() {
@@ -367,8 +400,8 @@ class ScrollAnimations {
 
 // Initialize all components when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize carousel - DISABLED (using CSS radio buttons instead)
-    // new Carousel();
+    // Check session at start
+    checkUserSession();
     
     // Initialize product cards
     new ProductCards();
@@ -385,8 +418,77 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize scroll animations
     new ScrollAnimations();
     
-    // Initialize login modal
-    new LoginModal();
+    // Login modal handlers
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('login-error');
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+            const user = usuarios.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                checkUserSession();
+                
+                // Close modal and redirect
+                const modal = document.getElementById('login-modal');
+                modal.classList.remove('active');
+                
+                alert('¡Sesión iniciada! Accediendo a tu perfil...');
+                setTimeout(() => {
+                    window.location.href = 'perfil.html';
+                }, 500);
+                
+                loginForm.reset();
+                if (errorDiv) errorDiv.style.display = 'none';
+            } else {
+                if (errorDiv) {
+                    errorDiv.textContent = 'Correo electrónico o contraseña incorrectos.';
+                    errorDiv.style.display = 'block';
+                }
+            }
+        });
+    }
+    
+    // Modal close handlers
+    const modalClose = document.querySelector('.modal-close');
+    const modal = document.getElementById('login-modal');
+    
+    if (modalClose) {
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    }
+    
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    }
+    
+    // Toggle password visibility
+    const togglePassword = document.querySelector('.modal .toggle-password');
+    const passwordInput = document.getElementById('password');
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    }
     
     console.log('TechNow Landing Page Loaded Successfully! 🚀');
 });
@@ -437,169 +539,4 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Login Modal
-class LoginModal {
-    constructor() {
-        this.modal = document.getElementById('login-modal');
-        this.perfilBtn = document.getElementById('perfil-btn');
-        this.closeBtn = document.querySelector('.modal-close');
-        this.loginForm = document.getElementById('login-form');
-        this.togglePassword = document.querySelector('.toggle-password');
-        this.passwordInput = document.getElementById('password');
-        this.init();
-    }
-    
-    init() {
-        // Open modal
-        this.perfilBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.openModal();
-        });
-        
-        // Close modal
-        this.closeBtn.addEventListener('click', () => this.closeModal());
-        
-        // Close on outside click
-        this.modal.addEventListener('click', (e) => {
-            if (e.target === this.modal) {
-                this.closeModal();
-            }
-        });
-        
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.closeModal();
-            }
-        });
-        
-        // Toggle password visibility
-        this.togglePassword.addEventListener('click', () => this.togglePasswordVisibility());
-        
-        // Form submission
-        this.loginForm.addEventListener('submit', (e) => this.handleLogin(e));
-        
-        // Social login buttons
-        const socialBtns = document.querySelectorAll('.social-btn');
-        socialBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => this.handleSocialLogin(e));
-        });
-    }
-    
-    openModal() {
-        this.modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    closeModal() {
-        this.modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-    
-    togglePasswordVisibility() {
-        if (this.passwordInput.type === 'password') {
-            this.passwordInput.type = 'text';
-            this.togglePassword.classList.remove('fa-eye');
-            this.togglePassword.classList.add('fa-eye-slash');
-        } else {
-            this.passwordInput.type = 'password';
-            this.togglePassword.classList.remove('fa-eye-slash');
-            this.togglePassword.classList.add('fa-eye');
-        }
-    }
-    
-    handleLogin(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        
-        if (!this.validateEmail(email)) {
-            this.showError('Por favor, introduce un correo válido');
-            return;
-        }
-        
-        if (password.length < 6) {
-            this.showError('La contraseña debe tener al menos 6 caracteres');
-            return;
-        }
-        
-        // Simulate login
-        const loginBtn = this.loginForm.querySelector('.login-btn');
-        const originalText = loginBtn.textContent;
-        loginBtn.textContent = 'Iniciando sesión...';
-        loginBtn.disabled = true;
-        
-        setTimeout(() => {
-            this.showSuccess('¡Inicio de sesión exitoso!');
-            loginBtn.textContent = originalText;
-            loginBtn.disabled = false;
-            this.loginForm.reset();
-            this.passwordInput.type = 'password';
-            
-            setTimeout(() => {
-                this.closeModal();
-            }, 1500);
-        }, 1500);
-    }
-    
-    handleSocialLogin(e) {
-        e.preventDefault();
-        const provider = e.currentTarget.classList.contains('google-btn') ? 'Google' : 'Facebook';
-        this.showSuccess(`Iniciando sesión con ${provider}...`);
-    }
-    
-    validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    showError(message) {
-        const notification = document.createElement('div');
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            background: #ef4444;
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            z-index: 10000;
-            animation: slideInRight 0.3s ease-out;
-            font-weight: 500;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.3s ease-out';
-            setTimeout(() => notification.remove(), 300);
-        }, 4000);
-    }
-    
-    showSuccess(message) {
-        const notification = document.createElement('div');
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            background: #10b981;
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            z-index: 10000;
-            animation: slideInRight 0.3s ease-out;
-            font-weight: 500;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.3s ease-out';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
-}
+

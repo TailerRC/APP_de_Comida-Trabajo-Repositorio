@@ -21,7 +21,7 @@
                     <li><a href="#novedades">Novedades</a></li>
                 </ul>
                 <div class="nav-icons">
-                    <a href="#" class="icon-link" id="perfil-btn"><i class="fas fa-user"></i> Perfil</a>
+                    <a href="#" class="icon-link" id="perfil-btn"><i class="fas fa-user"></i> <span id="perfil-text">Perfil</span></a>
                     <a href="#" class="icon-link"><i class="fas fa-heart"></i> Lista de deseos</a>
                     <a href="#" class="icon-link"><i class="fas fa-shopping-cart"></i> Mi Carrito</a>
                     <select class="language-select">
@@ -485,10 +485,11 @@
                             <input type="checkbox" name="remember">
                             <span>Recordarme</span>
                         </label>
-                        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                        <a href="recuperar-password.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
                     </div>
 
                     <button type="submit" class="login-btn">Iniciar Sesión</button>
+                    <div id="login-error" style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem; display: none; text-align: center;"></div>
                 </form>
 
                 <div class="divider">o</div>
@@ -505,7 +506,7 @@
                 </div>
 
                 <div class="login-footer">
-                    <p>¿No tienes una cuenta? <a href="#" class="register-link">Regístrate</a></p>
+                    <p>¿No tienes una cuenta? <a href="registro.html" class="register-link">Regístrate</a></p>
                 </div>
             </div>
         </div>
