@@ -507,7 +507,7 @@ window.addEventListener('scroll', () => {
             right: 30px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #17a2b8 0%, #00d4ff 100%);
             color: white;
             border: none;
             border-radius: 50%;
