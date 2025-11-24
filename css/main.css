@@ -365,7 +365,7 @@ body {
 /* Features Section */
 .features {
     padding: 5rem 0;
-    background-color: #edefef; /* soft, slightly bluish */
+    background-color: #dbe5e5; /* soft, slightly bluish */
     border-top: 1px solid var(--section-border);
     border-bottom: 1px solid var(--section-border);
     box-shadow: inset 0 1px 0 var(--section-bg-contrast);
@@ -520,7 +520,7 @@ body {
 
 .products {
     padding: 5rem 0;
-    background-color: #f8ffff; /* subtle contrast so cards stand out */
+    background-color: #dbe5e5; /* subtle contrast so cards stand out */
     border-top: 1px solid var(--section-border);
     border-bottom: 1px solid var(--section-border);
     box-shadow: inset 0 1px 0 var(--section-bg-contrast);
