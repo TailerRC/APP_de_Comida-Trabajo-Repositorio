@@ -439,10 +439,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modal = document.getElementById('login-modal');
                 modal.classList.remove('active');
                 
-                alert('¡Sesión iniciada! Accediendo a tu perfil...');
+                // Redirigir sin mostrar alerta
                 setTimeout(() => {
                     window.location.href = 'perfil.html';
-                }, 500);
+                }, 300);
                 
                 loginForm.reset();
                 if (errorDiv) errorDiv.style.display = 'none';
