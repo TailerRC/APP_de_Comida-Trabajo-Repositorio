@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Favoritos - TechNow</title>
+    <link rel="stylesheet" href="css\favoritos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container logo-center">
+                <a href="index.html">
+                    <img src="images/Logo1.png" alt="TechNow Logo" class="logo">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Inicio</a> > <span>Mis Favoritos</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Mis Favoritos <span class="product-count">(8 productos)</span></h1>
+                <div class="filters">
+                    <button class="btn-filter active">Añadir todos al carrito</button>
+                    <button class="btn-filter-outline">Comparar Lista</button>
+                    <button class="btn-filter-outline">Imprimir Lista</button>
+                    <div class="sort-group">
+                        <label for="sort">Ordenar por:</label>
+                        <select id="sort">
+                            <option value="price">Precio</option>
+                            <option value="name">Nombre</option>
+                            <option value="brand">Marca</option>
+                            <option value="rating">Valoración</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://images.samsung.com/is/image/samsung/pe-jg54qql-lc27jg54qqlxpe-frontblack-249134274?$720_576_JPG$" alt="Monitor Gaming">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Monitor Gaming Curvo 27" 144Hz</h3>
+                        <p class="product-brand">Samsung</p>
+                        <p class="product-price">$313.99</p>
+                        <span class="stock-badge in-stock"><i class="fas fa-check-circle"></i> En Stock</span>
+                    </div>
+                    <button class="btn-add-cart">Añadir al Carrito</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsbgA96M-1TJ7NrA248WQ5pgPrwNBEsFpcQ&s" alt="Teclado Mecánico">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Teclado Mecánico RGB Switch Blue</h3>
+                        <p class="product-brand">Corsair</p>
+                        <p class="product-price">$123.99</p>
+                        <span class="stock-badge out-of-stock"><i class="fas fa-times-circle"></i> Agotado</span>
+                    </div>
+                    <button class="btn-add-cart disabled">Añadir al Carrito</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&h=400&fit=crop" alt="Mouse Gaming">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Mouse Gaming Inalámbrico 16000 DPI</h3>
+                        <p class="product-brand">Logitech</p>
+                        <p class="product-price">$43.99</p>
+                        <span class="stock-badge in-stock"><i class="fas fa-check-circle"></i> En Stock</span>
+                    </div>
+                    <button class="btn-add-cart">Añadir al Carrito</button>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrBOcDV3505MtGSTt_bpe2bGWinOx8VtWQsQ&s" alt="Smartphone">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone 5G 128GB Pantalla AMOLED</h3>
+                        <p class="product-brand">Xiaomi</p>
+                        <p class="product-price">$241.00</p>
+                        <span class="stock-badge in-stock"><i class="fas fa-check-circle"></i> En Stock</span>
+                    </div>
+                    <button class="btn-add-cart">Añadir al Carrito</button>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1599669454699-248893623440?w=400&h=400&fit=crop" alt="Audífonos">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Audífonos Bluetooth Cancelación Ruido</h3>
+                        <p class="product-brand">Sony</p>
+                        <p class="product-price">$79.50</p>
+                        <span class="stock-badge in-stock"><i class="fas fa-check-circle"></i> En Stock</span>
+                    </div>
+                    <button class="btn-add-cart">Añadir al Carrito</button>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://home.ripley.com.pe/Attachment/WOP_5/2004322942275/2004322942275_2.jpg" alt="Laptop Gaming">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Laptop Gaming RTX 4060 16GB RAM</h3>
+                        <p class="product-brand">ASUS</p>
+                        <p class="product-price">$199.99</p>
+                        <span class="stock-badge out-of-stock"><i class="fas fa-times-circle"></i> Agotado</span>
+                    </div>
+                    <button class="btn-add-cart disabled">Añadir al Carrito</button>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://totalinformatica.com.pe/uploads/5-10-2022/RZ19-02320100-R3U1.jpg" alt="Webcam">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Webcam Full HD 1080p con Micrófono</h3>
+                        <p class="product-brand">Razer</p>
+                        <p class="product-price">$349.00</p>
+                        <span class="stock-badge in-stock"><i class="fas fa-check-circle"></i> En Stock</span>
+                    </div>
+                    <button class="btn-add-cart">Añadir al Carrito</button>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <button class="btn-remove"><i class="fas fa-times"></i></button>
+                    <div class="product-image">
+                        <img src="https://cyccomputer.pe/57114-large_default/ssd-1tb-kingston-nv3-m2-2280-nvme-pcie-gen4x4-pnsnv3s1000g.jpg" alt="SSD">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">SSD NVMe 1TB M.2 PCIe Gen4</h3>
+                        <p class="product-brand">Kingston</p>
+                        <p class="product-price">$59.99</p>
+                        <span class="stock-badge in-stock"><i class="fas fa-check-circle"></i> En Stock</span>
+                    </div>
+                    <button class="btn-add-cart">Añadir al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechNow</h3>
+                    <p>Tu tienda online de confianza para la última tecnología</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Atención al Cliente</h4>
+                    <ul>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Devoluciones y Reembolsos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Información Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Cookies</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TechNow. Todos los derechos reservados.</p>
+                <div class="payment-methods-footer">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js\favoritos.js"></script>
+</body>
+</html>
