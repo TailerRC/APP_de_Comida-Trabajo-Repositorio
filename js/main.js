@@ -30,6 +30,12 @@ function carouselNext() {
 
 // ===== Authentication Functions =====
 function checkUserSession() {
+    // Excepción: permitir acceso a admin sin estar logueado
+    if (window.location.pathname.includes('/admin/')) {
+        console.log('✓ Admin panel - acceso sin restricciones');
+        return;
+    }
+    
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const perfilBtn = document.getElementById('perfil-btn');
     const perfilText = document.getElementById('perfil-text');
@@ -427,6 +433,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const errorDiv = document.getElementById('login-error');
+            
+            // Verificar credenciales admin
+            if (email === 'admin@gmail.com' && password === '12345') {
+                const adminUser = { 
+                    nombreCompleto: 'Administrador', 
+                    email: 'admin@gmail.com',
+                    isAdmin: true 
+                };
+                localStorage.setItem('currentUser', JSON.stringify(adminUser));
+                
+                // Close modal and redirect to admin
+                const modal = document.getElementById('login-modal');
+                modal.classList.remove('active');
+                
+                setTimeout(() => {
+                    window.location.href = 'admin/admin.html';
+                }, 300);
+                
+                loginForm.reset();
+                if (errorDiv) errorDiv.style.display = 'none';
+                return;
+            }
             
             const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
             const user = usuarios.find(u => u.email === email && u.password === password);

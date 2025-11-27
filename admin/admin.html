@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+    rel="stylesheet"
+    />
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">
+                <img src="images/LogoTN.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div class="sidebar-title">
+                <div>Panel de</div>
+                <div>Administración</div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard">
+                <span class="icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                </span>
+                <span>Dashboard General</span>
+            </a>
+            <a href="#" class="nav-item" data-page="productos">
+                <span class="icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </span>
+                <span>Gestión de Productos</span>
+            </a>
+            <a href="#" class="nav-item" data-page="usuarios">
+                <span class="icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </span>
+                <span>Gestión de Usuarios</span>
+            </a>
+            
+            <div class="nav-item expandable">
+                <span class="icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                </span>
+                <span>Gestión de Datos</span>
+                <span class="arrow">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </span>
+            </div>
+            <div class="submenu">
+                <a href="#" class="nav-item submenu-item" data-page="marca">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                            <line x1="7" y1="7" x2="7.01" y2="7"/>
+                        </svg>
+                    </span>
+                    <span>Marca</span>
+                </a>
+                <a href="#" class="nav-item submenu-item">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                    </span>
+                    <span>Atención al cliente</span>
+                </a>
+                <a href="#" class="nav-item submenu-item">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                    </span>
+                    <span>Ventas</span>
+                </a>
+            </div>
+
+            <div class="nav-item expandable">
+                <span class="icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </span>
+                <span>Gestión de Ventas</span>
+                <span class="arrow">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </span>
+            </div>
+            <div class="submenu">   
+                <a href="#" class="nav-item submenu-item">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                    </span>
+                    <span>Marketing</span>
+                </a>
+                <a href="#" class="nav-item submenu-item">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </span>
+                    <span>Finanzas</span>
+                </a>    
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="footer-btn" title="Configuración">
+                <i class="ri-settings-2-line"></i>
+            </button>
+            <button class="footer-btn" id="btn-logout" title="Salir">
+                <i class="ri-logout-box-line"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard General Page -->
+        <div id="dashboard-page" class="page active">
+            <h1 class="page-title">Dashboard General</h1>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Ingresos Totales</div>
+                    <div class="stat-value" id="stat-ingresos">$0</div>
+                    <div class="stat-change positive" id="stat-ingresos-change">↑ 0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Ordenes Pendientes</div>
+                    <div class="stat-value" id="stat-ordenes">0</div>
+                    <div class="stat-change negative" id="stat-ordenes-change">↓ 0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Usuarios Activos</div>
+                    <div class="stat-value" id="stat-usuarios">0</div>
+                    <div class="stat-change positive" id="stat-usuarios-change">↑ 0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Productos Agotados</div>
+                    <div class="stat-value" id="stat-agotados">0</div>
+                    <div class="stat-change negative" id="stat-agotados-change">↓ 0%</div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <h2 class="section-title">Ventas y Tráfico del Último Mes</h2>
+                <canvas id="salesChart"></canvas>
+            </div>
+
+            <!-- Bottom Grid -->
+            <div class="bottom-grid">
+                <div class="card">
+                    <h3 class="card-title">Productos más vendidos</h3>
+                    <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Ventas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="top-products-tbody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Actividad Reciente</h3>
+                    <div class="activity-list" id="activity-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestión de Productos Page -->
+        <div id="productos-page" class="page">
+            <h1 class="page-title">Gestión de Productos</h1>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card blue">
+                    <div class="summary-label">Productos Publicados</div>
+                    <div class="summary-value" id="productos-publicados">0</div>
+                </div>
+                <div class="summary-card green">
+                    <div class="summary-label">Stock Total de Unidades</div>
+                    <div class="summary-value" id="stock-total">0</div>
+                </div>
+                <div class="summary-card red">
+                    <div class="summary-label">Productos sin Stock (Crítico)</div>
+                    <div class="summary-value" id="productos-sin-stock">0</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-row">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="product-search" placeholder="Buscar por Nombre o SKU...">
+                </div>
+                <select class="filter-select" id="filter-categoria">
+                    <option value="">Categoría</option>
+                    <option value="Laptops">Laptops</option>
+                    <option value="Smartphones">Smartphones</option>
+                    <option value="Audio">Audio</option>
+                    <option value="Gaming">Gaming</option>
+                </select>
+                <select class="filter-select" id="filter-marca">
+                    <option value="">Marca</option>
+                    <option value="Sony">Sony</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Xiaomi">Xiaomi</option>
+                </select>
+                <select class="filter-select" id="filter-estado">
+                    <option value="">Estado de Stock</option>
+                    <option value="alto">En Stock (>50)</option>
+                    <option value="bajo">Bajo Stock (1-50)</option>
+                    <option value="sin">Sin Stock (0)</option>
+                </select>
+                <button class="btn-primary" id="btn-nuevo-producto">+ Crear Nuevo Producto</button>
+            </div>
+
+            <!-- Products Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>SKU / ID DEL<br>PRODUCTO</th>
+                            <th>NOMBRE DEL PRODUCTO</th>
+                            <th>CATEGORÍA</th>
+                            <th>PRECIO</th>
+                            <th>STOCK<br>ACTUAL</th>
+                            <th>ESTADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-info" id="products-pagination-info">Mostrando 0 de 0 productos</div>
+            <div class="pagination" id="products-pagination">
+            </div>
+        </div>
+
+        <!-- Gestión de Usuarios Page -->
+        <div id="usuarios-page" class="page">
+            <h1 class="page-title">Gestión de Usuarios</h1>
+
+            <!-- Search and Filters -->
+            <div class="top-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="user-search" placeholder="Buscar por Nombre o Email">
+                </div>
+                <button class="btn-secondary">Filtros Avanzados</button>
+                <button class="btn-primary" id="btn-nuevo-usuario">+ Crear Nuevo Usuario</button>
+            </div>
+
+            <div class="pagination-info" id="users-count-info">Mostrando 0 de 0 Usuarios</div>
+
+            <!-- Users Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID/REGISTRO</th>
+                            <th>NOMBRE<br>COMPLETO</th>
+                            <th>CORREO ELECTRÓNICO</th>
+                            <th>ÚLTIMO INICIO DE<br>SESIÓN</th>
+                            <th>PEDIDOS<br>REALIZADOS</th>
+                            <th>ESTADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-info" id="users-pagination-info">Mostrando 0 de 0 usuarios</div>
+            <div class="pagination" id="users-pagination">
+            </div>
+        </div>
+
+        <!-- Marca Page -->
+        <div id="marca-page" class="page">
+            <h1 class="page-title">Marca</h1>
+
+            <!-- Brand Summary Cards -->
+            <div class="brand-cards">
+                <div class="brand-card blue">
+                    <div class="brand-card-content">
+                        <div class="brand-label">Total de Marcas</div>
+                        <div class="brand-value" id="total-marcas">0</div>
+                    </div>
+                    <div class="brand-icon">🏷️</div>
+                </div>
+                <div class="brand-card red">
+                    <div class="brand-card-content">
+                        <div class="brand-label">Productos sin Marca</div>
+                        <div class="brand-value" id="productos-sin-marca">0</div>
+                    </div>
+                    <div class="brand-icon">⚠️</div>
+                </div>
+                <div class="brand-card yellow">
+                    <div class="brand-card-content">
+                        <div class="brand-label">Marca Top Ventas</div>
+                        <div class="brand-value" id="marca-top">-</div>
+                    </div>
+                    <div class="brand-icon">🏆</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-row">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="brand-search" placeholder="Buscar por Nombre de la Marca">
+                </div>
+                <select class="filter-select" id="filter-visibilidad">
+                    <option value="">Filtrar por Visibilidad</option>
+                    <option value="visible">Visible</option>
+                    <option value="oculto">Oculto</option>
+                </select>
+                <select class="filter-select" id="filter-categoria-marca">
+                    <option value="">Filtrar por Categoría Principal</option>
+                    <option value="Audio">Audio</option>
+                    <option value="Tecnología">Tecnología</option>
+                    <option value="Gaming">Gaming</option>
+                </select>
+                <button class="btn-primary" id="btn-nueva-marca">+ Registrar Nueva Marca</button>
+            </div>
+
+            <!-- Brands Table -->
+            <div class="table-container">
+                <table class="data-table brands-table">
+                    <thead>
+                        <tr>
+                            <th>LOGO</th>
+                            <th>NOMBRE<br>DE LA<br>MARCA</th>
+                            <th>DESCRIPCIÓN CORTA</th>
+                            <th># PRODUCTOS<br>ASIGNADOS</th>
+                            <th>VISIBILIDAD<br>EN WEB</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="brands-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-info" id="brands-pagination-info">Mostrando 0 de 0 Marcas</div>
+            <div class="pagination" id="brands-pagination">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Nuevo Producto -->
+    <div id="modal-producto" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nuevo Producto</h2>
+            <form id="form-producto">
+                <div class="form-group">
+                    <label>SKU</label>
+                    <input type="text" id="input-sku" required>
+                </div>
+                <div class="form-group">
+                    <label>Nombre del Producto</label>
+                    <input type="text" id="input-nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="input-categoria" required>
+                        <option value="Laptops">Laptops</option>
+                        <option value="Smartphones">Smartphones</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Gaming">Gaming</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Marca</label>
+                    <select id="input-marca-producto" required>
+                        <option value="Sony">Sony</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Xiaomi">Xiaomi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Precio</label>
+                    <input type="number" id="input-precio" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Stock</label>
+                    <input type="number" id="input-stock" required>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Nuevo Usuario -->
+    <div id="modal-usuario" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nuevo Usuario</h2>
+            <form id="form-usuario">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="input-nombre-usuario" required>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="input-email" required>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Usuario</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Nueva Marca -->
+    <div id="modal-marca" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nueva Marca</h2>
+            <form id="form-marca">
+                <div class="form-group">
+                    <label>Nombre de la Marca</label>
+                    <input type="text" id="input-nombre-marca" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción Corta</label>
+                    <textarea id="input-descripcion" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Categoría Principal</label>
+                    <select id="input-categoria-marca" required>
+                        <option value="Audio">Audio</option>
+                        <option value="Tecnología">Tecnología</option>
+                        <option value="Gaming">Gaming</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Marca</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+</body>
+</html>
