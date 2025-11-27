@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNow - Mi Perfil</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/css_usuario/perfil.css">
+</head>
+<body>
+    <div class="container">
+        <a href="main.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </a>
+
+        <div class="profile-header">
+            <div class="decorative-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h1>Mi Perfil</h1>
+            <div class="decorative-shapes">
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Información Personal -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2>Información Personal</h2>
+                </div>
+                
+                <div class="photo-container" id="fotoPerfil">
+                    <i class="fas fa-user" style="font-size: 3rem; color: #17a2b8;"></i>
+                    <div class="badge-online"></div>
+                </div>
+                <button class="change-photo" onclick="cambiarFoto()"><i class="fas fa-camera" style="margin-right: 6px;"></i>Cambiar Foto</button>
+                <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+
+                <div class="form-group">
+                    <label for="nombreCompleto"><i class="fas fa-user-circle label-icon"></i>Nombre Completo</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="nombreCompleto" readonly>
+                        <i class="fas fa-pen edit-icon" onclick="editarCampo('nombreCompleto')" title="Editar"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="correoElectronico"><i class="fas fa-envelope label-icon"></i>Correo Electrónico</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="correoElectronico" readonly>
+                        <i class="fas fa-pen edit-icon" onclick="editarCampo('correoElectronico')" title="Editar"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="numeroTelefono"><i class="fas fa-phone label-icon"></i>Número de Teléfono</label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="numeroTelefono" readonly maxlength="9">
+                        <i class="fas fa-pen edit-icon" onclick="editarCampo('numeroTelefono')" title="Editar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalles Adicionales y Seguridad -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h2>Detalles Adicionales y Seguridad</h2>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoDocumento"><i class="fas fa-passport label-icon"></i>Tipo de Documento</label>
+                    <div class="input-wrapper">
+                        <select id="tipoDocumento" readonly>
+                            <option value="">Selecciona un tipo...</option>
+                            <option value="dni">DNI</option>
+                            <option value="ruc">RUC</option>
+                        </select>
+                        <i class="fas fa-pen edit-icon" onclick="editarCampo('tipoDocumento')" title="Editar"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="numeroDocumento"><i class="fas fa-numbers label-icon"></i>Número de Documento</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="numeroDocumento" readonly maxlength="8" placeholder="8 dígitos">
+                        <i class="fas fa-pen edit-icon" onclick="editarCampo('numeroDocumento')" title="Editar"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion"><i class="fas fa-map-marker-alt label-icon"></i>Dirección</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="direccion" placeholder="Ingresa tu dirección" readonly>
+                        <i class="fas fa-pen edit-icon" onclick="editarCampo('direccion')" title="Editar"></i>
+                    </div>
+                </div>
+
+                <button class="button-primary" onclick="guardarCambios()"><i class="fas fa-save" style="margin-right: 8px;"></i>Guardar Cambios</button>
+                <button class="button-secondary" onclick="cambiarPassword()"><i class="fas fa-lock" style="margin-right: 8px;"></i>Cambiar Contraseña</button>
+            </div>
+
+            <!-- Preferencias -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h2>Preferencias</h2>
+                </div>
+
+                <div class="toggle-container">
+                    <span class="toggle-label">Recibir Notificaciones por Correo Electrónico</span>
+                    <div class="toggle" onclick="toggleSwitch(this)">
+                        <div class="toggle-slider"></div>
+                        <input type="checkbox" id="notificaciones" checked style="display: none;">
+                    </div>
+                </div>
+
+                <div class="toggle-container">
+                    <span class="toggle-label">Mostrar promociones</span>
+                    <div class="toggle" onclick="toggleSwitch(this)">
+                        <div class="toggle-slider"></div>
+                        <input type="checkbox" id="promociones" checked style="display: none;">
+                    </div>
+                </div>
+
+                <button class="button-secondary" onclick="irMetodoPago()" style="margin-top: 30px;"><i class="fas fa-credit-card" style="margin-right: 8px;"></i>Método de Pago</button>
+                <button class="button-secondary" onclick="irMisPedidos()"><i class="fas fa-box" style="margin-right: 8px;"></i>Mis Pedidos</button>
+                <button class="button-logout" onclick="cerrarSesion()"><i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR PERFIL -->
+    <div id="modalEditarPerfil" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Editar Perfil</h2>
+                <button class="modal-close" onclick="cerrarModal('modalEditarPerfil')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-text">¿Está seguro de que desea guardar los cambios en su perfil?</p>
+                <p class="modal-text" style="font-size: 14px; color: #6c757d; margin: 15px 0 0 0;">Los cambios se aplicarán inmediatamente.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" onclick="cerrarModal('modalEditarPerfil')"><i class="fas fa-times"></i> Cancelar</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmarEditarPerfil()"><i class="fas fa-check"></i> Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CAMBIAR CONTRASEÑA -->
+    <div id="modalCambiarPassword" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-lock"></i> Cambiar Contraseña</h2>
+                <button class="modal-close" onclick="cerrarModal('modalCambiarPassword')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="passwordActual"><i class="fas fa-key"></i> Contraseña Actual</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="passwordActual" placeholder="Ingresa tu contraseña actual">
+                        <i class="fas fa-eye toggle-password-icon" onclick="togglePasswordVisibility('passwordActual')"></i>
+                    </div>
+                    <div class="error-message" id="errorPasswordActual"><i class="fas fa-exclamation-circle"></i> Contraseña incorrecta</div>
+                </div>
+                <div class="modal-form-group">
+                    <label for="passwordNueva"><i class="fas fa-key"></i> Nueva Contraseña</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="passwordNueva" placeholder="Mínimo 8 caracteres">
+                        <i class="fas fa-eye toggle-password-icon" onclick="togglePasswordVisibility('passwordNueva')"></i>
+                    </div>
+                    <div class="error-message" id="errorPasswordNueva"><i class="fas fa-exclamation-circle"></i> La contraseña debe tener al menos 8 caracteres</div>
+                </div>
+                <div class="modal-form-group">
+                    <label for="passwordConfirm"><i class="fas fa-key"></i> Confirmar Nueva Contraseña</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="passwordConfirm" placeholder="Confirma tu nueva contraseña">
+                        <i class="fas fa-eye toggle-password-icon" onclick="togglePasswordVisibility('passwordConfirm')"></i>
+                    </div>
+                    <div class="error-message" id="errorPasswordConfirm"><i class="fas fa-exclamation-circle"></i> Las contraseñas no coinciden</div>
+                </div>
+                <div class="success-message" id="successMessage"><i class="fas fa-check-circle"></i> Contraseña cambiada exitosamente</div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" onclick="cerrarModal('modalCambiarPassword')"><i class="fas fa-times"></i> Cancelar</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmarCambiarPassword()"><i class="fas fa-check"></i> Cambiar Contraseña</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CERRAR SESIÓN -->
+    <div id="modalCerrarSesion" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</h2>
+                <button class="modal-close" onclick="cerrarModal('modalCerrarSesion')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-text">¿Está seguro de que desea cerrar sesión?</p>
+                <p class="modal-text" style="font-size: 14px; color: #6c757d; margin: 15px 0 0 0;">Deberá volver a iniciar sesión para acceder a su cuenta.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" onclick="cerrarModal('modalCerrarSesion')"><i class="fas fa-times"></i> Cancelar</button>
+                <button class="modal-btn modal-btn-danger" onclick="confirmarCerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL MÉTODOS DE PAGO -->
+    <div id="modalMetodoPago" class="modal">
+        <div class="modal-content modal-pago">
+            <div class="modal-header">
+                <h2><i class="fas fa-credit-card"></i> Mis Métodos de Pago</h2>
+                <button class="modal-close" onclick="cerrarModal('modalMetodoPago')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <!-- Sección de tarjetas guardadas -->
+                <div id="tarjetasContainer" class="tarjetas-container">
+                    <!-- Las tarjetas se cargarán aquí dinámicamente -->
+                </div>
+
+                <!-- Formulario para agregar nueva tarjeta -->
+                <div class="form-agregar-pago">
+                    <h3><i class="fas fa-plus-circle"></i> Agregar Nuevo Método de Pago</h3>
+                    
+                    <div class="payment-form-group">
+                        <label for="nombreTitular">Nombre del Titular</label>
+                        <input type="text" id="nombreTitular" placeholder="Juan Pérez García" maxlength="50">
+                    </div>
+
+                    <div class="payment-form-group">
+                        <label for="numeroTarjeta">Número de Tarjeta</label>
+                        <input type="text" id="numeroTarjeta" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric">
+                    </div>
+
+                    <div class="payment-form-row">
+                        <div class="payment-form-group">
+                            <label for="fechaVencimiento">Fecha de Vencimiento</label>
+                            <input type="text" id="fechaVencimiento" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="payment-form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4" inputmode="numeric">
+                        </div>
+                    </div>
+
+                    <div class="payment-form-group">
+                        <label for="tipoPago">Tipo de Pago</label>
+                        <select id="tipoPago">
+                            <option value="">Selecciona un tipo...</option>
+                            <option value="creditcard">Tarjeta de Crédito</option>
+                            <option value="debitcard">Tarjeta de Débito</option>
+                            <option value="wallet">Billetera Digital</option>
+                        </select>
+                    </div>
+
+                    <div class="payment-form-group checkbox">
+                        <input type="checkbox" id="predeterminado">
+                        <label for="predeterminado">Hacer este mi método de pago predeterminado</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" onclick="cerrarModal('modalMetodoPago')"><i class="fas fa-times"></i> Cerrar</button>
+                <button class="modal-btn modal-btn-confirm" onclick="agregarMetodoPago()"><i class="fas fa-plus"></i> Agregar Método</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/js_usuario/perfil.js"></script>
+</body>
+</html>
