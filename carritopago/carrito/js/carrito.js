@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Seleccionar todos los botones de cantidad
     const qtyButtons = document.querySelectorAll('.qty-btn');
     const removeLinks = document.querySelectorAll('.action-link.remove');
-    const checkoutBtn = document.querySelector('.checkout-btn');
     
     // Función para actualizar el total del carrito
     function updateCartTotal() {
@@ -116,21 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="index.html" style="display: inline-block; padding: 12px 30px; background: #2c5f7c; color: white; text-decoration: none; border-radius: 6px;">Ir a la tienda</a>
             </div>
         `;
-    }
-    
-    // Manejar botón de checkout
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function() {
-            const cartItems = document.querySelectorAll('.cart-item');
-            if (cartItems.length === 0) {
-                alert('Tu carrito está vacío. Agrega productos para continuar.');
-                return;
-            }
-            
-            // Aquí puedes redirigir a la página de checkout
-            alert('Redirigiendo al proceso de pago...');
-            // window.location.href = 'checkout.html';
-        });
     }
     
     // Manejar enlace de cupón
