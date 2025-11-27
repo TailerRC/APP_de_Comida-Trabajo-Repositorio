@@ -230,34 +230,6 @@ function handleConfirm() {
     }, 1500);
 }
 
-// Animate elements on load
-function animateOnLoad() {
-    const cards = document.querySelectorAll('.section-card');
-    const summary = document.querySelector('.order-summary-sticky');
-    
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-
-    if (summary) {
-        summary.style.opacity = '0';
-        summary.style.transform = 'translateX(20px)';
-        
-        setTimeout(() => {
-            summary.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            summary.style.opacity = '1';
-            summary.style.transform = 'translateX(0)';
-        }, 300);
-    }
-}
-
 // Format date for display
 function formatDate(dateString) {
     const date = new Date(dateString);

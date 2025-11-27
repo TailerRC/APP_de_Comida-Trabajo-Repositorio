@@ -539,9 +539,9 @@ body {
 
 /* Paso activo - verde */
 .step.active .step-number {
-    background: #27ae60;
+    background: #4169E1;
     color: white;
-    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+    box-shadow: 0 0 0 4px rgba(65, 105, 225, 0.2);
 }
 
 /* Paso siguiente (azul) */
