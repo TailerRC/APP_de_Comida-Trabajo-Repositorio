@@ -1,12 +1,3 @@
-/* ============================================
-   LOGIN MODAL JAVASCRIPT
-   Componente reutilizable para el modal de login
-   
-   Dependencias:
-   - HTML: components/login-modal/login-modal.html
-   - CSS: components/login-modal/login-modal.css
-============================================ */
-
 (function() {
     'use strict';
 
