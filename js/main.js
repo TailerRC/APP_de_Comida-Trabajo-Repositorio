@@ -29,6 +29,25 @@ function carouselNext() {
 }
 
 // ===== Authentication Functions =====
+function getBasePath() {
+    const path = window.location.pathname;
+    
+    // Si estamos en secciones_navbar/novedades (2 niveles abajo)
+    if (path.includes('/secciones_navbar/novedades/')) {
+        return '../../';
+    }
+    // Si estamos en carritopago (2 niveles abajo)
+    if (path.includes('/carritopago/')) {
+        return '../../';
+    }
+    // Si estamos en admin
+    if (path.includes('/admin/')) {
+        return '../';
+    }
+    
+    return '';
+}
+
 function checkUserSession() {
     // Excepción: permitir acceso a admin sin estar logueado
     if (window.location.pathname.includes('/admin/')) {
@@ -36,9 +55,15 @@ function checkUserSession() {
         return;
     }
     
+    // Si estamos en novedades, no modificar el botón (lo maneja novedades.js)
+    if (window.location.pathname.includes('/secciones_navbar/novedades/')) {
+        return;
+    }
+    
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const perfilBtn = document.getElementById('perfil-btn');
     const perfilText = document.getElementById('perfil-text');
+    const basePath = getBasePath();
     
     if (currentUser) {
         // Usuario logueado
@@ -46,7 +71,7 @@ function checkUserSession() {
             perfilText.textContent = currentUser.nombreCompleto.split(' ')[0];
         }
         if (perfilBtn) {
-            perfilBtn.href = 'perfil.html';
+            perfilBtn.href = basePath + 'perfil.html';
             perfilBtn.onclick = null; // Permitir navegación normal
         }
     } else {

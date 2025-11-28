@@ -213,7 +213,48 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeFilters();
     initializePagination();
     initializeSorting();
+    initializePerfilButton();
 });
+
+// Initialize perfil button to open login modal or redirect to profile
+function initializePerfilButton() {
+    const perfilBtn = document.getElementById('perfil-btn');
+    const perfilText = document.getElementById('perfil-text');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    
+    if (perfilBtn) {
+        // Remover cualquier evento previo clonando el elemento
+        const newPerfilBtn = perfilBtn.cloneNode(true);
+        perfilBtn.parentNode.replaceChild(newPerfilBtn, perfilBtn);
+        
+        // Obtener referencia al nuevo span de texto
+        const newPerfilText = newPerfilBtn.querySelector('#perfil-text') || document.getElementById('perfil-text');
+        
+        if (currentUser) {
+            // Si hay usuario logueado, mostrar nombre y permitir navegación a perfil
+            if (newPerfilText) {
+                newPerfilText.textContent = currentUser.nombreCompleto ? currentUser.nombreCompleto.split(' ')[0] : 'Perfil';
+            }
+            newPerfilBtn.href = '../../perfil.html';
+            // No agregar onclick, dejar que el href funcione normalmente
+        } else {
+            // Si no hay usuario, abrir modal de login
+            if (newPerfilText) {
+                newPerfilText.textContent = 'Perfil';
+            }
+            newPerfilBtn.href = '#';
+            newPerfilBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (typeof openLoginModal === 'function') {
+                    openLoginModal();
+                } else {
+                    const modal = document.getElementById('login-modal');
+                    if (modal) modal.classList.add('active');
+                }
+            });
+        }
+    }
+}
 
 // Load products to grid
 function loadProducts(productsList) {
