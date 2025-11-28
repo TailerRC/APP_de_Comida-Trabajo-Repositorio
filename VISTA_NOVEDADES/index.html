@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promociones - TechNow</title>
+    <link rel="stylesheet" href="css\novedades.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="#home"><img src="Images\Logo1.png" alt="TechNow Logo" class="logo-navbar"></a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#categorias">Categorías</a></li>
+                    <li><a href="#promociones">Promociones</a></li>
+                    <li><a href="#novedades">Novedades</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="#" class="icon-link" id="perfil-btn"><i class="fas fa-user"></i> <span id="perfil-text">Perfil</span></a>
+                    <a href="#" class="icon-link"><i class="fas fa-heart"></i> Lista de deseos</a>
+                    <a href="#" class="icon-link"><i class="fas fa-shopping-cart"></i> Mi Carrito</a>
+                    <select class="language-select">
+                        <option value="es">ES</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <div class="content-wrapper">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="filter-section">
+                        <h3>Tipo de Producto</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="product" value="smartphones"> Smartphones</label>
+                        <label><input type="checkbox" name="product" value="laptops"> Laptops</label>
+                        <label><input type="checkbox" name="product" value="audio"> Audio</label>
+                        <label><input type="checkbox" name="product" value="gaming"> Gaming</label>
+                        <label><input type="checkbox" name="product" value="wearables"> Wearables</label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Marca</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="brand" value="apple"> Apple</label>
+                        <label><input type="checkbox" name="brand" value="samsung"> Samsung</label>
+                        <label><input type="checkbox" name="brand" value="hp"> HP</label>
+                        <label><input type="checkbox" name="brand" value="sony"> Sony</label>
+                        <label><input type="checkbox" name="brand" value="logitech"> Logitech</label>
+                        <label><input type="checkbox" name="brand" value="dell"> Dell</label>
+                        <label><input type="checkbox" name="brand" value="hyperx"> HyperX</label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Rango de Precio</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content price-range">
+                        <div class="price-inputs">
+                            <input type="number" placeholder="Mín" id="min-price">
+                            <input type="number" placeholder="Máx" id="max-price">
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Conectividad</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="connectivity" value="wifi6"> Wi-Fi 6</label>
+                        <label><input type="checkbox" name="connectivity" value="5g"> 5G</label>
+                        <label><input type="checkbox" name="connectivity" value="bluetooth"> Bluetooth 5.0+</label>
+                        <label><input type="checkbox" name="connectivity" value="nfc"> NFC</label>
+                        <label><input type="checkbox" name="connectivity" value="gps"> GPS</label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Capacidad (Almacenamiento/RAM)</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="capacity" value="128gb"> 128GB</label>
+                        <label><input type="checkbox" name="capacity" value="256gb"> 256GB</label>
+                        <label><input type="checkbox" name="capacity" value="512gb"> 512GB</label>
+                        <label><input type="checkbox" name="capacity" value="1tb"> 1TB+</label>
+                        <label><input type="checkbox" name="capacity" value="4gb"> 4GB RAM</label>
+                        <label><input type="checkbox" name="capacity" value="8gb"> 8GB RAM</label>
+                        <label><input type="checkbox" name="capacity" value="16gb"> 16GB RAM+</label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Sistema Operativo</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="os" value="ios"> iOS</label>
+                        <label><input type="checkbox" name="os" value="android"> Android</label>
+                        <label><input type="checkbox" name="os" value="windows"> Windows</label>
+                        <label><input type="checkbox" name="os" value="macos"> macOS</label>
+                        <label><input type="checkbox" name="os" value="chromeos"> ChromeOS</label>
+                        <label><input type="checkbox" name="os" value="linux"> Linux SQ</label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Resistencia / Durabilidad</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="durability" value="water"> Resistencia al Agua/IP rating</label>
+                        <label><input type="checkbox" name="durability" value="screen"> Protección de Pantalla</label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Color</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content color-filter">
+                        <label><input type="checkbox" name="color" value="black"><span class="color-circle" style="background-color: #000;"></span></label>
+                        <label><input type="checkbox" name="color" value="white"><span class="color-circle" style="background-color: #fff;"></span></label>
+                        <label><input type="checkbox" name="color" value="blue"><span class="color-circle" style="background-color: #4169e1;"></span></label>
+                        <label><input type="checkbox" name="color" value="gray"><span class="color-circle" style="background-color: #808080;"></span></label>
+                        <label><input type="checkbox" name="color" value="red"><span class="color-circle" style="background-color: #ff0000;"></span></label>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Disponibilidad</h3>
+                        <button class="toggle-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="availability" value="stock"> En Stock</label>
+                        <label><input type="checkbox" name="availability" value="preorder"> Próximamente</label>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="apply-filters-btn">Aplicar Filtros</button>
+                        <button class="clear-filters-btn">Limpiar Filtros</button>
+                    </div>
+                </aside>
+
+                <!-- Products Section -->
+                <section class="products-section">
+                    <div class="breadcrumb">
+                        <span>Inicio > Promociones</span>
+                    </div>
+                    
+                    <div class="products-header">
+                        <p>Mostrando 1-12 de 350 resultados</p>
+                        <div class="sort-by">
+                            <label>Ordenar por:</label>
+                            <select id="sort-select">
+                                <option value="relevance">Más Relevante</option>
+                                <option value="price-low">Precio: Menor a Mayor</option>
+                                <option value="price-high">Precio: Mayor a Menor</option>
+                                <option value="newest">Más Reciente</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="products-grid" id="products-grid">
+                        <!-- Products will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn" id="prev-btn">Anterior</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <span>...</span>
+                        <button class="page-btn">10</button>
+                        <button class="page-btn" id="next-btn">Siguiente</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechNow</h3>
+                    <p>Tu tienda online de confianza para la última tecnología</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Atención al Cliente</h4>
+                    <ul>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Devoluciones y Reembolsos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Información Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Cookies</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TechNow. Todos los derechos reservados.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js\novedades.js"></script>
+</body>
+</html>
