@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechNow - Tu tienda online de confianza</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="components/login-modal/login-modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -495,7 +496,9 @@
                         <div class="input-wrapper password-wrapper">
                             <i class="fas fa-lock"></i>
                             <input type="password" id="password" name="password" placeholder="••••••••" required>
-                            <i class="fas fa-eye toggle-password"></i>
+                            <button type="button" class="toggle-password" aria-label="Mostrar/Ocultar contraseña">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -514,11 +517,11 @@
                 <div class="divider">o</div>
 
                 <div class="social-login">
-                    <button class="social-btn google-btn">
+                    <button type="button" class="social-btn google-btn">
                         <i class="fab fa-google"></i>
                         Continuar con Google
                     </button>
-                    <button class="social-btn facebook-btn">
+                    <button type="button" class="social-btn facebook-btn">
                         <i class="fab fa-facebook-f"></i>
                         Continuar con Facebook
                     </button>
@@ -531,6 +534,7 @@
         </div>
     </div>
 
+    <script src="components/login-modal/login-modal.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
