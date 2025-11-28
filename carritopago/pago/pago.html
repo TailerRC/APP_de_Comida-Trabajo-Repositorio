@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método de Pago - TechNow</title>
+    <link rel="stylesheet" href="css\pago.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+        <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                    <a href="../../main.html"><img src="images/Logo1.png" alt="TechNow Logo" class="logo-navbar"></a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="breadcrumb-header">
+                <div class="breadcrumb">
+                    <a href="../carrito/carrito.html">Carrito</a> > <a href="../envio/envio.html">Envío</a> > <span>Pago</span>
+                </div>
+                <a href="../../main.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Volver a inicio
+                </a>
+            </div>
+
+            <div class="payment-layout">
+                <!-- Left Section: Payment Form -->
+                <div class="payment-section">
+                    <h1>Comprobante de Pago</h1>
+                    
+                    <!-- Boleta / Factura Toggle -->
+                    <div class="document-toggle">
+                        <label class="toggle-option">
+                            <input type="radio" name="documentType" value="boleta" checked>
+                            <span class="toggle-label">Boleta</span>
+                        </label>
+                        <label class="toggle-option">
+                            <input type="radio" name="documentType" value="factura">
+                            <span class="toggle-label">Factura</span>
+                        </label>
+                    </div>
+
+                    <!-- Boleta/Factura Forms -->
+                    <div id="boletaForm" class="document-form active">
+                        <div class="form-group">
+                            <label>DNI</label>
+                            <input type="text" placeholder="Ingresa tu DNI" maxlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" placeholder="Ingresa tu nombre completo">
+                        </div>
+                    </div>
+
+                    <div id="facturaForm" class="document-form">
+                        <div class="form-group">
+                            <label>RUC</label>
+                            <input type="text" placeholder="Ingresa tu RUC" maxlength="11">
+                        </div>
+                        <div class="form-group">
+                            <label>Razón Social</label>
+                            <input type="text" placeholder="Ingresa la razón social">
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección Fiscal</label>
+                            <input type="text" placeholder="Ingresa la dirección fiscal">
+                        </div>
+                    </div>
+
+                    <h2>Selecciona tu método de pago</h2>
+
+                    <!-- Payment Methods -->
+                    <div class="payment-methods">
+                        <!-- Credit Card -->
+                        <div class="payment-method active">
+                            <label class="payment-method-header">
+                                <input type="radio" name="paymentMethod" value="tarjeta" checked>
+                                <span>Tarjeta de Crédito</span>
+                                <div class="card-icons">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    <i class="fab fa-cc-amex"></i>
+                                </div>
+                            </label>
+                            <div class="payment-method-content">
+                                <div class="form-group">
+                                    <label>Número de Tarjeta</label>
+                                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre del Titular</label>
+                                    <input type="text" placeholder="Nombre completo">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Fecha de Vencimiento</label>
+                                        <input type="text" placeholder="MM/AA" maxlength="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Código CVV <i class="fas fa-question-circle"></i></label>
+                                        <input type="text" placeholder="123" maxlength="4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Digital Wallets -->
+                        <div class="payment-method">
+                            <label class="payment-method-header">
+                                <input type="radio" name="paymentMethod" value="billeteras">
+                                <span>Billeteras Digitales</span>
+                                <div class="wallet-icons">
+                                    <span class="yape-plin-text">Yape/Plin</span>
+                                    <i class="fab fa-paypal"></i>
+                                </div>
+                            </label>
+                            <div class="payment-method-content">
+                                <div class="wallet-options">
+                                    <button class="wallet-button" data-wallet="yape-plin">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        <span>Yape / Plin</span>
+                                    </button>
+                                    <button class="wallet-button" data-wallet="paypal">
+                                        <i class="fab fa-paypal"></i>
+                                        <span>PayPal</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Debit Card -->
+                        <div class="payment-method">
+                            <label class="payment-method-header">
+                                <input type="radio" name="paymentMethod" value="debito">
+                                <span>Tarjeta de Débito</span>
+                                <div class="debit-icons">
+                                    <i class="fas fa-credit-card"></i>
+                                    <i class="fas fa-university"></i>
+                                </div>
+                            </label>
+                            <div class="payment-method-content">
+                                <div class="form-group">
+                                    <label>Número de Tarjeta</label>
+                                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" class="debit-card-number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre del Titular</label>
+                                    <input type="text" placeholder="Nombre completo">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Fecha de Vencimiento</label>
+                                        <input type="text" placeholder="MM/AA" maxlength="5" class="debit-expiration">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Código CVV <i class="fas fa-question-circle"></i></label>
+                                        <input type="text" placeholder="123" maxlength="4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cash/Agent -->
+                        <div class="payment-method">
+                            <label class="payment-method-header">
+                                <input type="radio" name="paymentMethod" value="efectivo">
+                                <span>Pago en Efectivo/Agente</span>
+                                <i class="fas fa-money-bill-wave"></i>
+                            </label>
+                            <div class="payment-method-content">
+                                <div class="cash-payment-info">
+                                    <div class="payment-code">
+                                        <h3>Código de Pago</h3>
+                                        <div class="code-display">
+                                            <span id="paymentCode">TECH-2025-8734</span>
+                                            <button class="copy-button" onclick="copyPaymentCode()">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <p class="code-note">Presenta este código en el agente autorizado</p>
+                                    </div>
+                                    
+                                    <div class="agent-info">
+                                        <h3>Agente más cercano</h3>
+                                        <div class="agent-card">
+                                            <i class="fas fa-store"></i>
+                                            <div class="agent-details">
+                                                <h4>TechPay Express</h4>
+                                                <p><i class="fas fa-map-marker-alt"></i> Av. Javier Prado Este 4200, Santiago de Surco, Lima</p>
+                                                <p><i class="fas fa-clock"></i> Horario: Lun-Sáb 9:00 AM - 8:00 PM</p>
+                                                <p><i class="fas fa-phone"></i> Tel: (01) 445-6789</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="instructions">
+                                        <h4>Instrucciones de pago:</h4>
+                                        <ol>
+                                            <li>Dirígete al agente autorizado más cercano</li>
+                                            <li>Presenta tu código de pago</li>
+                                            <li>Realiza el pago del monto total</li>
+                                            <li>Guarda tu comprobante de pago</li>
+                                            <li>Tu pedido será procesado en 24-48 horas</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Order Summary -->
+                <div class="summary-section">
+                    <div class="order-summary">
+                        <h2>Resumen de compra</h2>
+                        
+                        <div class="summary-details">
+                            <div class="summary-item">
+                                <span>Productos</span>
+                                <span>$150.00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Gastos de entrega</span>
+                                <span>$5.00</span>
+                            </div>
+                        </div>
+
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span>$155.00</span>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button class="btn-secondary" onclick="window.location.href='../envio/envio.html'">ATRÁS</button>
+                            <button class="btn-primary">CONFIRMAR</button>
+                        </div>
+
+                        <!-- Step Navigator -->
+                        <div class="step-navigator">
+                            <h3>Navegador de Pasos</h3>
+                            <div class="steps">
+                                <div class="step completed">
+                                    <div class="step-number">1</div>
+                                    <span class="step-label">Carrito de compras</span>
+                                </div>
+                                <div class="step completed">
+                                    <div class="step-number">2</div>
+                                    <span class="step-label">Entrega a domicilio</span>
+                                </div>
+                                <div class="step active">
+                                    <div class="step-number">3</div>
+                                    <span class="step-label">Método de pago</span>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <span class="step-label">Confirmación</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="payment-methods-accepted">
+                            <h3>Medios de Pago Aceptados</h3>
+                            <div class="payment-icons">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-cc-amex"></i>
+                                <i class="fab fa-cc-paypal"></i>
+                            </div>
+                            <div class="secure-payment">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Pago Seguro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Yape/Plin QR -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Escanea el código QR</h2>
+            <p class="modal-subtitle">Usa tu app de Yape o Plin para completar el pago</p>
+            <div class="qr-container">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=TECHNOW-PAGO-155USD" alt="QR Code">
+            </div>
+            <div class="payment-amount">
+                <p>Monto a pagar</p>
+                <h3>$155.00</h3>
+            </div>
+            <p class="qr-instructions">Después de realizar el pago, haz clic en "Confirmar Pago"</p>
+            <button class="btn-primary" onclick="confirmQRPayment()">Confirmar Pago</button>
+        </div>
+    </div>
+
+    <!-- Modal for PayPal -->
+    <div id="paypalModal" class="modal">
+        <div class="modal-content paypal-modal">
+            <span class="close-modal">&times;</span>
+            <div class="paypal-header">
+                <i class="fab fa-paypal"></i>
+                <h2>PayPal</h2>
+            </div>
+            <p class="paypal-subtitle">Inicia sesión en tu cuenta de PayPal</p>
+            <div class="paypal-form">
+                <div class="form-group">
+                    <label>Correo electrónico o número de teléfono</label>
+                    <input type="email" placeholder="ejemplo@correo.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="Ingresa tu contraseña">
+                </div>
+                <div class="paypal-options">
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        <span>Recordarme</span>
+                    </label>
+                    <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button class="btn-paypal" onclick="confirmPayPalPayment()">Iniciar Sesión</button>
+                <div class="paypal-divider">
+                    <span>o</span>
+                </div>
+                <button class="btn-paypal-secondary">Crear una cuenta</button>
+            </div>
+            <div class="payment-summary-paypal">
+                <p>Estás pagando a <strong>TechNow</strong></p>
+                <h3>$155.00 USD</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Pago -->
+    <div id="confirmationModal" class="confirmation-modal">
+        <div class="confirmation-content">
+            <div class="confirmation-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2>¡Pago Confirmado!</h2>
+            <p>Tu pedido ha sido procesado exitosamente. Recibirás un correo de confirmación con los detalles de tu compra.</p>
+            
+            <div class="confirmation-steps">
+                <div class="confirmation-step">1</div>
+                <div class="confirmation-step">2</div>
+                <div class="confirmation-step">3</div>
+                <div class="confirmation-step">4</div>
+            </div>
+            
+            <button class="btn-home" onclick="window.location.href='../../main.html'">
+                <i class="fas fa-home"></i> Volver al Inicio
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Validación -->
+    <div id="validationModal" class="validation-modal">
+        <div class="validation-content">
+            <div class="validation-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h2 id="validationTitle">Error</h2>
+            <p id="validationMessage">Completa todos los campos requeridos</p>
+            <button class="validation-btn" onclick="closeValidationModal()">Entendido</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechNow</h3>
+                    <p>Tu tienda online de confianza para la última tecnología</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Atención al Cliente</h4>
+                    <ul>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Devoluciones y Reembolsos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Información Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Cookies</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TechNow. Todos los derechos reservados.</p>
+                <div class="payment-methods-footer">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js\pago.js"></script>
+</body>
+</html>
