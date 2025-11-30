@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laptops - TechNow</title>
+    <!-- Estilos de la página de categoría -->
+    <link rel="stylesheet" href="../css/categoria1.css" />
+    <!-- Font Awesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="container">
+          <div class="nav-brand">
+            <a href="../index.html">
+              <img
+                src="../images/Logo1.png"
+                alt="TechNow Logo"
+                class="logo-navbar"
+              />
+            </a>
+          </div>
+
+          <!-- Botón hamburguesa para móviles -->
+          <button class="mobile-menu-toggle" aria-label="Menú">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="nav-content">
+            <ul class="nav-menu">
+              <li><a href="../index.html#categorias">Categorías</a></li>
+              <li><a href="./promociones.html">Promociones</a></li>
+              <li><a href="../index.html#novedades">Novedades</a></li>
+            </ul>
+            <div class="nav-icons">
+              <a href="#login" class="icon-link"
+                ><i class="fas fa-user"></i> <span>Perfil</span></a
+              >
+              <a href="#" class="icon-link"
+                ><i class="fas fa-heart"></i> <span>Lista de deseos</span></a
+              >
+              <a href="#" class="icon-link cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Mi Carrito</span>
+                <span id="cart-count" class="cart-badge">0</span>
+              </a>
+              <select class="language-select">
+                <option value="es">ES</option>
+                <option value="en">EN</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Banner de Categoría -->
+    <section class="category-banner">
+      <div class="container">
+        <h1 class="category-title">Laptops</h1>
+      </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+      <div class="breadcrumb-container">
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <a href="../index.html">Inicio</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Laptops</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+    <section class="category-page">
+      <div class="category-container">
+        <!-- Botón de filtros móvil -->
+        <button class="mobile-filters-toggle" id="mobile-filters-toggle">
+          <i class="fas fa-filter"></i>
+          <span>Filtros</span>
+        </button>
+
+        <!-- Overlay para cerrar filtros -->
+        <div class="filters-overlay" id="filters-overlay"></div>
+
+        <!-- Sidebar de filtros -->
+        <aside class="filters-sidebar" id="filters-sidebar">
+          <div class="filters-header">
+            <h3>Filtros</h3>
+            <button class="close-filters" id="close-filters">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <!-- Filtro de Marca -->
+          <div class="filter-group">
+            <h4>Marca</h4>
+            <select id="filter-brand">
+              <option value="">Todas las marcas</option>
+              <option value="dell">Dell</option>
+              <option value="hp">HP</option>
+              <option value="lenovo">Lenovo</option>
+              <option value="asus">Asus</option>
+              <option value="acer">Acer</option>
+              <option value="apple">Apple</option>
+              <option value="msi">MSI</option>
+              <option value="razer">Razer</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Procesador -->
+          <div class="filter-group">
+            <h4>Procesador</h4>
+            <select id="filter-processor">
+              <option value="">Cualquiera</option>
+              <option value="intel-i5">Intel Core i5</option>
+              <option value="intel-i7">Intel Core i7</option>
+              <option value="intel-i9">Intel Core i9</option>
+              <option value="ryzen-5">AMD Ryzen 5</option>
+              <option value="ryzen-7">AMD Ryzen 7</option>
+              <option value="ryzen-9">AMD Ryzen 9</option>
+              <option value="apple-m">Apple M Series</option>
+            </select>
+          </div>
+
+          <!-- Filtro de RAM -->
+          <div class="filter-group">
+            <h4>RAM</h4>
+            <select id="filter-ram">
+              <option value="">Cualquiera</option>
+              <option value="8gb">8 GB</option>
+              <option value="16gb">16 GB</option>
+              <option value="32gb">32 GB</option>
+              <option value="64gb">64 GB</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Almacenamiento -->
+          <div class="filter-group">
+            <h4>Almacenamiento</h4>
+            <select id="filter-storage">
+              <option value="">Cualquiera</option>
+              <option value="256gb">256 GB SSD</option>
+              <option value="512gb">512 GB SSD</option>
+              <option value="1tb">1 TB SSD</option>
+              <option value="2tb">2 TB SSD</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Uso -->
+          <div class="filter-group">
+            <h4>Uso</h4>
+            <select id="filter-screen">
+              <option value="">Cualquiera</option>
+              <option value="ofimatica">Ofimática</option>
+              <option value="gaming">Gaming</option>
+              <option value="diseno">Diseño/Edición</option>
+              <option value="programacion">Programación</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Rango de Precio -->
+          <div class="filter-group">
+            <h4>Rango de Precio</h4>
+            <div class="price-range">
+              <div class="price-inputs">
+                <input
+                  type="number"
+                  id="price-min"
+                  placeholder="Mínimo"
+                  min="0"
+                  step="100"
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="price-max"
+                  placeholder="Máximo"
+                  min="0"
+                  step="100"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="filter-actions">
+            <button class="filter-btn apply-filters">Aplicar Filtros</button>
+            <button class="filter-btn clear-filters">Limpiar Filtros</button>
+          </div>
+        </aside>
+
+        <!-- Área de productos -->
+        <main class="products-area">
+          <div class="products-header">
+            <p class="products-count">
+              Mostrando <strong>1-6</strong> de <strong>120</strong> resultados
+            </p>
+            <div class="sort-options">
+              <label for="sort-by">Ordenar por:</label>
+              <select id="sort-by">
+                <option value="relevance">Más Relevante</option>
+                <option value="price-low">Precio: Menor a Mayor</option>
+                <option value="price-high">Precio: Mayor a Menor</option>
+                <option value="rating">Mejor Valorados</option>
+                <option value="newest">Más Recientes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Grid de productos -->
+          <div class="category-products-grid">
+            <!-- Producto 1 -->
+            <div
+              class="product-card"
+              data-brand="dell"
+              data-processor="intel-i7"
+              data-ram="16gb"
+              data-storage="512gb"
+              data-screen="ofimatica"
+              data-price="1299.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria2/laptop1.jpg"
+                  alt="Dell XPS 15"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Dell</p>
+                <h3 class="product-name">Dell XPS 15</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.7 (145)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 5,999</span>
+                  <span class="price-current">S/ 4,979</span>
+                  <span class="discount-badge">17% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 415</strong>
+                </p>
+                <p class="product-specs">
+                  15.6" FHD+ • Intel i7-13700H<br />
+                  512GB SSD • 16GB RAM • RTX 4050
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div
+              class="product-card"
+              data-brand="apple"
+              data-processor="apple-m"
+              data-ram="16gb"
+              data-storage="512gb"
+              data-screen="diseno"
+              data-price="2499.00"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria2/laptop2.jpg"
+                  alt="MacBook Pro 14"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Apple</p>
+                <h3 class="product-name">MacBook Pro 14" M3</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>4.9 (203)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 9,499</span>
+                  <span class="price-current">S/ 8,369</span>
+                  <span class="discount-badge">12% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 697</strong>
+                </p>
+                <p class="product-specs">
+                  14.2" Liquid Retina XDR<br />
+                  512GB SSD • 16GB RAM • M3 Pro Chip
+                </p>
+                <div class="stock-badge low-stock">Últimas unidades</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div
+              class="product-card"
+              data-brand="lenovo"
+              data-processor="ryzen-7"
+              data-ram="16gb"
+              data-storage="512gb"
+              data-screen="programacion"
+              data-price="1099.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria2/laptop3.jpg"
+                  alt="Lenovo ThinkPad X1"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Lenovo</p>
+                <h3 class="product-name">Lenovo ThinkPad X1 Carbon</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.6 (98)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 5,499</span>
+                  <span class="price-current">S/ 4,669</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 389</strong>
+                </p>
+                <p class="product-specs">
+                  14" WUXGA IPS • Ryzen 7 PRO<br />
+                  512GB SSD • 16GB RAM • Ultraligera
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div
+              class="product-card"
+              data-brand="asus"
+              data-processor="intel-i9"
+              data-ram="32gb"
+              data-storage="1tb"
+              data-screen="gaming"
+              data-price="2199.00"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria2/laptop4.jpg"
+                  alt="Asus ROG Strix"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Asus</p>
+                <h3 class="product-name">Asus ROG Strix G18</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>4.8 (156)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 10,499</span>
+                  <span class="price-current">S/ 8,819</span>
+                  <span class="discount-badge">16% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 735</strong>
+                </p>
+                <p class="product-specs">
+                  18" QHD+ 240Hz • Intel i9-13980HX<br />
+                  1TB SSD • 32GB RAM • RTX 4080
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div
+              class="product-card"
+              data-brand="hp"
+              data-processor="intel-i5"
+              data-ram="16gb"
+              data-storage="512gb"
+              data-screen="ofimatica"
+              data-price="899.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria2/laptop5.jpg"
+                  alt="HP Pavilion 15"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">HP</p>
+                <h3 class="product-name">HP Pavilion 15</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span>4.3 (89)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 3,799</span>
+                  <span class="price-current">S/ 3,229</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 269</strong>
+                </p>
+                <p class="product-specs">
+                  15.6" FHD IPS • Intel i5-1335U<br />
+                  512GB SSD • 16GB RAM • Iris Xe
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div
+              class="product-card"
+              data-brand="msi"
+              data-processor="intel-i7"
+              data-ram="16gb"
+              data-storage="1tb"
+              data-screen="gaming"
+              data-price="1799.00"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria2/laptop6.jpg"
+                  alt="MSI Katana 15"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">MSI</p>
+                <h3 class="product-name">MSI Katana 15</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.5 (112)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 6,799</span>
+                  <span class="price-current">S/ 5,949</span>
+                  <span class="discount-badge">13% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 496</strong>
+                </p>
+                <p class="product-specs">
+                  15.6" FHD 144Hz • Intel i7-13620H<br />
+                  1TB SSD • 16GB RAM • RTX 4060
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paginación -->
+          <div class="pagination">
+            <button class="pagination-btn" disabled>Anterior</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <span class="pagination-dots">...</span>
+            <button class="pagination-btn">8</button>
+            <button class="pagination-btn">Siguiente</button>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>TechNow</h3>
+            <p>Tu tienda de confianza para la última tecnología.</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Atención al Cliente</h4>
+            <ul>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+              <li><a href="#">Centro de Ayuda</a></li>
+              <li><a href="#">Devoluciones y Reembolsos</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Mi Cuenta</h4>
+            <ul>
+              <li><a href="#">Mi Perfil</a></li>
+              <li><a href="#">Mis Pedidos</a></li>
+              <li><a href="#">Lista de Deseos</a></li>
+              <li><a href="#">Historial de Compras</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Información Legal</h4>
+            <ul>
+              <li><a href="#">Política de Privacidad</a></li>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Cookies</a></li>
+              <li><a href="#">Aviso Legal</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 TechNow. Todos los derechos reservados.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal de Inicio de Sesión -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="login-container">
+          <div class="login-header">
+            <div class="login-icon">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <h2>Bienvenido a TechNow</h2>
+            <p>Inicia sesión para continuar</p>
+          </div>
+
+          <form class="login-form" id="login-form">
+            <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <div class="input-wrapper">
+                <i class="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="correo@ejemplo.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <div class="input-wrapper password-wrapper">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="••••••••"
+                  required
+                />
+                <i class="fas fa-eye toggle-password"></i>
+              </div>
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox">
+                <input type="checkbox" />
+                <span>Recordarme</span>
+              </label>
+              <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <div
+              id="login-error"
+              style="
+                color: #ef4444;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                display: none;
+              "
+            ></div>
+
+            <button type="submit" class="login-btn">Iniciar Sesión</button>
+          </form>
+
+          <div class="divider">o</div>
+
+          <div class="social-login">
+            <button class="social-btn google-btn">
+              <i class="fab fa-google"></i>
+              Continuar con Google
+            </button>
+            <button class="social-btn facebook-btn">
+              <i class="fab fa-facebook-f"></i>
+              Continuar con Facebook
+            </button>
+          </div>
+
+          <div class="login-footer">
+            <p>
+              ¿No tienes cuenta?
+              <a href="#" class="register-link">Regístrate aquí</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript específico de categoría -->
+    <script src="../js/categoria1.js"></script>
+  </body>
+</html>

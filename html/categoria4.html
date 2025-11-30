@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gaming - TechNow</title>
+    <!-- Estilos de la página de categoría -->
+    <link rel="stylesheet" href="../css/categoria1.css" />
+    <!-- Font Awesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="container">
+          <div class="nav-brand">
+            <a href="../index.html">
+              <img
+                src="../images/Logo1.png"
+                alt="TechNow Logo"
+                class="logo-navbar"
+              />
+            </a>
+          </div>
+
+          <!-- Botón hamburguesa para móviles -->
+          <button class="mobile-menu-toggle" aria-label="Menú">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="nav-content">
+            <ul class="nav-menu">
+              <li><a href="../index.html#categorias">Categorías</a></li>
+              <li><a href="./promociones.html">Promociones</a></li>
+              <li><a href="../index.html#novedades">Novedades</a></li>
+            </ul>
+            <div class="nav-icons">
+              <a href="#login" class="icon-link"
+                ><i class="fas fa-user"></i> <span>Perfil</span></a
+              >
+              <a href="#" class="icon-link"
+                ><i class="fas fa-heart"></i> <span>Lista de deseos</span></a
+              >
+              <a href="#" class="icon-link cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Mi Carrito</span>
+                <span id="cart-count" class="cart-badge">0</span>
+              </a>
+              <select class="language-select">
+                <option value="es">ES</option>
+                <option value="en">EN</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Banner de Categoría -->
+    <section class="category-banner">
+      <div class="container">
+        <h1 class="category-title">Gaming</h1>
+      </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+      <div class="breadcrumb-container">
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <a href="../index.html">Inicio</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Gaming</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+    <section class="category-page">
+      <div class="category-container">
+        <!-- Botón de filtros móvil -->
+        <button class="mobile-filters-toggle" id="mobile-filters-toggle">
+          <i class="fas fa-filter"></i>
+          <span>Filtros</span>
+        </button>
+
+        <!-- Overlay para cerrar filtros -->
+        <div class="filters-overlay" id="filters-overlay"></div>
+
+        <!-- Sidebar de filtros -->
+        <aside class="filters-sidebar" id="filters-sidebar">
+          <div class="filters-header">
+            <h3>Filtros</h3>
+            <button class="close-filters" id="close-filters">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <!-- Filtro de Plataforma -->
+          <div class="filter-group">
+            <h4>Plataforma</h4>
+            <select id="filter-brand">
+              <option value="">Todas</option>
+              <option value="pc">PC</option>
+              <option value="ps5">PlayStation 5</option>
+              <option value="xbox">Xbox Series X/S</option>
+              <option value="switch">Nintendo Switch</option>
+              <option value="multi">Multiplataforma</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Tipo -->
+          <div class="filter-group">
+            <h4>Tipo de Producto</h4>
+            <select id="filter-processor">
+              <option value="">Todos</option>
+              <option value="consolas">Consolas</option>
+              <option value="perifericos">Periféricos</option>
+              <option value="accesorios">Accesorios</option>
+              <option value="controles">Controles</option>
+              <option value="headsets">Headsets</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Marca -->
+          <div class="filter-group">
+            <h4>Marca</h4>
+            <select id="filter-ram">
+              <option value="">Todas las marcas</option>
+              <option value="sony">Sony</option>
+              <option value="microsoft">Microsoft</option>
+              <option value="nintendo">Nintendo</option>
+              <option value="razer">Razer</option>
+              <option value="logitech">Logitech</option>
+              <option value="steelseries">SteelSeries</option>
+            </select>
+          </div>
+
+          <!-- Filtro vacío para compatibilidad -->
+          <div class="filter-group" style="display: none">
+            <h4>Almacenamiento</h4>
+            <select id="filter-storage">
+              <option value="">Cualquiera</option>
+            </select>
+          </div>
+
+          <!-- Filtro vacío para compatibilidad -->
+          <div class="filter-group" style="display: none">
+            <h4>Pantalla</h4>
+            <select id="filter-screen">
+              <option value="">Cualquiera</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Rango de Precio -->
+          <div class="filter-group">
+            <h4>Rango de Precio</h4>
+            <div class="price-range">
+              <div class="price-inputs">
+                <input
+                  type="number"
+                  id="price-min"
+                  placeholder="Mínimo"
+                  min="0"
+                  step="50"
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="price-max"
+                  placeholder="Máximo"
+                  min="0"
+                  step="50"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="filter-actions">
+            <button class="filter-btn apply-filters">Aplicar Filtros</button>
+            <button class="filter-btn clear-filters">Limpiar Filtros</button>
+          </div>
+        </aside>
+
+        <!-- Área de productos -->
+        <main class="products-area">
+          <div class="products-header">
+            <p class="products-count">
+              Mostrando <strong>1-6</strong> de <strong>95</strong> resultados
+            </p>
+            <div class="sort-options">
+              <label for="sort-by">Ordenar por:</label>
+              <select id="sort-by">
+                <option value="relevance">Más Relevante</option>
+                <option value="price-low">Precio: Menor a Mayor</option>
+                <option value="price-high">Precio: Mayor a Menor</option>
+                <option value="rating">Mejor Valorados</option>
+                <option value="newest">Más Recientes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Grid de productos -->
+          <div class="category-products-grid">
+            <!-- Producto 1 -->
+            <div
+              class="product-card"
+              data-brand="ps5"
+              data-processor="consolas"
+              data-ram="sony"
+              data-storage=""
+              data-screen=""
+              data-price="499.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria4/gaming1.jpg"
+                  alt="PlayStation 5"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Sony</p>
+                <h3 class="product-name">PlayStation 5 Digital Edition</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.8 (412)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 2,399</span>
+                  <span class="price-current">S/ 2,039</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 170</strong>
+                </p>
+                <p class="product-specs">
+                  825GB SSD • 4K 120Hz<br />
+                  Ray Tracing • DualSense Controller
+                </p>
+                <div class="stock-badge low-stock">Últimas unidades</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div
+              class="product-card"
+              data-brand="xbox"
+              data-processor="consolas"
+              data-ram="microsoft"
+              data-storage=""
+              data-screen=""
+              data-price="549.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria4/gaming2.jpg"
+                  alt="Xbox Series X"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Microsoft</p>
+                <h3 class="product-name">Xbox Series X</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.7 (356)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 2,699</span>
+                  <span class="price-current">S/ 2,294</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 191</strong>
+                </p>
+                <p class="product-specs">
+                  1TB SSD • 4K 120FPS<br />
+                  Game Pass • Quick Resume
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div
+              class="product-card"
+              data-brand="pc"
+              data-processor="perifericos"
+              data-ram="razer"
+              data-storage=""
+              data-screen=""
+              data-price="149.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria4/gaming3.jpg"
+                  alt="Razer DeathAdder"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Razer</p>
+                <h3 class="product-name">Razer DeathAdder V3 Pro</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>4.9 (234)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 649</span>
+                  <span class="price-current">S/ 552</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 6 cuotas sin interés de <strong>S/ 92</strong>
+                </p>
+                <p class="product-specs">
+                  Sensor Focus Pro 30K<br />
+                  Inalámbrico • RGB Chroma • 90h batería
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div
+              class="product-card"
+              data-brand="pc"
+              data-processor="perifericos"
+              data-ram="logitech"
+              data-storage=""
+              data-screen=""
+              data-price="199.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria4/gaming4.jpg"
+                  alt="Logitech G Pro X"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Logitech</p>
+                <h3 class="product-name">Logitech G Pro X Keyboard</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.7 (189)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 759</span>
+                  <span class="price-current">S/ 645</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 6 cuotas sin interés de <strong>S/ 108</strong>
+                </p>
+                <p class="product-specs">
+                  Mecánico GX Blue<br />
+                  TKL • RGB LIGHTSYNC • Hot-Swappable
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div
+              class="product-card"
+              data-brand="multi"
+              data-processor="headsets"
+              data-ram="steelseries"
+              data-storage=""
+              data-screen=""
+              data-price="329.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria4/gaming5.jpg"
+                  alt="SteelSeries Arctis Nova Pro"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">SteelSeries</p>
+                <h3 class="product-name">SteelSeries Arctis Nova Pro</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>4.8 (267)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 1,399</span>
+                  <span class="price-current">S/ 1,189</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 99</strong>
+                </p>
+                <p class="product-specs">
+                  Hi-Res Audio • ANC<br />
+                  GameDAC Gen 2 • Multiplataforma
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div
+              class="product-card"
+              data-brand="switch"
+              data-processor="consolas"
+              data-ram="nintendo"
+              data-storage=""
+              data-screen=""
+              data-price="349.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria4/gaming6.jpg"
+                  alt="Nintendo Switch OLED"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Nintendo</p>
+                <h3 class="product-name">Nintendo Switch OLED</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.8 (523)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-old">S/ 1,699</span>
+                  <span class="price-current">S/ 1,444</span>
+                  <span class="discount-badge">15% OFF</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 12 cuotas sin interés de <strong>S/ 120</strong>
+                </p>
+                <p class="product-specs">
+                  Pantalla OLED 7"<br />
+                  64GB • Dock mejorado • Joy-Con
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paginación -->
+          <div class="pagination">
+            <button class="pagination-btn" disabled>Anterior</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <span class="pagination-dots">...</span>
+            <button class="pagination-btn">7</button>
+            <button class="pagination-btn">Siguiente</button>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>TechNow</h3>
+            <p>Tu tienda de confianza para la última tecnología.</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Atención al Cliente</h4>
+            <ul>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+              <li><a href="#">Centro de Ayuda</a></li>
+              <li><a href="#">Devoluciones y Reembolsos</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Mi Cuenta</h4>
+            <ul>
+              <li><a href="#">Mi Perfil</a></li>
+              <li><a href="#">Mis Pedidos</a></li>
+              <li><a href="#">Lista de Deseos</a></li>
+              <li><a href="#">Historial de Compras</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Información Legal</h4>
+            <ul>
+              <li><a href="#">Política de Privacidad</a></li>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Cookies</a></li>
+              <li><a href="#">Aviso Legal</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 TechNow. Todos los derechos reservados.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal de Inicio de Sesión -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="login-container">
+          <div class="login-header">
+            <div class="login-icon">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <h2>Bienvenido a TechNow</h2>
+            <p>Inicia sesión para continuar</p>
+          </div>
+
+          <form class="login-form" id="login-form">
+            <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <div class="input-wrapper">
+                <i class="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="correo@ejemplo.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <div class="input-wrapper password-wrapper">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="••••••••"
+                  required
+                />
+                <i class="fas fa-eye toggle-password"></i>
+              </div>
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox">
+                <input type="checkbox" />
+                <span>Recordarme</span>
+              </label>
+              <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <div
+              id="login-error"
+              style="
+                color: #ef4444;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                display: none;
+              "
+            ></div>
+
+            <button type="submit" class="login-btn">Iniciar Sesión</button>
+          </form>
+
+          <div class="divider">o</div>
+
+          <div class="social-login">
+            <button class="social-btn google-btn">
+              <i class="fab fa-google"></i>
+              Continuar con Google
+            </button>
+            <button class="social-btn facebook-btn">
+              <i class="fab fa-facebook-f"></i>
+              Continuar con Facebook
+            </button>
+          </div>
+
+          <div class="login-footer">
+            <p>
+              ¿No tienes cuenta?
+              <a href="#" class="register-link">Regístrate aquí</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript específico de categoría -->
+    <script src="../js/categoria1.js"></script>
+  </body>
+</html>
