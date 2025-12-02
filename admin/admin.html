@@ -81,7 +81,7 @@
                     </span>
                     <span>Marca</span>
                 </a>
-                <a href="#" class="nav-item submenu-item">
+                <a href="#" class="nav-item submenu-item" data-page="atencion">
                     <span class="icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
@@ -92,7 +92,7 @@
                     </span>
                     <span>Atención al cliente</span>
                 </a>
-                <a href="#" class="nav-item submenu-item">
+                <a href="#" class="nav-item submenu-item" data-page="ventas">
                     <span class="icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="9" cy="21" r="1"/>
@@ -119,7 +119,7 @@
                 </span>
             </div>
             <div class="submenu">   
-                <a href="#" class="nav-item submenu-item">
+                <a href="#" class="nav-item submenu-item" data-page="marketing">
                     <span class="icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -129,7 +129,7 @@
                     </span>
                     <span>Marketing</span>
                 </a>
-                <a href="#" class="nav-item submenu-item">
+                <a href="#" class="nav-item submenu-item" data-page="finanzas">
                     <span class="icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
@@ -397,6 +397,279 @@
             <div class="pagination-info" id="brands-pagination-info">Mostrando 0 de 0 Marcas</div>
             <div class="pagination" id="brands-pagination">
             </div>
+        </div>
+
+        <!-- Ventas Page -->
+        <div id="ventas-page" class="page">
+            <h1 class="page-title">Ventas</h1>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card blue">
+                    <div class="summary-label">Pedidos de Hoy</div>
+                    <div class="summary-value" id="ventas-pedidos-hoy">0</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="summary-label">Ingresos de Hoy</div>
+                    <div class="summary-value" id="ventas-ingresos-hoy">$0</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="summary-label">Pedidos Pendientes de Envío</div>
+                    <div class="summary-value" id="ventas-pendientes-envio">0</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="summary-label">Valor Promedio del Pedido (AOV)</div>
+                    <div class="summary-value" id="ventas-aov">$0.00</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-row">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="order-search" placeholder="Buscar por ID o Cliente...">
+                </div>
+                <select class="filter-select" id="filter-order-status">
+                    <option value="">Estado del Pedido</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Procesando">Procesando</option>
+                    <option value="Enviado">Enviado</option>
+                    <option value="Entregado">Entregado</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select>
+                <select class="filter-select" id="filter-payment-status">
+                    <option value="">Estado de Pago</option>
+                    <option value="Pagado">Pagado</option>
+                    <option value="Pendiente de Pago">Pendiente de Pago</option>
+                    <option value="Rechazado">Rechazado</option>
+                </select>
+                <button class="btn-secondary" id="btn-exportar-reporte">Exportar Reporte</button>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID DEL PEDIDO</th>
+                            <th>FECHA DEL PEDIDO</th>
+                            <th>CLIENTE</th>
+                            <th>TOTAL DEL PEDIDO</th>
+                            <th>ESTADO DEL PEDIDO</th>
+                            <th>ESTADO DE PAGO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody"></tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-info" id="orders-pagination-info">Mostrando 0 de 0 pedidos</div>
+            <div class="pagination" id="orders-pagination"></div>
+        </div>
+
+        <!-- Marketing Page -->
+        <div id="marketing-page" class="page">
+            <h1 class="page-title">Marketing y Promociones</h1>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card blue">
+                    <div class="summary-label">Cupones Activos</div>
+                    <div class="summary-value" id="mk-cupones-activos">0</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="summary-label">Ingresos por Promociones</div>
+                    <div class="summary-value" id="mk-ingresos-promos">$0</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="summary-label">Tasa de Uso</div>
+                    <div class="summary-value" id="mk-tasa-uso">0%</div>
+                </div>
+            </div>
+
+            <!-- Top Controls -->
+            <div class="top-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="mk-search" placeholder="Buscar por Nombre de Campaña o Código de Cupón">
+                </div>
+                <select class="filter-select" id="mk-filter-tipo">
+                    <option value="">Tipo de Campaña</option>
+                    <option value="Descuento %">Descuento %</option>
+                    <option value="Envío Gratis">Envío Gratis</option>
+                    <option value="2x1">2x1</option>
+                </select>
+                <select class="filter-select" id="mk-filter-estado">
+                    <option value="">Estado</option>
+                    <option value="Activa">Activa</option>
+                    <option value="Expirada">Expirada</option>
+                    <option value="Programada">Programada</option>
+                </select>
+                <button class="btn-primary" id="mk-btn-nueva">+ Crear Nueva Campaña / Cupón</button>
+            </div>
+
+            <!-- Campaigns Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID / CÓDIGO</th>
+                            <th>NOMBRE DE LA CAMPAÑA</th>
+                            <th>TIPO DE PROMOCIÓN</th>
+                            <th>FECHA DE VENCIMIENTO</th>
+                            <th>USOS TOTALES</th>
+                            <th>INGRESOS GENERADOS</th>
+                            <th>ESTADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mk-tbody"></tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-info" id="mk-pagination-info">Mostrando 0 de 0 campañas</div>
+            <div class="pagination" id="mk-pagination"></div>
+        </div>
+
+        <!-- Finanzas Page -->
+        <div id="finanzas-page" class="page">
+            <h1 class="page-title">Finanzas / Contabilidad</h1>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card blue">
+                    <div class="summary-label">Ganancia Neta (Total)</div>
+                    <div class="summary-value" id="fin-ganancia-neta">$0</div>
+                </div>
+                <div class="summary-card red">
+                    <div class="summary-label">Costo de Bienes Vendidos (COGS)</div>
+                    <div class="summary-value" id="fin-cogs">$0</div>
+                </div>
+                <div class="summary-card blue">
+                    <div class="summary-label">Tasa de Reembolsos</div>
+                    <div class="summary-value" id="fin-reembolsos">0%</div>
+                </div>
+                <div class="summary-card green">
+                    <div class="summary-label">Margen Bruto</div>
+                    <div class="summary-value" id="fin-margen">0%</div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <h2 class="section-title">Flujo de Caja (Ingresos vs. Egresos) Mensual</h2>
+                <canvas id="financeChart" style="width: 100%; height: 320px; display: block;"></canvas>
+            </div>
+
+            <!-- Top Controls -->
+            <div class="top-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="fin-search" placeholder="Buscar por Descripción o ID de Transacción">
+                </div>
+                <select class="filter-select" id="fin-filter-tipo">
+                    <option value="">Tipo</option>
+                    <option value="Ingreso">Ingreso</option>
+                    <option value="Gasto">Gasto</option>
+                </select>
+                <select class="filter-select" id="fin-filter-estado">
+                    <option value="">Estado</option>
+                    <option value="Pagado">Pagado</option>
+                    <option value="Pendiente">Pendiente</option>
+                </select>
+                <button class="btn-secondary" id="fin-btn-reporte">Exportar Reporte Mensual</button>
+                <button class="btn-primary" id="fin-btn-impuestos">Generar Declaración de Impuestos</button>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>FECHA</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>TIPO</th>
+                            <th>MONTO</th>
+                            <th>ESTADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fin-tbody"></tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-info" id="fin-pagination-info">Mostrando 0 de 0 transacciones</div>
+            <div class="pagination" id="fin-pagination"></div>
+        </div>
+        <!-- Atención al Cliente Page -->
+        <div id="atencion-page" class="page">
+            <h1 class="page-title">Atención al Cliente</h1>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card blue">
+                    <div class="summary-label">Tickets Abiertos</div>
+                    <div class="summary-value" id="tickets-abiertos">0</div>
+                </div>
+                <div class="summary-card red">
+                    <div class="summary-label">SLA Promedio</div>
+                    <div class="summary-value" id="sla-promedio">0m</div>
+                </div>
+                <div class="summary-card green">
+                    <div class="summary-label">Tickets Cerrados Hoy</div>
+                    <div class="summary-value" id="tickets-cerrados-hoy">0</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-row">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="ticket-search" placeholder="Buscar por ID, Cliente o Asunto...">
+                </div>
+                <select class="filter-select" id="filter-ticket-status">
+                    <option value="">Estado del Ticket</option>
+                    <option value="Nuevo">Nuevo</option>
+                    <option value="En Proceso">En Proceso</option>
+                    <option value="Escalado">Escalado</option>
+                    <option value="Cerrado">Cerrado</option>
+                </select>
+                <select class="filter-select" id="filter-ticket-type">
+                    <option value="">Tipo de Caso</option>
+                    <option value="Reclamo">Reclamo</option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Devolución">Devolución</option>
+                    <option value="Problema Técnico">Problema Técnico</option>
+                </select>
+            </div>
+
+            <!-- Tickets Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID DEL<br>TICKET</th>
+                            <th>FECHA DE<br>CREACIÓN</th>
+                            <th>CLIENTE/USUARIO</th>
+                            <th>ASUNTO/DESCRIPCIÓN BREVE</th>
+                            <th>TIPO DE CASO</th>
+                            <th>ESTADO</th>
+                            <th>ÚLTIMA<br>ACTIVIDAD</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tickets-tbody"></tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-info" id="tickets-pagination-info">Mostrando 0 de 0 tickets</div>
+            <div class="pagination" id="tickets-pagination"></div>
         </div>
     </div>
 

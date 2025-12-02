@@ -35,7 +35,37 @@ let brands = [
 ];
 
 let activities = [];
-let currentPage = { products: 1, users: 1, brands: 1 };
+let tickets = [
+    { id: 'TN-001', createdAt: '2023-10-26', client: 'Ana García', subject: 'Problema con el envío del pedido #12345', type: 'Reclamo', status: 'Escalado', lastActivity: 'Hace 10 min', slaMinutes: 135 },
+    { id: 'TN-002', createdAt: '2023-10-25', client: 'Juan Pérez', subject: 'Consulta sobre garantía de producto X', type: 'Consulta', status: 'En Proceso', lastActivity: 'Hace 30 min', slaMinutes: 160 },
+    { id: 'TN-003', createdAt: '2023-10-24', client: 'María López', subject: 'Solicitud de devolución para artículo defectuoso', type: 'Devolución', status: 'Cerrado', lastActivity: 'Ayer', slaMinutes: 95 },
+    { id: 'TN-004', createdAt: '2023-10-26', client: 'Carlos Ruiz', subject: 'Problema técnico con software de producto Y', type: 'Problema Técnico', status: 'Nuevo', lastActivity: 'Hace 5 min', slaMinutes: 120 },
+    { id: 'TN-005', createdAt: '2023-10-23', client: 'Laura Martínez', subject: 'Reclamo por retraso en la entrega', type: 'Reclamo', status: 'En Proceso', lastActivity: 'Hace 2 h', slaMinutes: 200 },
+    { id: 'TN-006', createdAt: '2023-10-22', client: 'Diego Torres', subject: 'Consulta: compatibilidad de accesorios', type: 'Consulta', status: 'Cerrado', lastActivity: 'Hace 3 días', slaMinutes: 80 }
+];
+let orders = [
+    { id: 'ORD001', date: '2023-10-26', client: 'Juan Pérez', total: 150.00, orderStatus: 'Pendiente', paymentStatus: 'Pagado' },
+    { id: 'ORD002', date: '2023-10-25', client: 'María García', total: 230.50, orderStatus: 'Enviado', paymentStatus: 'Pagado' },
+    { id: 'ORD003', date: '2023-10-24', client: 'Carlos Ruiz', total: 85.00, orderStatus: 'Entregado', paymentStatus: 'Pagado' },
+    { id: 'ORD004', date: '2023-10-23', client: 'Ana López', total: 320.00, orderStatus: 'Cancelado', paymentStatus: 'Rechazado' },
+    { id: 'ORD005', date: '2023-10-22', client: 'Pedro Gómez', total: 99.99, orderStatus: 'Procesando', paymentStatus: 'Pendiente de Pago' },
+    { id: 'ORD006', date: '2023-10-21', client: 'Laura Martínez', total: 180.00, orderStatus: 'Pendiente', paymentStatus: 'Pendiente de Pago' },
+    { id: 'ORD007', date: '2023-10-20', client: 'Diego Torres', total: 249.90, orderStatus: 'Enviado', paymentStatus: 'Pagado' }
+];
+let campaigns = [
+    { id: 'CUPON123', name: 'Descuento Verano', type: 'Descuento %', expires: '31/08/2024', uses: 500, revenue: 5000, status: 'Activa' },
+    { id: 'ENVIOFREE', name: 'Envío Gratis Navidad', type: 'Envío Gratis', expires: '25/12/2023', uses: 1200, revenue: 7200, status: 'Expirada' },
+    { id: '2X1PROMO', name: 'Promo Black Friday', type: '2x1', expires: '29/11/2024', uses: 80, revenue: 3030, status: 'Programada' }
+];
+let transactions = [
+    { id: 'TX-001', date: '2023-10-01', description: 'Venta ORD001', type: 'Ingreso', amount: 150.00, status: 'Pagado' },
+    { id: 'TX-002', date: '2023-10-02', description: 'Compra de Stock', type: 'Gasto', amount: 320.00, status: 'Pagado' },
+    { id: 'TX-003', date: '2023-10-03', description: 'Reembolso ORD004', type: 'Gasto', amount: 50.00, status: 'Pagado' },
+    { id: 'TX-004', date: '2023-10-10', description: 'Venta ORD003', type: 'Ingreso', amount: 85.00, status: 'Pagado' },
+    { id: 'TX-005', date: '2023-10-15', description: 'Servicios de Marketing', type: 'Gasto', amount: 200.00, status: 'Pendiente' },
+    { id: 'TX-006', date: '2023-10-20', description: 'Venta ORD007', type: 'Ingreso', amount: 249.90, status: 'Pagado' }
+];
+let currentPage = { products: 1, users: 1, brands: 1, tickets: 1, orders: 1, campaigns: 1, finances: 1 };
 const itemsPerPage = 5;
 
 // ==================== INITIALIZATION ====================
@@ -47,10 +77,35 @@ document.addEventListener('DOMContentLoaded', function() {
     renderProductsTable();
     renderUsersTable();
     renderBrandsTable();
+    renderTicketsTable();
+    renderOrdersTable();
+    renderCampaignsTable();
+    renderFinanceTable();
+    drawFinanceChart();
     initModals();
     initFilters();
+    setupFinanceChartActivation();
+    setupFinanceResizeObserver();
+    setupFinanceIntersectionObserver();
+    ensureFinanceChartReady();
     addActivity('Sistema iniciado correctamente');
 });
+// Redraw finance chart when the page becomes active to avoid zoom dependency
+function setupFinanceChartActivation() {
+    const finPage = document.getElementById('finanzas-page');
+    if (!finPage) return;
+    const observer = new MutationObserver(() => {
+        if (finPage.classList.contains('active')) {
+            // Defer to ensure layout finalized
+            requestAnimationFrame(() => {
+                drawFinanceChart();
+                // Extra delayed draw to catch late layout/style settles
+                setTimeout(drawFinanceChart, 150);
+            });
+        }
+    });
+    observer.observe(finPage, { attributes: true, attributeFilter: ['class'] });
+}
 
 // ==================== NAVIGATION ====================
 function initNavigation() {
@@ -75,6 +130,17 @@ function initNavigation() {
                 if (pageId === 'productos-page') renderProductsTable();
                 if (pageId === 'usuarios-page') renderUsersTable();
                 if (pageId === 'marca-page') renderBrandsTable();
+                if (pageId === 'atencion-page') renderTicketsTable();
+                if (pageId === 'ventas-page') renderOrdersTable();
+                if (pageId === 'marketing-page') renderCampaignsTable();
+                if (pageId === 'finanzas-page') {
+                    renderFinanceTable();
+                    updateFinanceStats();
+                    // Defer chart draw to ensure layout has settled
+                    requestAnimationFrame(() => {
+                        setTimeout(() => { drawFinanceChart(); }, 50);
+                    });
+                }
             }
         });
     });
@@ -1051,8 +1117,14 @@ function updatePagination(type, totalItems) {
     
     const start = ((currentPage[type] - 1) * itemsPerPage) + 1;
     const end = Math.min(currentPage[type] * itemsPerPage, totalItems);
-    
-    info.textContent = `Mostrando ${start} a ${end} de ${totalItems} ${type === 'products' ? 'productos' : type === 'users' ? 'usuarios' : 'Marcas'}`;
+    const label = type === 'products' ? 'productos' :
+                  type === 'users' ? 'usuarios' :
+                  type === 'brands' ? 'Marcas' :
+                  type === 'tickets' ? 'tickets' :
+                  type === 'orders' ? 'pedidos' :
+                  type === 'campaigns' ? 'campañas' :
+                  'transacciones';
+    info.textContent = `Mostrando ${totalItems === 0 ? 0 : start} a ${totalItems === 0 ? 0 : end} de ${totalItems} ${label}`;
     
     let html = `<button class="page-btn" onclick="changePage('${type}', ${currentPage[type] - 1})" ${currentPage[type] === 1 ? 'disabled' : ''}>Anterior</button>`;
     
@@ -1072,7 +1144,11 @@ function updatePagination(type, totalItems) {
 function changePage(type, page) {
     const filtered = type === 'products' ? getFilteredProducts() : 
                      type === 'users' ? getFilteredUsers() : 
-                     getFilteredBrands();
+                     type === 'brands' ? getFilteredBrands() :
+                     type === 'tickets' ? getFilteredTickets() :
+                     type === 'orders' ? getFilteredOrders() :
+                     type === 'campaigns' ? getFilteredCampaigns() :
+                     getFilteredTransactions();
     const totalPages = Math.ceil(filtered.length / itemsPerPage);
     
     if (page < 1 || page > totalPages) return;
@@ -1082,6 +1158,10 @@ function changePage(type, page) {
     if (type === 'products') renderProductsTable();
     if (type === 'users') renderUsersTable();
     if (type === 'brands') renderBrandsTable();
+    if (type === 'tickets') renderTicketsTable();
+    if (type === 'orders') renderOrdersTable();
+    if (type === 'campaigns') renderCampaignsTable();
+    if (type === 'finances' || type === 'transactions') renderFinanceTable();
 }
 
 // ==================== MODALS ====================
@@ -1221,6 +1301,537 @@ function initFilters() {
         currentPage.brands = 1;
         renderBrandsTable();
     };
+
+    // Tickets filters
+    const ticketSearch = document.getElementById('ticket-search');
+    if (ticketSearch) ticketSearch.oninput = () => { currentPage.tickets = 1; renderTicketsTable(); };
+    const ticketStatus = document.getElementById('filter-ticket-status');
+    if (ticketStatus) ticketStatus.onchange = () => { currentPage.tickets = 1; renderTicketsTable(); };
+    const ticketType = document.getElementById('filter-ticket-type');
+    if (ticketType) ticketType.onchange = () => { currentPage.tickets = 1; renderTicketsTable(); };
+
+    // Orders filters
+    const orderSearch = document.getElementById('order-search');
+    if (orderSearch) orderSearch.oninput = () => { currentPage.orders = 1; renderOrdersTable(); };
+    const orderStatus = document.getElementById('filter-order-status');
+    if (orderStatus) orderStatus.onchange = () => { currentPage.orders = 1; renderOrdersTable(); };
+    const paymentStatus = document.getElementById('filter-payment-status');
+    if (paymentStatus) paymentStatus.onchange = () => { currentPage.orders = 1; renderOrdersTable(); };
+
+    // Marketing filters
+    const mkSearch = document.getElementById('mk-search');
+    if (mkSearch) mkSearch.oninput = () => { currentPage.campaigns = 1; renderCampaignsTable(); };
+    const mkTipo = document.getElementById('mk-filter-tipo');
+    if (mkTipo) mkTipo.onchange = () => { currentPage.campaigns = 1; renderCampaignsTable(); };
+    const mkEstado = document.getElementById('mk-filter-estado');
+    if (mkEstado) mkEstado.onchange = () => { currentPage.campaigns = 1; renderCampaignsTable(); };
+
+    // Finance filters
+    const finSearch = document.getElementById('fin-search');
+    if (finSearch) finSearch.oninput = () => { currentPage.finances = 1; renderFinanceTable(); };
+    const finTipo = document.getElementById('fin-filter-tipo');
+    if (finTipo) finTipo.onchange = () => { currentPage.finances = 1; renderFinanceTable(); };
+    const finEstado = document.getElementById('fin-filter-estado');
+    if (finEstado) finEstado.onchange = () => { currentPage.finances = 1; renderFinanceTable(); };
+}
+
+// ==================== SUPPORT / TICKETS ====================
+function renderTicketsTable() {
+    updateTicketStats();
+
+    const filtered = getFilteredTickets();
+    const paginated = paginate(filtered, currentPage.tickets, itemsPerPage);
+
+    const tbody = document.getElementById('tickets-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = paginated.map(t => `
+        <tr data-id="${t.id}">
+            <td>${t.id}</td>
+            <td>${t.createdAt}</td>
+            <td>${t.client}</td>
+            <td>${t.subject}</td>
+            <td><span class="status-badge active">${t.type}</span></td>
+            <td><span class="status-badge ${ticketStatusClass(t.status)}">${t.status}</span></td>
+            <td>${t.lastActivity}</td>
+            <td>
+                <button class="icon-btn view" title="Ver" onclick="viewTicket('${t.id}')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+
+    updatePagination('tickets', filtered.length);
+}
+
+function updateTicketStats() {
+    const abiertos = tickets.filter(t => t.status !== 'Cerrado').length;
+    const cerradosHoy = tickets.filter(t => t.status === 'Cerrado').length; // dummy: total cerrados
+    const avgMinutes = Math.round(tickets.reduce((s, t) => s + t.slaMinutes, 0) / (tickets.length || 1));
+    const hours = Math.floor(avgMinutes / 60);
+    const minutes = avgMinutes % 60;
+
+    const elAbiertos = document.getElementById('tickets-abiertos');
+    const elCerrados = document.getElementById('tickets-cerrados-hoy');
+    const elSla = document.getElementById('sla-promedio');
+    if (elAbiertos) elAbiertos.textContent = abiertos.toString();
+    if (elCerrados) elCerrados.textContent = cerradosHoy.toString();
+    if (elSla) elSla.textContent = `${hours > 0 ? hours + 'h ' : ''}${minutes}m`;
+}
+
+function getFilteredTickets() {
+    const search = (document.getElementById('ticket-search')?.value || '').toLowerCase();
+    const status = (document.getElementById('filter-ticket-status')?.value || '');
+    const type = (document.getElementById('filter-ticket-type')?.value || '');
+
+    return tickets.filter(t => {
+        const matchSearch = !search || t.id.toLowerCase().includes(search) || t.client.toLowerCase().includes(search) || t.subject.toLowerCase().includes(search);
+        const matchStatus = !status || t.status === status;
+        const matchType = !type || t.type === type;
+        return matchSearch && matchStatus && matchType;
+    });
+}
+
+function ticketStatusClass(status) {
+    if (status === 'Cerrado') return 'success';
+    if (status === 'Escalado') return 'danger';
+    if (status === 'En Proceso') return 'warning';
+    return 'active'; // Nuevo
+}
+
+function viewTicket(id) {
+    const t = tickets.find(x => x.id === id);
+    if (!t) return;
+    showNotification(`Ticket ${t.id}: ${t.subject}`, 'success');
+}
+
+// ==================== SALES / ORDERS ====================
+function renderOrdersTable() {
+    updateOrderStats();
+
+    const filtered = getFilteredOrders();
+    const paginated = paginate(filtered, currentPage.orders, itemsPerPage);
+
+    const tbody = document.getElementById('orders-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = paginated.map(o => `
+        <tr data-id="${o.id}">
+            <td>${o.id}</td>
+            <td>${o.date}</td>
+            <td>${o.client}</td>
+            <td>$${o.total.toFixed(2)}</td>
+            <td><span class="status-badge ${orderStatusClass(o.orderStatus)}">${o.orderStatus}</span></td>
+            <td><span class="status-badge ${paymentStatusClass(o.paymentStatus)}">${o.paymentStatus}</span></td>
+            <td>
+                <button class="icon-btn view" title="Ver" onclick="viewOrder('${o.id}')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+
+    updatePagination('orders', filtered.length);
+}
+
+function updateOrderStats() {
+    const today = new Date('2023-10-26'); // dummy anchor
+    const ordersToday = orders.filter(o => o.date === '2023-10-26');
+    const pedidosHoy = ordersToday.length;
+    const ingresosHoy = ordersToday.reduce((s, o) => s + o.total, 0);
+    const pendientesEnvio = orders.filter(o => o.orderStatus === 'Pendiente' || o.orderStatus === 'Procesando').length;
+    const aov = orders.length ? (orders.reduce((s, o) => s + o.total, 0) / orders.length) : 0;
+
+    const elHoy = document.getElementById('ventas-pedidos-hoy');
+    const elIng = document.getElementById('ventas-ingresos-hoy');
+    const elPen = document.getElementById('ventas-pendientes-envio');
+    const elAov = document.getElementById('ventas-aov');
+    if (elHoy) elHoy.textContent = pedidosHoy.toString();
+    if (elIng) elIng.textContent = `$${ingresosHoy.toFixed(2)}`;
+    if (elPen) elPen.textContent = pendientesEnvio.toString();
+    if (elAov) elAov.textContent = `$${aov.toFixed(2)}`;
+}
+
+function getFilteredOrders() {
+    const search = (document.getElementById('order-search')?.value || '').toLowerCase();
+    const status = (document.getElementById('filter-order-status')?.value || '');
+    const pay = (document.getElementById('filter-payment-status')?.value || '');
+
+    return orders.filter(o => {
+        const matchSearch = !search || o.id.toLowerCase().includes(search) || o.client.toLowerCase().includes(search);
+        const matchStatus = !status || o.orderStatus === status;
+        const matchPay = !pay || o.paymentStatus === pay;
+        return matchSearch && matchStatus && matchPay;
+    });
+}
+
+function orderStatusClass(s) {
+    if (s === 'Entregado') return 'success';
+    if (s === 'Enviado') return 'active';
+    if (s === 'Procesando') return 'warning';
+    if (s === 'Pendiente') return 'warning';
+    if (s === 'Cancelado') return 'danger';
+    return 'active';
+}
+
+function paymentStatusClass(s) {
+    if (s === 'Pagado') return 'success';
+    if (s === 'Pendiente de Pago') return 'warning';
+    if (s === 'Rechazado') return 'danger';
+    return 'active';
+}
+
+function viewOrder(id) {
+    const o = orders.find(x => x.id === id);
+    if (!o) return;
+    showNotification(`Pedido ${o.id}: ${o.client} — $${o.total.toFixed(2)}`, 'success');
+}
+
+// ==================== MARKETING / CAMPAIGNS ====================
+function renderCampaignsTable() {
+    updateMarketingStats();
+
+    const filtered = getFilteredCampaigns();
+    const paginated = paginate(filtered, currentPage.campaigns, itemsPerPage);
+
+    const tbody = document.getElementById('mk-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = paginated.map(c => `
+        <tr data-id="${c.id}">
+            <td>${c.id}</td>
+            <td>${c.name}</td>
+            <td>${c.type}</td>
+            <td>${c.expires}</td>
+            <td>${c.uses}</td>
+            <td>$${c.revenue.toLocaleString()}</td>
+            <td><span class="status-badge ${campaignStatusClass(c.status)}">${c.status}</span></td>
+            <td>
+                <button class="icon-btn view" title="Ver" onclick="viewCampaign('${c.id}')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+
+    updatePagination('campaigns', filtered.length);
+}
+
+function updateMarketingStats() {
+    const activos = campaigns.filter(c => c.status === 'Activa').length;
+    const ingresos = campaigns.reduce((s, c) => s + c.revenue, 0);
+    const usos = campaigns.reduce((s, c) => s + c.uses, 0);
+    const tasaUso = campaigns.length ? Math.min(99, Math.round((usos / (campaigns.length * 1000)) * 100)) : 0; // dummy calc
+
+    const elActivos = document.getElementById('mk-cupones-activos');
+    const elIngresos = document.getElementById('mk-ingresos-promos');
+    const elTasa = document.getElementById('mk-tasa-uso');
+    if (elActivos) elActivos.textContent = activos.toString();
+    if (elIngresos) elIngresos.textContent = `$${ingresos.toLocaleString()}`;
+    if (elTasa) elTasa.textContent = `${tasaUso}%`;
+}
+
+function getFilteredCampaigns() {
+    const search = (document.getElementById('mk-search')?.value || '').toLowerCase();
+    const tipo = (document.getElementById('mk-filter-tipo')?.value || '');
+    const estado = (document.getElementById('mk-filter-estado')?.value || '');
+
+    return campaigns.filter(c => {
+        const matchSearch = !search || c.name.toLowerCase().includes(search) || c.id.toLowerCase().includes(search);
+        const matchTipo = !tipo || c.type === tipo;
+        const matchEstado = !estado || c.status === estado;
+        return matchSearch && matchTipo && matchEstado;
+    });
+}
+
+function campaignStatusClass(s) {
+    if (s === 'Activa') return 'success';
+    if (s === 'Expirada') return 'danger';
+    if (s === 'Programada') return 'warning';
+    return 'active';
+}
+
+function viewCampaign(id) {
+    const c = campaigns.find(x => x.id === id);
+    if (!c) return;
+    showNotification(`Campaña ${c.id}: ${c.name} — ${c.type}`, 'success');
+}
+
+// ==================== FINANCES / TRANSACTIONS ====================
+function renderFinanceTable() {
+    updateFinanceStats();
+    const filtered = getFilteredTransactions();
+    const paginated = paginate(filtered, currentPage.finances, itemsPerPage);
+
+    const tbody = document.getElementById('fin-tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = paginated.map(t => `
+        <tr data-id="${t.id}">
+            <td>${t.id}</td>
+            <td>${t.date}</td>
+            <td>${t.description}</td>
+            <td><span class="status-badge ${t.type === 'Ingreso' ? 'success' : 'danger'}">${t.type}</span></td>
+            <td>$${t.amount.toFixed(2)}</td>
+            <td><span class="status-badge ${t.status === 'Pagado' ? 'success' : 'warning'}">${t.status}</span></td>
+            <td>
+                <button class="icon-btn view" title="Ver" onclick="viewTransaction('${t.id}')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+
+    updatePagination('transactions', filtered.length);
+}
+
+function getFilteredTransactions() {
+    const search = (document.getElementById('fin-search')?.value || '').toLowerCase();
+    const tipo = (document.getElementById('fin-filter-tipo')?.value || '');
+    const estado = (document.getElementById('fin-filter-estado')?.value || '');
+
+    return transactions.filter(t => {
+        const matchSearch = !search || t.id.toLowerCase().includes(search) || t.description.toLowerCase().includes(search);
+        const matchTipo = !tipo || t.type === tipo;
+        const matchEstado = !estado || t.status === estado;
+        return matchSearch && matchTipo && matchEstado;
+    });
+}
+
+function updateFinanceStats() {
+    const ingresos = transactions.filter(t => t.type === 'Ingreso').reduce((s, t) => s + t.amount, 0);
+    const gastos = transactions.filter(t => t.type === 'Gasto').reduce((s, t) => s + t.amount, 0);
+    const neta = ingresos - gastos;
+    const reembolsosRate = Math.round((transactions.filter(t => t.description.toLowerCase().includes('reembolso')).length / (transactions.length || 1)) * 1000) / 10; // % aprox
+    const margen = ingresos ? Math.round(((ingresos - gastos) / ingresos) * 1000) / 10 : 0;
+
+    const elNeta = document.getElementById('fin-ganancia-neta');
+    const elCogs = document.getElementById('fin-cogs');
+    const elReem = document.getElementById('fin-reembolsos');
+    const elMargen = document.getElementById('fin-margen');
+    if (elNeta) elNeta.textContent = `$${neta.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elCogs) elCogs.textContent = `$${gastos.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elReem) elReem.textContent = `${reembolsosRate}%`;
+    if (elMargen) elMargen.textContent = `${margen}%`;
+}
+
+function drawFinanceChart() {
+    const canvas = document.getElementById('financeChart');
+    if (!canvas) return;
+    // Simplificación: usar mismo enfoque que salesChart (sin DPR transform) para descartar problema de escala
+    const container = canvas.parentElement || canvas;
+    const width = container.clientWidth || canvas.offsetWidth || 800;
+    const height = 320;
+    const finPageActive = document.getElementById('finanzas-page')?.classList.contains('active');
+    console.log('[FinanceChart] START', { finPageActive, width, clientWidth: container.clientWidth, offsetWidth: canvas.offsetWidth, rectWidth: container.getBoundingClientRect().width });
+    const ctx = canvas.getContext('2d');
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style.width = '100%';
+    canvas.style.height = height + 'px';
+
+    const padding = 70; // more room for labels
+    const graphWidth = width - padding * 2;
+    const graphHeight = height - padding * 2;
+
+    const labels = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const ingresos = labels.map(() => Math.floor(Math.random() * 35) + 65);
+    const egresos = labels.map(() => Math.floor(Math.random() * 30) + 35);
+    const maxValue = Math.max(...ingresos, ...egresos, 100);
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Grid
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 5; i++) {
+        const y = padding + (graphHeight / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(width - padding, y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#95a5a6';
+        ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.textAlign = 'right';
+        const value = maxValue - (maxValue / 5) * i;
+        ctx.fillText(value.toFixed(0), padding - 15, y + 5);
+    }
+
+    function drawLine(data, color, lineWidth) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+
+        const points = [];
+        data.forEach((value, index) => {
+            const x = padding + (graphWidth / (data.length - 1)) * index;
+            const y = padding + graphHeight - (value / maxValue) * graphHeight;
+            points.push({ x, y, value, label: labels[index] });
+            if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        points.forEach(point => {
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 8, 0, Math.PI * 2);
+            ctx.fillStyle = color + '20';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+        });
+
+        return points;
+    }
+
+    const ingresosPoints = drawLine(ingresos, '#3498db', 3.5);
+    const egresosPoints = drawLine(egresos, '#95a5a6', 3);
+
+    // X labels
+    ctx.fillStyle = '#2c3e50';
+    ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    labels.forEach((label, index) => {
+        const x = padding + (graphWidth / (labels.length - 1)) * index;
+        ctx.fillText(label, x, height - 22);
+    });
+
+    // Legend
+    const legendX = Math.max(width - 200, 120);
+    const legendY = 15;
+    const legendSpacing = 120;
+
+    ctx.fillStyle = '#3498db';
+    ctx.fillRect(legendX, legendY, 18, 18);
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(legendX, legendY, 18, 18);
+    ctx.fillStyle = '#2c3e50';
+    ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Ingresos', legendX + 26, legendY + 13);
+
+    const egX = legendX + legendSpacing;
+    ctx.fillStyle = '#95a5a6';
+    ctx.fillRect(egX, legendY, 18, 18);
+    ctx.strokeStyle = '#ffffff';
+    ctx.strokeRect(egX, legendY, 18, 18);
+    ctx.fillStyle = '#2c3e50';
+    ctx.fillText('Egresos', egX + 26, legendY + 13);
+
+    // Store points (por si agregamos tooltip luego)
+    canvas.ingresosPoints = ingresosPoints;
+    canvas.egresosPoints = egresosPoints;
+    console.log('[FinanceChart] END', { drawnWidth: width, ingresosPoints: ingresosPoints.length, egresosPoints: egresosPoints.length });
+}
+
+// Hook: Redibujar al terminar animación de aparición de la página Finanzas
+function setupFinanceAnimationHook() {
+    const finPage = document.getElementById('finanzas-page');
+    if (!finPage) return;
+    finPage.addEventListener('animationend', (e) => {
+        if (e.animationName === 'fadeInUp' || finPage.classList.contains('active')) {
+            setTimeout(() => drawFinanceChart(), 50);
+            setTimeout(() => drawFinanceChart(), 400); // segundo intento tras terminar la transición visual
+        }
+    });
+}
+
+// Añadir overlay de depuración para corroborar presencia del canvas incluso si no se ve contenido
+function ensureFinanceDebugOverlay() {
+    const canvas = document.getElementById('financeChart');
+    if (!canvas) return;
+    if (!canvas.parentElement.querySelector('.finance-chart-overlay-debug')) {
+        const overlay = document.createElement('div');
+        overlay.className = 'finance-chart-overlay-debug';
+        overlay.textContent = 'Canvas presente (debug)';
+        canvas.parentElement.style.position = 'relative';
+        canvas.parentElement.appendChild(overlay);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupFinanceAnimationHook();
+    ensureFinanceDebugOverlay();
+});
+
+// Observe container size changes to redraw when width becomes available
+function setupFinanceResizeObserver() {
+    const canvas = document.getElementById('financeChart');
+    const finPage = document.getElementById('finanzas-page');
+    if (!canvas || !canvas.parentElement) return;
+    const ro = new ResizeObserver(entries => {
+        for (const entry of entries) {
+            const cr = entry.contentRect;
+            // Only redraw when visible and has a positive width
+            if (cr.width > 0 && finPage && finPage.classList.contains('active')) {
+                requestAnimationFrame(() => drawFinanceChart());
+            }
+        }
+    });
+    ro.observe(canvas.parentElement);
+}
+
+// Redraw when finance canvas enters the viewport
+function setupFinanceIntersectionObserver() {
+    const canvas = document.getElementById('financeChart');
+    if (!canvas || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                requestAnimationFrame(() => drawFinanceChart());
+            }
+        });
+    }, { root: null, threshold: 0.1 });
+    io.observe(canvas);
+}
+
+// Fallback: Poll briefly until canvas has width when Finanzas is active
+function ensureFinanceChartReady() {
+    const finPage = document.getElementById('finanzas-page');
+    const canvas = document.getElementById('financeChart');
+    if (!finPage || !canvas) return;
+    let attempts = 0;
+    const maxAttempts = 20; // ~2s if interval is 100ms
+    const timer = setInterval(() => {
+        attempts++;
+        const container = canvas.parentElement || canvas;
+        const width = container.getBoundingClientRect().width || container.clientWidth || canvas.offsetWidth;
+        const isActive = finPage.classList.contains('active');
+        if (isActive && width > 20) {
+            try { drawFinanceChart(); } catch {}
+            clearInterval(timer);
+        }
+        if (attempts >= maxAttempts) {
+            clearInterval(timer);
+        }
+    }, 100);
+}
+
+function viewTransaction(id) {
+    const t = transactions.find(x => x.id === id);
+    if (!t) return;
+    showNotification(`${t.type} ${t.id}: ${t.description} — $${t.amount.toFixed(2)}`, 'success');
 }
 
 // ==================== NOTIFICATIONS ====================
@@ -1238,7 +1849,14 @@ function showNotification(message, type = 'success') {
 }
 
 // ==================== RESIZE ====================
-window.addEventListener('resize', drawSalesChart);
+window.addEventListener('resize', function(){
+    drawSalesChart();
+    // Redraw finance chart on resize if canvas exists
+    const finCanvas = document.getElementById('financeChart');
+    if (finCanvas && finCanvas.offsetParent !== null) {
+        drawFinanceChart();
+    }
+});
 
 console.log('✓ Sistema de administración cargado correctamente');
 
