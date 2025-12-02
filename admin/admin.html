@@ -127,7 +127,7 @@
                             <line x1="12" y1="3" x2="12" y2="15"/>
                         </svg>
                     </span>
-                    <span>Marketing y Promociones</span>
+                    <span>Marketing</span>
                 </a>
                 <a href="#" class="nav-item submenu-item" data-page="finanzas">
                     <span class="icon">
@@ -580,8 +580,8 @@
                     <option value="Pagado">Pagado</option>
                     <option value="Pendiente">Pendiente</option>
                 </select>
-                <button class="btn-secondary" id="fin-btn-reporte">Exportar Reporte Mensual</button>
-                <button class="btn-primary" id="fin-btn-impuestos">Generar Declaración de Impuestos</button>
+                <button class="btn-primary" id="fin-btn-nueva-transaccion">+ Nueva Transacción</button>
+                <button class="btn-secondary" id="fin-btn-reporte">Exportar Reporte</button>
             </div>
 
             <!-- Transactions Table -->
@@ -646,6 +646,7 @@
                     <option value="Devolución">Devolución</option>
                     <option value="Problema Técnico">Problema Técnico</option>
                 </select>
+                <button class="btn-primary" id="btn-nuevo-ticket">+ Nuevo Ticket</button>
             </div>
 
             <!-- Tickets Table -->
@@ -760,6 +761,204 @@
                     </select>
                 </div>
                 <button type="submit" class="btn-primary">Guardar Marca</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Ticket -->
+    <div id="modal-ticket" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detalle del Ticket</h2>
+            <form id="form-ticket">
+                <div class="form-group">
+                    <label>ID del Ticket</label>
+                    <input type="text" id="input-ticket-id" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <input type="text" id="input-ticket-cliente" required>
+                </div>
+                <div class="form-group">
+                    <label>Asunto</label>
+                    <input type="text" id="input-ticket-asunto" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Caso</label>
+                    <select id="input-ticket-tipo" required>
+                        <option value="Reclamo">Reclamo</option>
+                        <option value="Consulta">Consulta</option>
+                        <option value="Devolución">Devolución</option>
+                        <option value="Problema Técnico">Problema Técnico</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="input-ticket-estado" required>
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="Escalado">Escalado</option>
+                        <option value="Cerrado">Cerrado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Descripción / Notas</label>
+                    <textarea id="input-ticket-descripcion" rows="4" placeholder="Añadir notas o descripción del caso..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Respuesta al Cliente</label>
+                    <textarea id="input-ticket-respuesta" rows="3" placeholder="Escribir respuesta para el cliente..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Pedido/Orden -->
+    <div id="modal-orden" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detalle del Pedido</h2>
+            <form id="form-orden">
+                <div class="form-group">
+                    <label>ID del Pedido</label>
+                    <input type="text" id="input-orden-id" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Fecha del Pedido</label>
+                    <input type="date" id="input-orden-fecha" required>
+                </div>
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <input type="text" id="input-orden-cliente" required>
+                </div>
+                <div class="form-group">
+                    <label>Total del Pedido ($)</label>
+                    <input type="number" id="input-orden-total" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Estado del Pedido</label>
+                    <select id="input-orden-estado" required>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Procesando">Procesando</option>
+                        <option value="Enviado">Enviado</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Estado de Pago</label>
+                    <select id="input-orden-pago" required>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Pendiente de Pago">Pendiente de Pago</option>
+                        <option value="Rechazado">Rechazado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notas Internas</label>
+                    <textarea id="input-orden-notas" rows="3" placeholder="Notas sobre el pedido..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Campaña/Marketing -->
+    <div id="modal-campana" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nueva Campaña / Cupón</h2>
+            <form id="form-campana">
+                <div class="form-group">
+                    <label>Código del Cupón</label>
+                    <input type="text" id="input-campana-codigo" placeholder="Ej: VERANO2024" required>
+                </div>
+                <div class="form-group">
+                    <label>Nombre de la Campaña</label>
+                    <input type="text" id="input-campana-nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Promoción</label>
+                    <select id="input-campana-tipo" required>
+                        <option value="Descuento %">Descuento %</option>
+                        <option value="Envío Gratis">Envío Gratis</option>
+                        <option value="2x1">2x1</option>
+                        <option value="Monto Fijo">Monto Fijo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor del Descuento</label>
+                    <input type="number" id="input-campana-valor" step="0.01" placeholder="Ej: 15 para 15%">
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Vencimiento</label>
+                    <input type="date" id="input-campana-vencimiento" required>
+                </div>
+                <div class="form-group">
+                    <label>Límite de Usos (0 = ilimitado)</label>
+                    <input type="number" id="input-campana-limite" value="0">
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="input-campana-estado" required>
+                        <option value="Activa">Activa</option>
+                        <option value="Programada">Programada</option>
+                        <option value="Expirada">Expirada</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Campaña</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Transacción Financiera -->
+    <div id="modal-transaccion" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nueva Transacción</h2>
+            <form id="form-transaccion">
+                <div class="form-group">
+                    <label>ID de Transacción</label>
+                    <input type="text" id="input-transaccion-id" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" id="input-transaccion-fecha" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <input type="text" id="input-transaccion-descripcion" required placeholder="Ej: Venta ORD001">
+                </div>
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select id="input-transaccion-tipo" required>
+                        <option value="Ingreso">Ingreso</option>
+                        <option value="Gasto">Gasto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Monto ($)</label>
+                    <input type="number" id="input-transaccion-monto" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="input-transaccion-estado" required>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Pendiente">Pendiente</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="input-transaccion-categoria">
+                        <option value="Ventas">Ventas</option>
+                        <option value="Inventario">Inventario</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Operaciones">Operaciones</option>
+                        <option value="Reembolsos">Reembolsos</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Transacción</button>
             </form>
         </div>
     </div>
