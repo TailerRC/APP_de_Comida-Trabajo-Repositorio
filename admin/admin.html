@@ -672,6 +672,402 @@
             <div class="pagination-info" id="tickets-pagination-info">Mostrando 0 de 0 tickets</div>
             <div class="pagination" id="tickets-pagination"></div>
         </div>
+
+        <!-- Configuraciones Page -->
+        <div id="configuraciones-page" class="page">
+            <h1 class="page-title">Configuraciones Generales de la Tienda</h1>
+
+            <!-- Tabs -->
+            <div class="config-tabs">
+                <button class="config-tab active" data-tab="general">General</button>
+                <button class="config-tab" data-tab="seguridad">Seguridad y Usuarios</button>
+                <button class="config-tab" data-tab="pagos">Pagos y Moneda</button>
+            </div>
+
+            <!-- General Tab -->
+            <div id="tab-general" class="config-tab-content active">
+                <div class="config-section">
+                    <h2 class="config-section-title">Configuración de la Marca</h2>
+                    <div class="config-form-grid">
+                        <div class="form-group full-width">
+                            <label for="config-nombre-tienda">Nombre de la Tienda</label>
+                            <input type="text" id="config-nombre-tienda" class="form-input" placeholder="TechNow">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="config-url-tienda">URL de la Tienda</label>
+                            <input type="text" id="config-url-tienda" class="form-input" placeholder="https://www.technow.com">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="config-logo">Logo de la Tienda</label>
+                            <div class="logo-upload-container">
+                                <div class="logo-preview">
+                                    <div class="logo-placeholder">
+                                        <i class="ri-image-line"></i>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-secondary" id="btn-cambiar-logo">Cambiar Logo</button>
+                                <input type="file" id="config-logo-input" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h2 class="config-section-title">Ajustes Regionales</h2>
+                    <div class="config-form-grid">
+                        <div class="form-group">
+                            <label for="config-zona-horaria">Zona Horaria</label>
+                            <select id="config-zona-horaria" class="form-select">
+                                <option value="GMT-5">GMT-5 (Lima)</option>
+                                <option value="GMT-4">GMT-4 (Santiago)</option>
+                                <option value="GMT-3">GMT-3 (Buenos Aires)</option>
+                                <option value="GMT-6">GMT-6 (México City)</option>
+                                <option value="GMT+0">GMT+0 (Londres)</option>
+                                <option value="GMT+1">GMT+1 (Madrid)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="config-moneda">Moneda Predeterminada</label>
+                            <select id="config-moneda" class="form-select">
+                                <option value="USD">USD - Dólar Estadounidense</option>
+                                <option value="PEN">PEN - Sol Peruano</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="MXN">MXN - Peso Mexicano</option>
+                                <option value="CLP">CLP - Peso Chileno</option>
+                                <option value="ARS">ARS - Peso Argentino</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h2 class="config-section-title">Opciones Generales</h2>
+                    <div class="config-options">
+                        <div class="config-option">
+                            <div class="option-info">
+                                <label class="option-label">Activar Modo Mantenimiento</label>
+                                <p class="option-description">Desactiva temporalmente la tienda para mantenimiento</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-mantenimiento">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <div class="option-info">
+                                <label class="option-label">Habilitar Registro de Usuarios</label>
+                                <p class="option-description">Permite que nuevos usuarios creen cuentas</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-registro" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seguridad Tab -->
+            <div id="tab-seguridad" class="config-tab-content">
+                <div class="config-section">
+                    <h2 class="config-section-title"><i class="ri-shield-keyhole-line"></i> Ajustes de Autenticación de Administradores</h2>
+                    <div class="config-options">
+                        <div class="config-option">
+                            <div class="option-info">
+                                <label class="option-label">Habilitar Autenticación de Dos Factores (2FA)</label>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-2fa">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <div class="option-info">
+                                <label class="option-label">Forzar Cambio de Contraseña cada 90 días</label>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-cambio-password">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="config-option-inline">
+                            <label class="option-label">Límite de Intentos de Sesión Fallidos</label>
+                            <input type="number" id="config-intentos-login" class="form-input-small" value="5" min="1" max="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h2 class="config-section-title"><i class="ri-shield-user-line"></i> Gestión de Roles</h2>
+                    <div class="roles-table-container">
+                        <table class="roles-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Rol</th>
+                                    <th># de Usuarios Asignados</th>
+                                    <th>Descripción de Permisos</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="roles-table-body">
+                                <tr>
+                                    <td><strong>Administrador</strong></td>
+                                    <td>3</td>
+                                    <td>Acceso total al panel</td>
+                                    <td><button class="btn-text-link">Editar Permisos</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Logístico</strong></td>
+                                    <td>5</td>
+                                    <td>Gestión de pedidos y envíos</td>
+                                    <td><button class="btn-text-link">Editar Permisos</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Marketing</strong></td>
+                                    <td>2</td>
+                                    <td>Gestión de productos y promociones</td>
+                                    <td><button class="btn-text-link">Editar Permisos</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn-secondary-outline" id="btn-crear-rol">
+                        <i class="ri-add-line"></i> Crear Nuevo Rol
+                    </button>
+                </div>
+
+                <div class="config-section">
+                    <h2 class="config-section-title"><i class="ri-admin-line"></i> Lista de Cuentas de Administrador</h2>
+                    <div class="admin-filters">
+                        <div class="search-box-small">
+                            <i class="ri-search-line"></i>
+                            <input type="text" id="admin-search" placeholder="Buscar por nombre o correo...">
+                        </div>
+                        <select class="filter-select-small" id="admin-filter-rol">
+                            <option value="">Filtrar por Rol</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Logístico">Logístico</option>
+                            <option value="Marketing">Marketing</option>
+                        </select>
+                    </div>
+                    <div class="admin-accounts-table-container">
+                        <table class="admin-accounts-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre/Correo Electrónico</th>
+                                    <th>Rol Asignado</th>
+                                    <th>Último Acceso</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-accounts-body">
+                                <tr>
+                                    <td><strong>juan.perez@example.com</strong></td>
+                                    <td><span class="role-badge admin">Administrador</span></td>
+                                    <td>2023-10-26 10:30</td>
+                                    <td>
+                                        <label class="toggle-switch-small">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <button class="btn-icon" title="Eliminar">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>maria.gomez@example.com</strong></td>
+                                    <td><span class="role-badge logistico">Logístico</span></td>
+                                    <td>2023-10-25 14:00</td>
+                                    <td>
+                                        <label class="toggle-switch-small">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <button class="btn-icon" title="Eliminar">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>carlos.ruiz@example.com</strong></td>
+                                    <td><span class="role-badge marketing">Marketing</span></td>
+                                    <td>2023-10-26 09:00</td>
+                                    <td>
+                                        <label class="toggle-switch-small">
+                                            <input type="checkbox">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <button class="btn-icon" title="Eliminar">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Save Button for Security Tab -->
+                <div class="config-actions">
+                    <button class="btn-primary btn-large" id="btn-guardar-seguridad">
+                        <i class="ri-save-line"></i> Guardar Configuraciones de Seguridad
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pagos Tab -->
+            <div id="tab-pagos" class="config-tab-content">
+                <div class="config-section">
+                    <h2 class="config-section-title"><i class="ri-money-dollar-circle-line"></i> Configuración de Divisa</h2>
+                    <div class="form-group">
+                        <label for="config-moneda-principal">Moneda Principal</label>
+                        <select id="config-moneda-principal" class="form-select">
+                            <option value="USD">USD - Dólar estadounidense</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="PEN">PEN - Sol Peruano</option>
+                            <option value="MXN">MXN - Peso Mexicano</option>
+                            <option value="CLP">CLP - Peso Chileno</option>
+                            <option value="ARS">ARS - Peso Argentino</option>
+                        </select>
+                    </div>
+                    
+                    <p class="section-description">Tabla para listar y configurar tasas de cambio manuales (si aplica)</p>
+                    
+                    <div class="currency-table-container">
+                        <table class="currency-table">
+                            <thead>
+                                <tr>
+                                    <th>Moneda</th>
+                                    <th>Tasa de Cambio (vs. USD)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="currency-table-body">
+                                <tr>
+                                    <td><strong>EUR - Euro</strong></td>
+                                    <td><input type="number" class="currency-rate-input" value="0.85" step="0.01"></td>
+                                    <td><button class="btn-text-link">Editar</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MXN - Peso mexicano</strong></td>
+                                    <td><input type="number" class="currency-rate-input" value="20.00" step="0.01"></td>
+                                    <td><button class="btn-text-link">Editar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h2 class="config-section-title"><i class="ri-bank-card-line"></i> Conexión con Pasarelas de Pago</h2>
+                    <div class="payment-gateways-container">
+                        <table class="payment-gateways-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Estado</th>
+                                    <th>Tarifas por Transacción</th>
+                                    <th>Acciones</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="payment-gateways-body">
+                                <tr>
+                                    <td><strong>Stripe</strong></td>
+                                    <td><span class="status-badge conectado">Conectado</span></td>
+                                    <td>2.9% + $0.30</td>
+                                    <td>
+                                        <button class="btn-primary-small">Configurar Credenciales</button>
+                                    </td>
+                                    <td>
+                                        <label class="toggle-switch-small">
+                                            <input type="checkbox" id="gateway-stripe" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PayPal</strong></td>
+                                    <td><span class="status-badge conectado">Conectado</span></td>
+                                    <td>3.49% + $0.49</td>
+                                    <td>
+                                        <button class="btn-primary-small">Configurar Credenciales</button>
+                                    </td>
+                                    <td>
+                                        <label class="toggle-switch-small">
+                                            <input type="checkbox" id="gateway-paypal" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mercado Pago</strong></td>
+                                    <td><span class="status-badge desconectado">Desconectado</span></td>
+                                    <td>3.25% + $0.30</td>
+                                    <td>
+                                        <button class="btn-secondary-outline-small">Conectar API</button>
+                                    </td>
+                                    <td>
+                                        <label class="toggle-switch-small">
+                                            <input type="checkbox" id="gateway-mercadopago">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h2 class="config-section-title"><i class="ri-wallet-3-line"></i> Opciones de Pago Adicionales</h2>
+                    <div class="config-options">
+                        <div class="config-option">
+                            <div class="option-info">
+                                <label class="option-label">Pago en Efectivo/Contra Entrega</label>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-pago-efectivo" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <div class="option-info">
+                                <label class="option-label">Transferencia Bancaria Directa</label>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-pago-transferencia">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <div class="option-info">
+                                <label class="option-label">Pagos a Meses/Cuotas</label>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-pago-cuotas" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button for Payments Tab -->
+                <div class="config-actions">
+                    <button class="btn-primary btn-large" id="btn-guardar-pagos">
+                        <i class="ri-save-line"></i> Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal para Nuevo Producto -->

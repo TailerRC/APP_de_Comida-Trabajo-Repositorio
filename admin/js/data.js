@@ -2422,3 +2422,548 @@ window.addEventListener('load', function() {
         });
     }
 });
+
+// ==================== CONFIGURACIONES PAGE ====================
+
+// Store configuration data
+let configData = {
+    general: {
+        nombreTienda: 'TechNow',
+        urlTienda: 'https://www.technow.com',
+        logo: null,
+        zonaHoraria: 'GMT-5',
+        moneda: 'USD',
+        modoMantenimiento: false,
+        registroUsuarios: true
+    },
+    seguridad: {
+        autenticacion2FA: false,
+        cambioPassword: false,
+        intentosLogin: 3,
+        duracionSesion: 60
+    },
+    pagos: {
+        pagoTarjeta: true,
+        pagoPaypal: true,
+        pagoTransferencia: false,
+        pagoContraentrega: true,
+        envioGratis: 50,
+        costoEnvio: 5.99,
+        tasaImpuesto: 18,
+        impuestoIncluido: 'si'
+    }
+};
+
+// Initialize configuration page
+function initConfiguraciones() {
+    // Tab switching
+    const configTabs = document.querySelectorAll('.config-tab');
+    const configTabContents = document.querySelectorAll('.config-tab-content');
+    
+    configTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+            
+            // Update active tab
+            configTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update active content
+            configTabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === `tab-${tabName}`) {
+                    content.classList.add('active');
+                }
+            });
+        });
+    });
+    
+    // Load configuration data
+    loadConfigData();
+    
+    // Logo upload
+    const btnCambiarLogo = document.getElementById('btn-cambiar-logo');
+    const configLogoInput = document.getElementById('config-logo-input');
+    
+    if (btnCambiarLogo && configLogoInput) {
+        btnCambiarLogo.addEventListener('click', function() {
+            configLogoInput.click();
+        });
+        
+        configLogoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const logoPlaceholder = document.querySelector('.logo-placeholder');
+                    logoPlaceholder.innerHTML = `<img src="${event.target.result}" alt="Logo">`;
+                    configData.general.logo = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
+    // Save button
+    const btnGuardarConfig = document.getElementById('btn-guardar-config');
+    if (btnGuardarConfig) {
+        btnGuardarConfig.addEventListener('click', saveConfigData);
+    }
+}
+
+// Load configuration data from storage or defaults
+function loadConfigData() {
+    const savedConfig = localStorage.getItem('configData');
+    if (savedConfig) {
+        configData = JSON.parse(savedConfig);
+    }
+    
+    // General tab
+    document.getElementById('config-nombre-tienda').value = configData.general.nombreTienda;
+    document.getElementById('config-url-tienda').value = configData.general.urlTienda;
+    document.getElementById('config-zona-horaria').value = configData.general.zonaHoraria;
+    document.getElementById('config-moneda').value = configData.general.moneda;
+    document.getElementById('config-mantenimiento').checked = configData.general.modoMantenimiento;
+    document.getElementById('config-registro').checked = configData.general.registroUsuarios;
+    
+    // Load logo if exists
+    if (configData.general.logo) {
+        const logoPlaceholder = document.querySelector('.logo-placeholder');
+        logoPlaceholder.innerHTML = `<img src="${configData.general.logo}" alt="Logo">`;
+    }
+    
+    // Seguridad tab
+    document.getElementById('config-2fa').checked = configData.seguridad.autenticacion2FA;
+    document.getElementById('config-cambio-password').checked = configData.seguridad.cambioPassword;
+    document.getElementById('config-intentos-login').value = configData.seguridad.intentosLogin;
+    document.getElementById('config-sesion-duracion').value = configData.seguridad.duracionSesion;
+    
+    // Pagos tab
+    document.getElementById('config-pago-tarjeta').checked = configData.pagos.pagoTarjeta;
+    document.getElementById('config-pago-paypal').checked = configData.pagos.pagoPaypal;
+    document.getElementById('config-pago-transferencia').checked = configData.pagos.pagoTransferencia;
+    document.getElementById('config-pago-contraentrega').checked = configData.pagos.pagoContraentrega;
+    document.getElementById('config-envio-gratis').value = configData.pagos.envioGratis;
+    document.getElementById('config-costo-envio').value = configData.pagos.costoEnvio;
+    document.getElementById('config-impuesto').value = configData.pagos.tasaImpuesto;
+    document.getElementById('config-impuesto-incluido').value = configData.pagos.impuestoIncluido;
+}
+
+// Save configuration data
+function saveConfigData() {
+    // General tab
+    configData.general.nombreTienda = document.getElementById('config-nombre-tienda').value;
+    configData.general.urlTienda = document.getElementById('config-url-tienda').value;
+    configData.general.zonaHoraria = document.getElementById('config-zona-horaria').value;
+    configData.general.moneda = document.getElementById('config-moneda').value;
+    configData.general.modoMantenimiento = document.getElementById('config-mantenimiento').checked;
+    configData.general.registroUsuarios = document.getElementById('config-registro').checked;
+    
+    // Seguridad tab
+    configData.seguridad.autenticacion2FA = document.getElementById('config-2fa').checked;
+    configData.seguridad.cambioPassword = document.getElementById('config-cambio-password').checked;
+    configData.seguridad.intentosLogin = parseInt(document.getElementById('config-intentos-login').value);
+    configData.seguridad.duracionSesion = parseInt(document.getElementById('config-sesion-duracion').value);
+    
+    // Pagos tab
+    configData.pagos.pagoTarjeta = document.getElementById('config-pago-tarjeta').checked;
+    configData.pagos.pagoPaypal = document.getElementById('config-pago-paypal').checked;
+    configData.pagos.pagoTransferencia = document.getElementById('config-pago-transferencia').checked;
+    configData.pagos.pagoContraentrega = document.getElementById('config-pago-contraentrega').checked;
+    configData.pagos.envioGratis = parseFloat(document.getElementById('config-envio-gratis').value);
+    configData.pagos.costoEnvio = parseFloat(document.getElementById('config-costo-envio').value);
+    configData.pagos.tasaImpuesto = parseFloat(document.getElementById('config-impuesto').value);
+    configData.pagos.impuestoIncluido = document.getElementById('config-impuesto-incluido').value;
+    
+    // Save to localStorage
+    localStorage.setItem('configData', JSON.stringify(configData));
+    
+    // Show success message
+    showNotification('✅ Configuración guardada exitosamente', 'success');
+    
+    // Add activity
+    addActivity('Configuraciones generales actualizadas');
+}
+
+// Show notification
+function showNotification(message, type = 'success') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        font-size: 15px;
+        font-weight: 600;
+        animation: slideInRight 0.3s ease;
+    `;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Add animations to document if not exists
+if (!document.getElementById('notification-animations')) {
+    const style = document.createElement('style');
+    style.id = 'notification-animations';
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize settings button
+function initSettingsButton() {
+    const footerBtns = document.querySelectorAll('.footer-btn');
+    footerBtns.forEach(btn => {
+        if (btn.title === 'Configuración') {
+            btn.addEventListener('click', function() {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                
+                // Show config page
+                const configPage = document.getElementById('configuraciones-page');
+                if (configPage) {
+                    configPage.classList.add('active');
+                }
+                
+                // Update nav items
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                
+                // Initialize config if not done
+                if (!btn.dataset.initialized) {
+                    initConfiguraciones();
+                    btn.dataset.initialized = 'true';
+                }
+            });
+        }
+    });
+}
+
+// Call initialization on load
+document.addEventListener('DOMContentLoaded', function() {
+    initSettingsButton();
+    
+    // Initialize on first access
+    const configPage = document.getElementById('configuraciones-page');
+    if (configPage) {
+        initConfiguraciones();
+        initSecurityTab();
+        initPaymentsTab();
+    }
+});
+
+// ==================== SECURITY TAB FUNCTIONALITY ====================
+
+let rolesData = [
+    { id: 1, nombre: 'Administrador', usuarios: 3, permisos: 'Acceso total al panel' },
+    { id: 2, nombre: 'Logístico', usuarios: 5, permisos: 'Gestión de pedidos y envíos' },
+    { id: 3, nombre: 'Marketing', usuarios: 2, permisos: 'Gestión de productos y promociones' }
+];
+
+let adminAccountsData = [
+    { id: 1, email: 'juan.perez@example.com', rol: 'Administrador', ultimoAcceso: '2023-10-26 10:30', activo: true },
+    { id: 2, email: 'maria.gomez@example.com', rol: 'Logístico', ultimoAcceso: '2023-10-25 14:00', activo: true },
+    { id: 3, email: 'carlos.ruiz@example.com', rol: 'Marketing', ultimoAcceso: '2023-10-26 09:00', activo: false }
+];
+
+function initSecurityTab() {
+    // Render roles table
+    renderRolesTable();
+    
+    // Render admin accounts
+    renderAdminAccounts();
+    
+    // Create new role button
+    const btnCrearRol = document.getElementById('btn-crear-rol');
+    if (btnCrearRol) {
+        btnCrearRol.addEventListener('click', function() {
+            showNotification('Función de crear rol en desarrollo', 'success');
+        });
+    }
+    
+    // Admin search
+    const adminSearch = document.getElementById('admin-search');
+    if (adminSearch) {
+        adminSearch.addEventListener('input', function() {
+            filterAdminAccounts();
+        });
+    }
+    
+    // Admin filter
+    const adminFilterRol = document.getElementById('admin-filter-rol');
+    if (adminFilterRol) {
+        adminFilterRol.addEventListener('change', function() {
+            filterAdminAccounts();
+        });
+    }
+    
+    // Save security button
+    const btnGuardarSeguridad = document.getElementById('btn-guardar-seguridad');
+    if (btnGuardarSeguridad) {
+        btnGuardarSeguridad.addEventListener('click', function() {
+            saveSecurityConfig();
+        });
+    }
+}
+
+function renderRolesTable() {
+    const tbody = document.getElementById('roles-table-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = rolesData.map(rol => `
+        <tr>
+            <td><strong>${rol.nombre}</strong></td>
+            <td>${rol.usuarios}</td>
+            <td>${rol.permisos}</td>
+            <td><button class="btn-text-link" onclick="editarPermisos(${rol.id})">Editar Permisos</button></td>
+        </tr>
+    `).join('');
+}
+
+function renderAdminAccounts() {
+    const tbody = document.getElementById('admin-accounts-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = adminAccountsData.map(admin => {
+        const rolClass = admin.rol.toLowerCase().replace(/\s+/g, '-');
+        return `
+            <tr>
+                <td><strong>${admin.email}</strong></td>
+                <td><span class="role-badge ${rolClass}">${admin.rol}</span></td>
+                <td>${admin.ultimoAcceso}</td>
+                <td>
+                    <label class="toggle-switch-small">
+                        <input type="checkbox" ${admin.activo ? 'checked' : ''} onchange="toggleAdminStatus(${admin.id})">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <button class="btn-icon" title="Eliminar" onclick="deleteAdmin(${admin.id})">
+                        <i class="ri-delete-bin-line"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function filterAdminAccounts() {
+    const searchTerm = document.getElementById('admin-search')?.value.toLowerCase() || '';
+    const filterRol = document.getElementById('admin-filter-rol')?.value || '';
+    
+    const filtered = adminAccountsData.filter(admin => {
+        const matchesSearch = admin.email.toLowerCase().includes(searchTerm);
+        const matchesRol = !filterRol || admin.rol === filterRol;
+        return matchesSearch && matchesRol;
+    });
+    
+    const tbody = document.getElementById('admin-accounts-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = filtered.map(admin => {
+        const rolClass = admin.rol.toLowerCase().replace(/\s+/g, '-');
+        return `
+            <tr>
+                <td><strong>${admin.email}</strong></td>
+                <td><span class="role-badge ${rolClass}">${admin.rol}</span></td>
+                <td>${admin.ultimoAcceso}</td>
+                <td>
+                    <label class="toggle-switch-small">
+                        <input type="checkbox" ${admin.activo ? 'checked' : ''} onchange="toggleAdminStatus(${admin.id})">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <button class="btn-icon" title="Eliminar" onclick="deleteAdmin(${admin.id})">
+                        <i class="ri-delete-bin-line"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function editarPermisos(rolId) {
+    showNotification(`Editando permisos del rol ID: ${rolId}`, 'success');
+}
+
+function toggleAdminStatus(adminId) {
+    const admin = adminAccountsData.find(a => a.id === adminId);
+    if (admin) {
+        admin.activo = !admin.activo;
+        showNotification(`Estado del administrador ${admin.activo ? 'activado' : 'desactivado'}`, 'success');
+    }
+}
+
+function deleteAdmin(adminId) {
+    if (confirm('¿Estás seguro de eliminar este administrador?')) {
+        adminAccountsData = adminAccountsData.filter(a => a.id !== adminId);
+        renderAdminAccounts();
+        showNotification('Administrador eliminado exitosamente', 'success');
+    }
+}
+
+function saveSecurityConfig() {
+    const securityConfig = {
+        autenticacion2FA: document.getElementById('config-2fa')?.checked || false,
+        cambioPassword: document.getElementById('config-cambio-password')?.checked || false,
+        intentosLogin: parseInt(document.getElementById('config-intentos-login')?.value) || 5
+    };
+    
+    localStorage.setItem('securityConfig', JSON.stringify(securityConfig));
+    showNotification('✅ Configuración de seguridad guardada', 'success');
+    addActivity('Configuraciones de seguridad actualizadas');
+}
+
+// ==================== PAYMENTS TAB FUNCTIONALITY ====================
+
+let currencyRates = [
+    { id: 1, moneda: 'EUR - Euro', tasa: 0.85 },
+    { id: 2, moneda: 'MXN - Peso mexicano', tasa: 20.00 }
+];
+
+let paymentGateways = [
+    { id: 1, nombre: 'Stripe', estado: 'Conectado', tarifas: '2.9% + $0.30', activo: true },
+    { id: 2, nombre: 'PayPal', estado: 'Conectado', tarifas: '3.49% + $0.49', activo: true },
+    { id: 3, nombre: 'Mercado Pago', estado: 'Desconectado', tarifas: '3.25% + $0.30', activo: false }
+];
+
+function initPaymentsTab() {
+    // Render currency table
+    renderCurrencyTable();
+    
+    // Render payment gateways
+    renderPaymentGateways();
+    
+    // Save payments button
+    const btnGuardarPagos = document.getElementById('btn-guardar-pagos');
+    if (btnGuardarPagos) {
+        btnGuardarPagos.addEventListener('click', function() {
+            savePaymentsConfig();
+        });
+    }
+}
+
+function renderCurrencyTable() {
+    const tbody = document.getElementById('currency-table-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = currencyRates.map(currency => `
+        <tr>
+            <td><strong>${currency.moneda}</strong></td>
+            <td>
+                <input type="number" class="currency-rate-input" 
+                       value="${currency.tasa}" 
+                       step="0.01" 
+                       onchange="updateCurrencyRate(${currency.id}, this.value)">
+            </td>
+            <td><button class="btn-text-link" onclick="editCurrency(${currency.id})">Editar</button></td>
+        </tr>
+    `).join('');
+}
+
+function renderPaymentGateways() {
+    const tbody = document.getElementById('payment-gateways-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = paymentGateways.map(gateway => {
+        const estadoClass = gateway.estado.toLowerCase().replace(/\s+/g, '-');
+        const btnText = gateway.estado === 'Conectado' ? 'Configurar Credenciales' : 'Conectar API';
+        const btnClass = gateway.estado === 'Conectado' ? 'btn-primary-small' : 'btn-secondary-outline-small';
+        
+        return `
+            <tr>
+                <td><strong>${gateway.nombre}</strong></td>
+                <td><span class="status-badge ${estadoClass}">${gateway.estado}</span></td>
+                <td>${gateway.tarifas}</td>
+                <td>
+                    <button class="${btnClass}" onclick="configureGateway(${gateway.id})">
+                        ${btnText}
+                    </button>
+                </td>
+                <td>
+                    <label class="toggle-switch-small">
+                        <input type="checkbox" ${gateway.activo ? 'checked' : ''} 
+                               onchange="toggleGateway(${gateway.id})" 
+                               id="gateway-${gateway.id}">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function updateCurrencyRate(currencyId, newRate) {
+    const currency = currencyRates.find(c => c.id === currencyId);
+    if (currency) {
+        currency.tasa = parseFloat(newRate);
+        showNotification('Tasa de cambio actualizada', 'success');
+    }
+}
+
+function editCurrency(currencyId) {
+    showNotification(`Editando moneda ID: ${currencyId}`, 'success');
+}
+
+function configureGateway(gatewayId) {
+    const gateway = paymentGateways.find(g => g.id === gatewayId);
+    showNotification(`Configurando pasarela: ${gateway?.nombre}`, 'success');
+}
+
+function toggleGateway(gatewayId) {
+    const gateway = paymentGateways.find(g => g.id === gatewayId);
+    if (gateway) {
+        gateway.activo = !gateway.activo;
+        showNotification(`Pasarela ${gateway.nombre} ${gateway.activo ? 'activada' : 'desactivada'}`, 'success');
+    }
+}
+
+function savePaymentsConfig() {
+    const paymentsConfig = {
+        monedaPrincipal: document.getElementById('config-moneda-principal')?.value || 'USD',
+        pagoEfectivo: document.getElementById('config-pago-efectivo')?.checked || false,
+        pagoTransferencia: document.getElementById('config-pago-transferencia')?.checked || false,
+        pagoCuotas: document.getElementById('config-pago-cuotas')?.checked || false,
+        currencyRates: currencyRates,
+        paymentGateways: paymentGateways
+    };
+    
+    localStorage.setItem('paymentsConfig', JSON.stringify(paymentsConfig));
+    showNotification('✅ Configuración de pagos guardada', 'success');
+    addActivity('Configuraciones de pagos actualizadas');
+}
+
+console.log('✅ Sistema de configuraciones cargado correctamente');

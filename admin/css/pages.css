@@ -441,3 +441,791 @@
         max-width: 100%;
     }
 }
+
+/* ==================== CONFIGURACIONES PAGE ==================== */
+
+/* Tabs */
+.config-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    border-bottom: 2px solid #e8ecf1;
+    padding-bottom: 0;
+    overflow-x: auto;
+}
+
+.config-tab {
+    padding: 14px 24px;
+    background: transparent;
+    border: none;
+    color: #7f8c8d;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: -2px;
+}
+
+.config-tab:hover {
+    color: #3498db;
+    background: rgba(52, 152, 219, 0.05);
+}
+
+.config-tab.active {
+    color: #3498db;
+    border-bottom-color: #3498db;
+}
+
+/* Tab Content */
+.config-tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.config-tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Config Sections */
+.config-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.config-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f5f7fa;
+}
+
+/* Form Grid */
+.config-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.config-form-grid .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.form-input,
+.form-select {
+    padding: 12px 16px;
+    border: 2px solid #e8ecf1;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: inherit;
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+}
+
+.form-input::placeholder {
+    color: #bdc3c7;
+}
+
+.form-help {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Logo Upload */
+.logo-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-preview {
+    width: 120px;
+    height: 120px;
+    border: 3px dashed #e8ecf1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.logo-preview:hover {
+    border-color: #3498db;
+    background: #f0f8ff;
+}
+
+.logo-placeholder {
+    font-size: 48px;
+    color: #bdc3c7;
+}
+
+.logo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Config Options */
+.config-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.config-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid #e8ecf1;
+    transition: all 0.3s ease;
+}
+
+.config-option:hover {
+    background: #f0f8ff;
+    border-color: #d4e7f7;
+}
+
+.option-info {
+    flex: 1;
+}
+
+.option-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.option-description {
+    font-size: 13px;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 28px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background-color: #27ae60;
+}
+
+.toggle-switch input:focus + .toggle-slider {
+    box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(28px);
+}
+
+/* Config Actions */
+.config-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px solid #e8ecf1;
+}
+
+.btn-large {
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-large i {
+    font-size: 18px;
+}
+
+/* Config Option Inline (for small inputs) */
+.config-option-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid #e8ecf1;
+}
+
+.config-option-inline .option-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-input-small {
+    width: 80px;
+    padding: 8px 12px;
+    border: 2px solid #e8ecf1;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.form-input-small:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Section Title with Icon */
+.config-section-title i {
+    margin-right: 10px;
+    color: #3498db;
+}
+
+.section-description {
+    color: #7f8c8d;
+    font-size: 13px;
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+/* Roles Table */
+.roles-table-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.roles-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.roles-table thead {
+    background: #f8f9fa;
+}
+
+.roles-table th {
+    padding: 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e8ecf1;
+}
+
+.roles-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #e8ecf1;
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.roles-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* Button Text Link */
+.btn-text-link {
+    background: none;
+    border: none;
+    color: #3498db;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-text-link:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.btn-secondary-outline {
+    padding: 12px 20px;
+    background: white;
+    border: 2px solid #3498db;
+    color: #3498db;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-secondary-outline:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* Admin Filters */
+.admin-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.search-box-small {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-box-small i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.search-box-small input {
+    width: 100%;
+    padding: 10px 14px 10px 40px;
+    border: 2px solid #e8ecf1;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.search-box-small input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+}
+
+.filter-select-small {
+    padding: 10px 14px;
+    border: 2px solid #e8ecf1;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #2c3e50;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-select-small:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Admin Accounts Table */
+.admin-accounts-table-container {
+    overflow-x: auto;
+}
+
+.admin-accounts-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.admin-accounts-table thead {
+    background: #f8f9fa;
+}
+
+.admin-accounts-table th {
+    padding: 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e8ecf1;
+}
+
+.admin-accounts-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #e8ecf1;
+    font-size: 14px;
+    color: #2c3e50;
+    vertical-align: middle;
+}
+
+.admin-accounts-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* Role Badges */
+.role-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.role-badge.admin {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.role-badge.logistico {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.role-badge.marketing {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+/* Toggle Switch Small */
+.toggle-switch-small {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+}
+
+.toggle-switch-small input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-switch-small .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 22px;
+}
+
+.toggle-switch-small .toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch-small input:checked + .toggle-slider {
+    background-color: #27ae60;
+}
+
+.toggle-switch-small input:checked + .toggle-slider:before {
+    transform: translateX(22px);
+}
+
+/* Button Icon */
+.btn-icon {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background: #fee;
+    color: #c0392b;
+}
+
+/* Currency Table */
+.currency-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.currency-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.currency-table thead {
+    background: #f8f9fa;
+}
+
+.currency-table th {
+    padding: 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e8ecf1;
+}
+
+.currency-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #e8ecf1;
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.currency-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.currency-rate-input {
+    width: 120px;
+    padding: 8px 12px;
+    border: 2px solid #e8ecf1;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.currency-rate-input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Payment Gateways Table */
+.payment-gateways-container {
+    overflow-x: auto;
+}
+
+.payment-gateways-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.payment-gateways-table thead {
+    background: #f8f9fa;
+}
+
+.payment-gateways-table th {
+    padding: 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e8ecf1;
+}
+
+.payment-gateways-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #e8ecf1;
+    font-size: 14px;
+    color: #2c3e50;
+    vertical-align: middle;
+}
+
+.payment-gateways-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-badge.conectado {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.desconectado {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Button Variants */
+.btn-primary-small {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-small:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-secondary-outline-small {
+    padding: 8px 16px;
+    background: white;
+    border: 2px solid #7f8c8d;
+    color: #7f8c8d;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-outline-small:hover {
+    background: #7f8c8d;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .config-form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .config-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+    
+    .config-section {
+        padding: 20px;
+    }
+    
+    .config-option {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .toggle-switch {
+        align-self: flex-end;
+    }
+    
+    .logo-upload-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .config-actions {
+        justify-content: stretch;
+    }
+    
+    .btn-large {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .admin-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box-small {
+        max-width: 100%;
+    }
+    
+    .roles-table-container,
+    .admin-accounts-table-container,
+    .currency-table-container,
+    .payment-gateways-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
