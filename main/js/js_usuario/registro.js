@@ -120,6 +120,6 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
     
     // Redirigir a la página principal después de 1 segundo
     setTimeout(() => {
-        window.location.href = 'main.html';
+        window.location.href = '../main.html';
     }, 1000);
 });

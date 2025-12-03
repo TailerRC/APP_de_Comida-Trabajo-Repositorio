@@ -242,7 +242,7 @@ function checkUserSession() {
             perfilText.textContent = currentUser.nombreCompleto.split(' ')[0];
         }
         if (perfilBtn) {
-            perfilBtn.href = basePath + 'perfil.html';
+            perfilBtn.href = basePath + 'main/perfil.html';
             perfilBtn.onclick = null; // Permitir navegación normal
         }
     } else {
