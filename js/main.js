@@ -1,4 +1,175 @@
 
+// ===== Page Transition System =====
+class PageTransition {
+    constructor() {
+        this.overlay = null;
+        this.init();
+    }
+
+    init() {
+        // Create overlay element
+        this.createOverlay();
+        
+        // Handle page load - show entry animation
+        this.handlePageLoad();
+        
+        // Intercept navigation links
+        this.interceptLinks();
+    }
+
+    createOverlay() {
+        // Create the overlay HTML
+        const overlay = document.createElement('div');
+        overlay.className = 'page-transition-overlay';
+        overlay.innerHTML = `
+            <div class="loader-particles">
+                <div class="loader-particle"></div>
+                <div class="loader-particle"></div>
+                <div class="loader-particle"></div>
+                <div class="loader-particle"></div>
+                <div class="loader-particle"></div>
+                <div class="loader-particle"></div>
+                <div class="loader-particle"></div>
+                <div class="loader-particle"></div>
+            </div>
+            <div class="loader-container">
+                <div class="loader-spinner"></div>
+                <div class="loader-text">Cargando</div>
+                <div class="loader-progress">
+                    <div class="loader-progress-bar"></div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(overlay);
+        this.overlay = overlay;
+    }
+
+    getLogoPath() {
+        const path = window.location.pathname;
+        
+        // Determine the correct path to the logo based on current location
+        if (path.includes('/secciones_navbar/promociones_categorias/')) {
+            return '../../../images/Logo1.png';
+        }
+        if (path.includes('/secciones_navbar/novedades/')) {
+            return '../../images/Logo1.png';
+        }
+        if (path.includes('/secciones_navbar/lista_deseos/')) {
+            return '../../images/Logo1.png';
+        }
+        if (path.includes('/carritopago/')) {
+            return '../../images/Logo1.png';
+        }
+        if (path.includes('/admin/')) {
+            return '../images/Logo1.png';
+        }
+        
+        return 'images/Logo1.png';
+    }
+
+    handlePageLoad() {
+        // Add page entering animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('page-entering');
+            
+            // Remove the class after animation completes
+            setTimeout(() => {
+                document.body.classList.remove('page-entering');
+            }, 500);
+        });
+
+        // Handle back/forward navigation
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // Page was loaded from cache (back/forward navigation)
+                this.hideOverlay();
+                document.body.classList.add('page-entering');
+                setTimeout(() => {
+                    document.body.classList.remove('page-entering');
+                }, 500);
+            }
+        });
+    }
+
+    interceptLinks() {
+        // Get all navigation links that should trigger the transition
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            
+            if (!link) return;
+            
+            const href = link.getAttribute('href');
+            
+            // Skip if:
+            // - No href
+            // - Hash link (same page anchor)
+            // - External link
+            // - JavaScript link
+            // - Opens in new tab
+            // - Is a modal trigger
+            if (!href || 
+                href.startsWith('#') || 
+                href.startsWith('javascript:') ||
+                href.startsWith('http://') ||
+                href.startsWith('https://') ||
+                link.target === '_blank' ||
+                link.id === 'perfil-btn' ||
+                link.classList.contains('modal-trigger')) {
+                return;
+            }
+
+            // Check if it's a navigation link (internal page change)
+            if (href.endsWith('.html') || 
+                href.includes('/secciones_navbar/') || 
+                href.includes('/carritopago/') ||
+                href.includes('/admin/')) {
+                
+                e.preventDefault();
+                this.navigateTo(href);
+            }
+        });
+    }
+
+    showOverlay() {
+        if (this.overlay) {
+            // Reset progress bar animation
+            const progressBar = this.overlay.querySelector('.loader-progress-bar');
+            if (progressBar) {
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight; // Trigger reflow
+                progressBar.style.animation = 'progressShimmer 1.5s ease-in-out infinite, progressGrow 0.6s ease-out forwards';
+            }
+            
+            this.overlay.classList.add('active');
+            this.overlay.classList.remove('fade-out');
+        }
+    }
+
+    hideOverlay() {
+        if (this.overlay) {
+            this.overlay.classList.add('fade-out');
+            this.overlay.classList.remove('active');
+        }
+    }
+
+    navigateTo(url) {
+        // Show the loading overlay
+        this.showOverlay();
+        
+        // Wait for the animation, then navigate
+        setTimeout(() => {
+            window.location.href = url;
+        }, 1000);
+    }
+}
+
+// Initialize page transition when DOM is ready
+let pageTransition;
+document.addEventListener('DOMContentLoaded', () => {
+    pageTransition = new PageTransition();
+});
+
 // ===== Carousel Functions =====
 function carouselPrev() {
     const slide1 = document.getElementById('slide1');
@@ -368,30 +539,6 @@ class CategoryCards {
         });
     }
     
-    showCategoryMessage(category) {
-        const notification = document.createElement('div');
-        notification.textContent = `Explorando categoría: ${category}`;
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            z-index: 10000;
-            animation: slideInRight 0.3s ease-out;
-            font-weight: 500;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.3s ease-out';
-            setTimeout(() => notification.remove(), 300);
-        }, 2500);
-    }
 }
 
 // Scroll Animations

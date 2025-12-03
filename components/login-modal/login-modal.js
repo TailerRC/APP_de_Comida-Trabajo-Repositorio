@@ -17,6 +17,15 @@
                 perfilBtn.href = getBasePath() + 'perfil.html';
                 perfilBtn.onclick = null; // Permitir navegación normal
             }
+        } else {
+            // Si no hay sesión, el botón de perfil debe abrir el modal
+            if (perfilBtn) {
+                perfilBtn.href = '#';
+                perfilBtn.onclick = function(e) {
+                    e.preventDefault();
+                    openLoginModal();
+                };
+            }
         }
     }
 
@@ -134,8 +143,16 @@
     function getBasePath() {
         const path = window.location.pathname;
         
+        // Si estamos en promociones_categorias/html (3 niveles abajo)
+        if (path.includes('/secciones_navbar/promociones_categorias/html/')) {
+            return '../../../';
+        }
         // Si estamos en novedades (2 niveles abajo)
         if (path.includes('/secciones_navbar/novedades/')) {
+            return '../../';
+        }
+        // Si estamos en lista_deseos (2 niveles abajo)
+        if (path.includes('/secciones_navbar/lista_deseos/')) {
             return '../../';
         }
         // Si estamos en una subcarpeta de novedades
@@ -165,11 +182,16 @@
     // Exponer función globalmente para poder llamarla desde otros scripts
     window.openLoginModal = openLoginModal;
     window.initLoginModal = initLoginModal;
+    window.checkUserSession = checkUserSession;
 
     // Auto-inicializar cuando el DOM esté listo
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLoginModal);
+        document.addEventListener('DOMContentLoaded', function() {
+            initLoginModal();
+            checkUserSession();
+        });
     } else {
         initLoginModal();
+        checkUserSession();
     }
 })();

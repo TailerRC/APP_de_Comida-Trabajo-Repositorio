@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accesorios - TechNow</title>
+    <!-- Estilos de la página de categoría -->
+    <link rel="stylesheet" href="../css/categoria1.css" />
+    <!-- Estilos del modal de login -->
+    <link rel="stylesheet" href="../../../components/login-modal/login-modal.css" />
+    <!-- Font Awesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="container">
+          <div class="nav-brand">
+            <a href="../../../main.html">
+              <img
+                src="../images/Logo1.png"
+                alt="TechNow Logo"
+                class="logo-navbar"
+              />
+            </a>
+          </div>
+
+          <!-- Botón hamburguesa para móviles -->
+          <button class="mobile-menu-toggle" aria-label="Menú">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="nav-content">
+            <ul class="nav-menu">
+              <li><a href="../../../main.html#categorias">Categorías</a></li>
+              <li><a href="./promociones.html">Promociones</a></li>
+              <li><a href="../../novedades/novedades.html">Novedades</a></li>
+            </ul>
+            <div class="nav-icons">
+              <a href="#" class="icon-link" id="perfil-btn"
+                ><i class="fas fa-user"></i> <span id="perfil-text">Perfil</span></a
+              >
+              <a href="../../lista_deseos/favoritos.html" class="icon-link"
+                ><i class="fas fa-heart"></i> <span>Lista de deseos</span></a
+              >
+              <a href="../../../carritopago/carrito/carrito.html" class="icon-link cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Mi Carrito</span>
+                <span id="cart-count" class="cart-badge">0</span>
+              </a>
+              <select class="language-select">
+                <option value="es">ES</option>
+                <option value="en">EN</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Banner de Categoría -->
+    <section class="category-banner">
+      <div class="container">
+        <h1 class="category-title">Accesorios</h1>
+      </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+      <div class="breadcrumb-container">
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <a href="../../../main.html">Inicio</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Accesorios</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+    <section class="category-page">
+      <div class="category-container">
+        <!-- Botón de filtros móvil -->
+        <button class="mobile-filters-toggle" id="mobile-filters-toggle">
+          <i class="fas fa-filter"></i>
+          <span>Filtros</span>
+        </button>
+
+        <!-- Overlay para cerrar filtros -->
+        <div class="filters-overlay" id="filters-overlay"></div>
+
+        <!-- Sidebar de filtros -->
+        <aside class="filters-sidebar" id="filters-sidebar">
+          <div class="filters-header">
+            <h3>Filtros</h3>
+            <button class="close-filters" id="close-filters">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <!-- Filtro de Tipo -->
+          <div class="filter-group">
+            <h4>Tipo de Accesorio</h4>
+            <select id="filter-brand">
+              <option value="">Todos</option>
+              <option value="fundas">Fundas y Cases</option>
+              <option value="cables">Cables</option>
+              <option value="cargadores">Cargadores</option>
+              <option value="protectores">Protectores de Pantalla</option>
+              <option value="soportes">Soportes</option>
+              <option value="adaptadores">Adaptadores</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Compatibilidad -->
+          <div class="filter-group">
+            <h4>Compatibilidad</h4>
+            <select id="filter-processor">
+              <option value="">Cualquiera</option>
+              <option value="iphone">iPhone</option>
+              <option value="android">Android</option>
+              <option value="laptop">Laptop</option>
+              <option value="tablet">Tablet</option>
+              <option value="universal">Universal</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Marca -->
+          <div class="filter-group">
+            <h4>Marca</h4>
+            <select id="filter-ram">
+              <option value="">Todas las marcas</option>
+              <option value="apple">Apple</option>
+              <option value="samsung">Samsung</option>
+              <option value="anker">Anker</option>
+              <option value="belkin">Belkin</option>
+              <option value="spigen">Spigen</option>
+              <option value="ugreen">UGREEN</option>
+            </select>
+          </div>
+
+          <!-- Filtro vacío para compatibilidad -->
+          <div class="filter-group" style="display: none">
+            <h4>Almacenamiento</h4>
+            <select id="filter-storage">
+              <option value="">Cualquiera</option>
+            </select>
+          </div>
+
+          <!-- Filtro vacío para compatibilidad -->
+          <div class="filter-group" style="display: none">
+            <h4>Pantalla</h4>
+            <select id="filter-screen">
+              <option value="">Cualquiera</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Rango de Precio -->
+          <div class="filter-group">
+            <h4>Rango de Precio</h4>
+            <div class="price-range">
+              <div class="price-inputs">
+                <input
+                  type="number"
+                  id="price-min"
+                  placeholder="Mínimo"
+                  min="0"
+                  step="10"
+                />
+                <span>-</span>
+                <input
+                  type="number"
+                  id="price-max"
+                  placeholder="Máximo"
+                  min="0"
+                  step="10"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="filter-actions">
+            <button class="filter-btn apply-filters">Aplicar Filtros</button>
+            <button class="filter-btn clear-filters">Limpiar Filtros</button>
+          </div>
+        </aside>
+
+        <!-- Área de productos -->
+        <main class="products-area">
+          <div class="products-header">
+            <p class="products-count">
+              Mostrando <strong>1-6</strong> de <strong>142</strong> resultados
+            </p>
+            <div class="sort-options">
+              <label for="sort-by">Ordenar por:</label>
+              <select id="sort-by">
+                <option value="relevance">Más Relevante</option>
+                <option value="price-low">Precio: Menor a Mayor</option>
+                <option value="price-high">Precio: Mayor a Menor</option>
+                <option value="rating">Mejor Valorados</option>
+                <option value="newest">Más Recientes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Grid de productos -->
+          <div class="category-products-grid">
+            <!-- Producto 1 -->
+            <div
+              class="product-card"
+              data-brand="cargadores"
+              data-processor="universal"
+              data-ram="anker"
+              data-storage=""
+              data-screen=""
+              data-price="79.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria6/accesorio1.jpg"
+                  alt="Anker PowerPort III"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Anker</p>
+                <h3 class="product-name">Anker PowerPort III 65W GaN</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.8 (456)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-current">S/ 189</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 6 cuotas sin interés de <strong>S/ 27</strong>
+                </p>
+                <p class="product-specs">
+                  Cargador Rápido 65W<br />
+                  3 Puertos USB-C • GaN Tech • Plegable
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div
+              class="product-card"
+              data-brand="fundas"
+              data-processor="iphone"
+              data-ram="apple"
+              data-storage=""
+              data-screen=""
+              data-price="149.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria6/accesorio2.jpg"
+                  alt="Apple Silicone Case"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Apple</p>
+                <h3 class="product-name">Funda de Silicona iPhone 15 Pro</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.7 (289)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-current">S/ 229</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 6 cuotas sin interés de <strong>S/ 33</strong>
+                </p>
+                <p class="product-specs">
+                  Silicona Premium<br />
+                  MagSafe Compatible • Microfibra interior
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div
+              class="product-card"
+              data-brand="cables"
+              data-processor="universal"
+              data-ram="ugreen"
+              data-storage=""
+              data-screen=""
+              data-price="39.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria6/accesorio3.jpg"
+                  alt="UGREEN Cable USB-C"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">UGREEN</p>
+                <h3 class="product-name">Cable USB-C a USB-C 100W 2m</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>4.9 (678)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-current">S/ 79</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 3 cuotas sin interés de <strong>S/ 22</strong>
+                </p>
+                <p class="product-specs">
+                  100W Carga Rápida<br />
+                  USB 3.2 • Trenzado • E-Marker Chip
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div
+              class="product-card"
+              data-brand="protectores"
+              data-processor="universal"
+              data-ram="belkin"
+              data-storage=""
+              data-screen=""
+              data-price="69.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria6/accesorio4.jpg"
+                  alt="Belkin Screen Protector"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Belkin</p>
+                <h3 class="product-name">
+                  Protector Vidrio Templado iPhone 15
+                </h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.6 (512)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-current">S/ 119</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 3 cuotas sin interés de <strong>S/ 34</strong>
+                </p>
+                <p class="product-specs">
+                  Cristal 9H Ultra-Resistente<br />
+                  Anti-Huellas • Aplicador incluido
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div
+              class="product-card"
+              data-brand="soportes"
+              data-processor="universal"
+              data-ram="anker"
+              data-storage=""
+              data-screen=""
+              data-price="99.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria6/accesorio5.jpg"
+                  alt="Anker PowerWave Stand"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">Anker</p>
+                <h3 class="product-name">Soporte de Carga Inalámbrica 15W</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>4.7 (334)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-current">S/ 229</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 6 cuotas sin interés de <strong>S/ 33</strong>
+                </p>
+                <p class="product-specs">
+                  Carga Rápida 15W<br />
+                  Qi Certificado • Ajustable • LED indicador
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div
+              class="product-card"
+              data-brand="adaptadores"
+              data-processor="laptop"
+              data-ram="ugreen"
+              data-storage=""
+              data-screen=""
+              data-price="129.99"
+            >
+              <div class="product-actions">
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="far fa-heart"></i></button>
+              </div>
+
+              <div class="product-image">
+                <img
+                  src="../images/categoria6/accesorio6.jpg"
+                  alt="UGREEN USB-C Hub"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+
+              <div class="product-info">
+                <p class="product-brand">UGREEN</p>
+                <h3 class="product-name">Hub USB-C 7 en 1 HDMI 4K</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>4.8 (421)</span>
+                </div>
+                <div class="product-price">
+                  <span class="price-current">S/ 289</span>
+                </div>
+                <p class="product-installments">
+                  Hasta 6 cuotas sin interés de <strong>S/ 41</strong>
+                </p>
+                <p class="product-specs">
+                  HDMI 4K@60Hz • 3x USB 3.0<br />
+                  SD/TF • 100W PD • Ethernet
+                </p>
+                <div class="stock-badge in-stock">En Stock</div>
+                <button class="view-details-btn">Ver Detalles</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paginación -->
+          <div class="pagination">
+            <button class="pagination-btn" disabled>Anterior</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <span class="pagination-dots">...</span>
+            <button class="pagination-btn">12</button>
+            <button class="pagination-btn">Siguiente</button>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>TechNow</h3>
+            <p>Tu tienda de confianza para la última tecnología.</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Atención al Cliente</h4>
+            <ul>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+              <li><a href="#">Centro de Ayuda</a></li>
+              <li><a href="#">Devoluciones y Reembolsos</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Mi Cuenta</h4>
+            <ul>
+              <li><a href="#">Mi Perfil</a></li>
+              <li><a href="#">Mis Pedidos</a></li>
+              <li><a href="#">Lista de Deseos</a></li>
+              <li><a href="#">Historial de Compras</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Información Legal</h4>
+            <ul>
+              <li><a href="#">Política de Privacidad</a></li>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Cookies</a></li>
+              <li><a href="#">Aviso Legal</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 TechNow. Todos los derechos reservados.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal de Inicio de Sesión -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="login-container">
+                <div class="login-header">
+                    <h2>Iniciar Sesión</h2>
+                    <p>Accede a tu cuenta para continuar</p>
+                </div>
+
+                <form class="login-form" id="login-form">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <div class="input-wrapper password-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password" aria-label="Mostrar/Ocultar contraseña">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember">
+                            <span>Recordarme</span>
+                        </label>
+                        <a href="../../../recuperar-password.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">Iniciar Sesión</button>
+                    <div id="login-error" style="color: #ef4444; font-size: 0.9rem; margin-top: 1rem; display: none; text-align: center;"></div>
+                </form>
+
+                <div class="divider">o</div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google-btn">
+                        <i class="fab fa-google"></i>
+                        Continuar con Google
+                    </button>
+                    <button type="button" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i>
+                        Continuar con Facebook
+                    </button>
+                </div>
+
+                <div class="login-footer">
+                    <p>¿No tienes una cuenta? <a href="../../../registro.html" class="register-link">Regístrate</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript específico de categoría -->
+    <script src="../js/categoria1.js"></script>
+    <!-- JavaScript del modal de login -->
+    <script src="../../../components/login-modal/login-modal.js"></script>
+    <!-- JavaScript principal (incluye transiciones de página) -->
+    <script src="../../../js/main.js"></script>
+  </body>
+</html>
