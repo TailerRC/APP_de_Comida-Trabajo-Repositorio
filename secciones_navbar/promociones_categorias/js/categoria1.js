@@ -1,32 +1,6 @@
 // PÁGINA DE CATEGORÍA - SMARTPHONES
 // Archivo: categoria1.js
 
-function showNotification(message, type) {
-  type = type || "success";
-  const bgColors = {
-    success: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-    info: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-    warning: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-    error: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
-  };
-
-  const notification = document.createElement("div");
-  notification.textContent = message;
-  notification.style.cssText =
-    "position:fixed;top:100px;right:20px;padding:1rem 1.5rem;background:" +
-    (bgColors[type] || bgColors.success) +
-    ";color:white;border-radius:8px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);z-index:10001;font-weight:500;animation:slideInRight 0.3s ease-out";
-
-  document.body.appendChild(notification);
-
-  setTimeout(function () {
-    notification.style.animation = "slideOutRight 0.3s ease-out";
-    setTimeout(function () {
-      notification.remove();
-    }, 300);
-  }, 3000);
-}
-
 // Las funciones de login (initLoginModal, checkUserSession) vienen del componente login-modal.js
 
 class CategoryFilters {
@@ -146,7 +120,6 @@ class CategoryFilters {
       }.bind(this)
     );
 
-    showNotification(visibleCount + " producto(s) encontrado(s)", "info");
     console.log(
       "Filtros aplicados:",
       this.filters,
@@ -192,7 +165,6 @@ class CategoryFilters {
       card.removeAttribute("data-filtered");
     });
 
-    showNotification("Filtros limpiados", "success");
     console.log("Filtros limpiados");
 
     if (window.categoryProducts && window.categoryProducts.updatePagination) {
@@ -237,7 +209,7 @@ class CategoryFilters {
       newest: "Más Recientes",
     };
 
-    showNotification("Ordenado: " + sortLabels[this.sortBy], "info");
+    console.log("Ordenado:", sortLabels[this.sortBy]);
     console.log("Ordenado por:", this.sortBy);
   }
 }
@@ -309,12 +281,10 @@ class CategoryProducts {
       icon.classList.remove("fas");
       icon.classList.add("far");
       this.favorites.delete(productName);
-      showNotification(productName + " eliminado de favoritos", "warning");
     } else {
       icon.classList.remove("far");
       icon.classList.add("fas");
       this.favorites.add(productName);
-      showNotification(productName + " agregado a favoritos ❤️", "success");
     }
 
     localStorage.setItem(
@@ -325,12 +295,10 @@ class CategoryProducts {
   }
 
   showProductDetails(productName) {
-    showNotification("Detalles: " + productName, "info");
     console.log("Ver detalles:", productName);
   }
 
   showQuickView(productName) {
-    showNotification("Vista rápida: " + productName, "info");
     console.log("Vista rápida:", productName);
   }
 
@@ -621,9 +589,6 @@ function initCartSystem() {
         btn.disabled = false;
         btn.classList.remove("added-to-cart");
       }, 1500);
-
-      // Notificación opcional
-      showNotification("Producto añadido al carrito", "success");
     });
   });
 }

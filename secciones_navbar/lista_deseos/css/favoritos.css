@@ -306,7 +306,7 @@ body {
     background-color: #9ca3af;
 }
 
-/* Footer Styles */
+/* Footer */
 .footer {
     background-color: #0d3f54;
     color: white;
@@ -399,18 +399,18 @@ body {
     color: #cbd5e1;
 }
 
-.footer .payment-methods {
+.payment-methods {
     display: flex;
     gap: 1rem;
     font-size: 2rem;
 }
 
-.footer .payment-methods i {
+.payment-methods i {
     color: #cbd5e1;
     transition: color 0.3s;
 }
 
-.footer .payment-methods i:hover {
+.payment-methods i:hover {
     color: #667eea;
 }
 

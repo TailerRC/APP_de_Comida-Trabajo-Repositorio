@@ -297,9 +297,6 @@ class ProductCards {
         button.textContent = '✓ Añadido';
         button.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
         
-        // Show notification
-        this.showNotification('Producto añadido al carrito', 'success');
-        
         // Reset button after 2 seconds
         setTimeout(() => {
             button.textContent = originalText;
@@ -315,82 +312,15 @@ class ProductCards {
             icon.classList.remove('fas');
             icon.classList.add('far');
             button.style.color = '#667eea';
-            this.showNotification('Eliminado de favoritos', 'info');
         } else {
             icon.classList.remove('far');
             icon.classList.add('fas');
             button.style.color = '#ef4444';
-            this.showNotification('Añadido a favoritos', 'success');
         }
     }
     
     quickView(e) {
-        this.showNotification('Vista rápida disponible próximamente', 'info');
-    }
-    
-    showNotification(message, type) {
-        // Remove existing notification
-        const existingNotification = document.querySelector('.notification');
-        if (existingNotification) {
-            existingNotification.remove();
-        }
-        
-        // Create notification
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.textContent = message;
-        
-        // Style notification
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            background: ${type === 'success' ? '#10b981' : type === 'info' ? '#3b82f6' : '#ef4444'};
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            z-index: 10000;
-            animation: slideInRight 0.3s ease-out;
-            font-weight: 500;
-        `;
-        
-        // Add animation styles
-        if (!document.querySelector('#notification-styles')) {
-            const style = document.createElement('style');
-            style.id = 'notification-styles';
-            style.textContent = `
-                @keyframes slideInRight {
-                    from {
-                        transform: translateX(400px);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateX(0);
-                        opacity: 1;
-                    }
-                }
-                @keyframes slideOutRight {
-                    from {
-                        transform: translateX(0);
-                        opacity: 1;
-                    }
-                    to {
-                        transform: translateX(400px);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        document.body.appendChild(notification);
-        
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.3s ease-out';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
+        console.log('Vista rápida');
     }
 }
 
