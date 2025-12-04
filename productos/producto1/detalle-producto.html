@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Producto - TechNow</title>
+    <link rel="stylesheet" href="css\detalle-producto.css">
+    <link rel="stylesheet" href="../../components/page-loader/page-loader.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                    <a href="../../main.html"><img src="images/Logo1.png" alt="TechNow Logo" class="logo-navbar"></a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="#">Inicio</a> > <a href="/secciones_navbar/promociones_categorias/html/categoria1.html">Smartphones</a> > <span id="product-model">iPhone 17 Pro</span>
+            </div>
+
+            <!-- Product Detail Section -->
+            <div class="product-detail-container">
+                <!-- Left Side - Images -->
+                <div class="product-images-section">
+                    <div class="thumbnail-images">
+                        <div class="thumbnail active" data-index="0">
+                            <img src="Images/imagen1.jpg" alt="Laptop vista 1">
+                        </div>
+                        <div class="thumbnail" data-index="1">
+                            <img src="Images/imagen2.jpg" alt="Laptop vista 2">
+                        </div>
+                        <div class="thumbnail" data-index="2">
+                            <img src="Images/imagen3.jpg" alt="Laptop vista 3">
+                        </div>
+                        <div class="thumbnail" data-index="3">
+                            <img src="Images/imagen4.jpg" alt="Laptop vista 4">
+                        </div>
+                    </div>
+                    
+                    <div class="main-image-container">
+                        <img id="main-product-image" src="Images/imagen1.jpg" alt="Producto Principal">
+                        <div class="image-indicators">
+                            <span class="indicator active"></span>
+                            <span class="indicator"></span>
+                            <span class="indicator"></span>
+                            <span class="indicator"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Product Info -->
+                <div class="product-info-section">
+                    <div class="product-header">
+                        <h1 id="product-title">Marca Modelo X 16GB RAM 512GB SSD, Negro</h1>
+                        <button class="wishlist-btn" id="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="product-price">
+                        <h2 id="product-price">1,299.00</h2>
+                        <p class="installments">4 cuotas sin intereses con Visa, Mastercard y American Express</p>
+                    </div>
+
+                    <div class="shipping-info">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <p class="shipping-title">Recíbelo Mañana</p>
+                            <p class="shipping-subtitle">Envío GRATIS</p>
+                        </div>
+                    </div>
+
+                    <div class="quantity-section">
+                        <button class="qty-btn" id="decrease-btn">-</button>
+                        <input type="number" id="quantity-input" value="1" min="1" max="10" readonly>
+                        <button class="qty-btn" id="increase-btn">+</button>
+                        <span class="stock-info" id="stock-info">¡Menos de 10 unidades disponibles!</span>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="add-to-cart-btn" id="add-to-cart-main">
+                            Añadir al Carrito
+                        </button>
+                        <button class="buy-now-btn" id="buy-now-btn">
+                            Comprar Ahora
+                        </button>
+                    </div>
+
+                    <div class="product-details">
+                        <h3>Acerca del producto</h3>
+                        <ul id="product-features">
+                            <li>Memoria interna: 16GB RAM</li>
+                            <li>Almacenamiento: 512GB SSD</li>
+                            <li>Pantalla: 15.6" Full HD</li>
+                            <li>Procesador: Intel Core i7 de 11ª generación</li>
+                        </ul>
+                        <a href="#" class="see-all-features" id="see-all-features">Ver todas las características</a>
+                    </div>
+
+                    <div class="payment-methods">
+                        <h3>Medios de pago</h3>
+                        <div class="payment-icons">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-amex"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Specifications Section (Hidden by default) -->
+            <div class="full-specifications" id="full-specifications" style="display: none;">
+                <h2>Especificaciones Completas</h2>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <strong>Procesador:</strong>
+                        <span>Apple A19 Pro de última generación</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Memoria RAM:</strong>
+                        <span>12GB LPDDR6</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Almacenamiento:</strong>
+                        <span>1TB SSD NVMe</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Pantalla:</strong>
+                        <span>6.7" Super Retina XDR ProMotion (2800x1290)</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Tarjeta Gráfica:</strong>
+                        <span>Principal 50MP, Ultra Gran Angular 12MP, Teleobjetivo 12MP (Zoom Óptico 5x)</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Cámara Frontal:</strong>
+                        <span>12MP con Autofocus y TrueDepth</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Conectividad:</strong>
+                        <span>5G, Wi-Fi 7, Bluetooth 6.0</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Puertos:</strong>
+                        <span>1x USB-C (Thunderbolt 4)</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Batería:</strong>
+                        <span>4500 mAh (hasta 24 horas de reproducción de video)</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Peso:</strong>
+                        <span>200 g</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Color:</strong>
+                        <span>Naranja brillante</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Garantía:</strong>
+                        <span>1 año del fabricante</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechNow</h3>
+                    <p>Tu tienda online de confianza para la última tecnología</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Atención al Cliente</h4>
+                    <ul>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Devoluciones y Reembolsos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Información Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Cookies</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TechNow. Todos los derechos reservados.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../components/page-loader/page-loader.js"></script>
+    <script src="js\detalle-producto.js"></script>
+</body>
+</html>

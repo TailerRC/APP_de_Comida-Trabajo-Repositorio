@@ -62,7 +62,7 @@
                     modal.classList.remove('active');
                     
                     setTimeout(() => {
-                        window.location.href = getBasePath() + 'admin/admin.html';
+                        window.location.href = getAdminPath() + 'admin.html';
                     }, 300);
                     
                     loginForm.reset();
@@ -145,30 +145,55 @@
         
         // Si estamos en promociones_categorias/html (3 niveles abajo)
         if (path.includes('/secciones_navbar/promociones_categorias/html/')) {
-            return '../../../';
+            return '../../../main/';
         }
         // Si estamos en novedades (2 niveles abajo)
         if (path.includes('/secciones_navbar/novedades/')) {
-            return '../../';
+            return '../../main/';
         }
         // Si estamos en lista_deseos (2 niveles abajo)
         if (path.includes('/secciones_navbar/lista_deseos/')) {
-            return '../../';
+            return '../../main/';
         }
         // Si estamos en una subcarpeta de novedades
         if (path.includes('/novedades/')) {
-            return '../';
+            return '../main/';
         }
         // Si estamos en carritopago (2 niveles abajo)
         if (path.includes('/carritopago/')) {
-            return '../../';
+            return '../../main/';
         }
         // Si estamos en admin
         if (path.includes('/admin/')) {
-            return '../';
+            return '../main/';
         }
+        // Si estamos en la raíz (main.html)
+        return 'main/';
+    }
+
+    // Función para obtener la ruta base para admin
+    function getAdminPath() {
+        const path = window.location.pathname;
         
-        return '';
+        if (path.includes('/secciones_navbar/promociones_categorias/html/')) {
+            return '../../../admin/';
+        }
+        if (path.includes('/secciones_navbar/novedades/')) {
+            return '../../admin/';
+        }
+        if (path.includes('/secciones_navbar/lista_deseos/')) {
+            return '../../admin/';
+        }
+        if (path.includes('/novedades/')) {
+            return '../admin/';
+        }
+        if (path.includes('/carritopago/')) {
+            return '../../admin/';
+        }
+        if (path.includes('/admin/')) {
+            return '';
+        }
+        return 'admin/';
     }
 
     // Función para abrir el modal de login

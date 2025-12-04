@@ -300,7 +300,7 @@ class ProductCards {
         // Reset button after 2 seconds
         setTimeout(() => {
             button.textContent = originalText;
-            button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            button.style.background = 'linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)';
         }, 2000);
     }
     

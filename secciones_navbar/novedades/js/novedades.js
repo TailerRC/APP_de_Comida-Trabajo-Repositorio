@@ -235,7 +235,7 @@ function initializePerfilButton() {
             if (newPerfilText) {
                 newPerfilText.textContent = currentUser.nombreCompleto ? currentUser.nombreCompleto.split(' ')[0] : 'Perfil';
             }
-            newPerfilBtn.href = '../../perfil.html';
+            newPerfilBtn.href = '../../main/perfil.html';
             // No agregar onclick, dejar que el href funcione normalmente
         } else {
             // Si no hay usuario, abrir modal de login
