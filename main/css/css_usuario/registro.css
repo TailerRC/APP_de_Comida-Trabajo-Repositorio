@@ -327,6 +327,48 @@ body {
     text-decoration: none;
 }
 
+/* Estilos para mensajes de error */
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #fee2e2;
+    border-left: 3px solid #dc2626;
+    border-radius: 4px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.error-message i {
+    font-size: 1rem;
+}
+
+.input-wrapper.error,
+.password-input-wrapper.error {
+    border-color: #dc2626;
+    background: #fef2f2;
+}
+
+.input-wrapper.error:focus-within,
+.password-input-wrapper.error:focus-within {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
 .login-link a:hover {
     color: #06b6d4;
     text-decoration: underline;
@@ -344,5 +386,138 @@ body {
 
     .registro-header h1 {
         font-size: 1.6rem;
+    }
+}
+
+/* Modal de Confirmación */
+.modal-confirmacion {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-confirmacion-content {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-confirmacion-icon {
+    margin-bottom: 1.5rem;
+}
+
+.modal-confirmacion-icon i {
+    font-size: 5rem;
+    color: #10b981;
+    animation: checkBounce 0.6s ease-out;
+}
+
+@keyframes checkBounce {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal-confirmacion-content h2 {
+    color: #1e293b;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.modal-confirmacion-content p {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.modal-confirmacion-content p strong {
+    color: #0891b2;
+    font-weight: 600;
+}
+
+.btn-continuar {
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+}
+
+.btn-continuar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(8, 145, 178, 0.4);
+}
+
+.btn-continuar:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .modal-confirmacion-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .modal-confirmacion-icon i {
+        font-size: 4rem;
+    }
+
+    .modal-confirmacion-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .modal-confirmacion-content p {
+        font-size: 1rem;
+    }
+
+    .btn-continuar {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
     }
 }

@@ -64,7 +64,7 @@
             <div class="form-group">
                 <label for="numeroDocumento"><i class="fas fa-numbers label-icon"></i>Número de Documento</label>
                 <div class="input-wrapper">
-                    <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="8 dígitos" maxlength="8" required>
+                    <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="8 dígitos" maxlength="11" required>
                 </div>
             </div>
 
@@ -101,6 +101,19 @@
 
         <div class="login-link">
             <p>¿Ya tienes una cuenta? <a href="../main.html">Inicia Sesión aquí</a></p>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="modalConfirmacion" class="modal-confirmacion">
+        <div class="modal-confirmacion-content">
+            <div class="modal-confirmacion-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>¡Registro Exitoso!</h2>
+            <p>Tu cuenta ha sido creada correctamente.</p>
+            <p>Bienvenido a <strong>TechNow</strong></p>
+            <button id="btnContinuar" class="btn-continuar">Continuar</button>
         </div>
     </div>
 
