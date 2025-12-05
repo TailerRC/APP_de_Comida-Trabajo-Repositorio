@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dirección de Envío - TechNow</title>
     <link rel="stylesheet" href="css\envio.css">
+    <link rel="stylesheet" href="../../components/page-loader/page-loader.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <div class="nav-brand">
+            <div class="container navbar-container">
+                <div class="nav-brand">
                     <a href="../../main.html"><img src="images/Logo1.png" alt="TechNow Logo" class="logo-navbar"></a>
+                </div>
+                <div class="nav-icons">
+                    <a href="../../main.html" class="nav-icon-link" title="Inicio">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="../../secciones_navbar/lista_deseos/favoritos.html" class="nav-icon-link" title="Favoritos">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="../carrito/carrito.html" class="nav-icon-link cart-icon active" title="Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">3</span>
+                    </a>
+                </div>
             </div>
         </nav>
     </header>
@@ -40,17 +55,6 @@
                         <div class="current-address">
                             <p class="address-text">Av. Siempre Viva 742, Springfield</p>
                             <a href="#" class="change-link">Cambiar ubicación</a>
-                        </div>
-                    </div>
-
-                    <!-- Shipping Details -->
-                    <div class="section-card">
-                        <h2 class="section-title">Detalle del Envío (Productos)</h2>
-                        <p class="shipping-vendor">Entrega 1 de 1</p>
-                        <div class="product-thumbnails">
-                            <div class="thumbnail-box"></div>
-                            <div class="thumbnail-box"></div>
-                            <div class="thumbnail-box"></div>
                         </div>
                     </div>
 
@@ -111,7 +115,7 @@
                                         <p class="delivery-time">Entrega entre 9:00 y 18:00</p>
                                     </div>
                                 </div>
-                                <span class="delivery-price">Costo: $5.00</span>
+                                <span class="delivery-price">Costo: S/ 5.00</span>
                             </label>
                         </div>
 
@@ -123,7 +127,7 @@
                                     <i class="fas fa-calendar-alt delivery-icon"></i>
                                     <div>
                                         <h3 class="delivery-name">Entrega programada</h3>
-                                        <p class="delivery-time">Costo: $7.50</p>
+                                        <p class="delivery-time">Costo: S/ 7.50</p>
                                     </div>
                                 </div>
                             </label>
@@ -141,23 +145,21 @@
                         <div class="order-summary">
                             <h2 class="summary-title">Resumen de compra</h2>
                             
-                            <div class="summary-details">
-                                <div class="summary-row">
-                                    <span>Productos</span>
-                                    <span>$150.00</span>
-                                </div>
-                                <div class="summary-row">
-                                    <span>Gastos de entrega</span>
-                                    <span class="delivery-cost">$5.00</span>
-                                </div>
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Productos</span>
+                                <span>S/ 2,700.00</span>
                             </div>
-
-                            <div class="summary-total">
-                                <span class="total-label">Total</span>
-                                <span class="total-amount">$155.00</span>
+                            <div class="summary-row">
+                                <span>Gastos de entrega</span>
+                                <span class="delivery-cost free">GRATIS</span>
                             </div>
+                        </div>
 
-                            <!-- Action Buttons -->
+                        <div class="summary-total">
+                            <span class="total-label">Total</span>
+                            <span class="total-amount">S/ 2,700.00</span>
+                        </div>                            <!-- Action Buttons -->
                             <div class="action-buttons">
                                 <button class="btn btn-secondary" onclick="window.location.href='../carrito/carrito.html'">ATRÁS</button>
                                 <button class="btn btn-primary" onclick="window.location.href='../pago/pago.html'" id="confirmBtn">CONFIRMAR</button>
@@ -253,5 +255,6 @@
     </footer>
 
     <script src="js\envio.js"></script>
+    <script src="../../components/page-loader/page-loader.js"></script>
 </body>
 </html>

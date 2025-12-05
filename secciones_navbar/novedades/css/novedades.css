@@ -345,10 +345,38 @@ body {
     flex: 1;
 }
 
+/* Breadcrumb */
 .breadcrumb {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
+  padding: 1rem 0;
+  background-color: #f8f9fa;
+}
+
+.breadcrumb-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.breadcrumb-nav a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.breadcrumb-nav a:hover {
+  color: var(--secondary-color);
+}
+
+.breadcrumb-nav i {
+  font-size: 0.7rem;
+  color: var(--text-light);
 }
 
 .products-header {

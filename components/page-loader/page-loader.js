@@ -11,7 +11,7 @@
 class PageLoader {
     constructor() {
         this.overlay = null;
-        this.excludedPaths = ['/carritopago/', '/admin/', 'carritopago/', 'admin/'];
+        this.excludedPaths = ['/admin/', 'admin/'];
         this.init();
     }
 
@@ -126,7 +126,7 @@ class PageLoader {
             if (progressBar) {
                 progressBar.style.animation = 'none';
                 progressBar.offsetHeight; // Trigger reflow
-                progressBar.style.animation = 'progressShimmer 1.5s ease-in-out infinite, progressGrow 0.6s ease-out forwards';
+                progressBar.style.animation = 'progressShimmer 2s ease-in-out infinite, progressGrow 0.6s ease-out forwards';
             }
             
             this.overlay.classList.add('active');

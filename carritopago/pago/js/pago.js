@@ -1,3 +1,114 @@
+// =============================================
+// SISTEMA DE NOTIFICACIONES
+// =============================================
+
+function showNotification(message, type = 'success') {
+    const existingNotifications = document.querySelectorAll('.toast-notification');
+    existingNotifications.forEach(n => n.remove());
+    
+    const icons = {
+        success: '✓',
+        error: '✕',
+        warning: '⚠',
+        info: 'ℹ'
+    };
+    
+    const colors = {
+        success: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+        error: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+        warning: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+        info: 'linear-gradient(135deg, #17a2b8 0%, #138496 100%)'
+    };
+    
+    const notification = document.createElement('div');
+    notification.className = 'toast-notification';
+    notification.innerHTML = `
+        <span style="font-size: 18px;">${icons[type]}</span>
+        <span>${message}</span>
+    `;
+    
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: ${colors[type]};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+        font-size: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        z-index: 999999;
+        transform: translateX(400px);
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 10);
+    
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px);';
+        setTimeout(() => notification.remove(), 400);
+    }, 3000);
+}
+
+// =============================================
+// CARGAR DATOS DEL CARRITO
+// =============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadOrderData();
+});
+
+function loadOrderData() {
+    // Cargar datos del carrito
+    const cartData = JSON.parse(localStorage.getItem('cartData')) || { products: 2700, items: 3 };
+    const deliveryCost = parseFloat(localStorage.getItem('deliveryCost')) || 0;
+    const orderTotal = parseFloat(localStorage.getItem('orderTotal')) || cartData.products;
+    
+    // Actualizar resumen de compra
+    const summaryItems = document.querySelectorAll('.summary-item');
+    if (summaryItems.length >= 2) {
+        summaryItems[0].querySelector('span:last-child').textContent = `S/ ${cartData.products.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+        
+        if (deliveryCost === 0) {
+            summaryItems[1].querySelector('span:last-child').innerHTML = '<span style="color: #27ae60; font-weight: 700;">GRATIS</span>';
+        } else {
+            summaryItems[1].querySelector('span:last-child').textContent = `S/ ${deliveryCost.toFixed(2)}`;
+        }
+    }
+    
+    // Actualizar total
+    const totalElement = document.querySelector('.summary-total span:last-child');
+    if (totalElement) {
+        totalElement.textContent = `S/ ${orderTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+    }
+    
+    // Actualizar contador del carrito
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+        cartCount.textContent = cartData.items;
+    }
+    
+    // Actualizar montos en los modales de QR y PayPal
+    const qrAmount = document.querySelector('.payment-amount h3');
+    const paypalAmount = document.querySelector('.payment-summary-paypal h3');
+    
+    if (qrAmount) qrAmount.textContent = `S/ ${orderTotal.toFixed(2)}`;
+    if (paypalAmount) paypalAmount.textContent = `S/ ${orderTotal.toFixed(2)}`;
+}
+
+// =============================================
+// MODAL DE VALIDACIÓN
+// =============================================
+
 // Modal de Validación Personalizado
 function showValidationModal(message) {
     const modal = document.getElementById('validationModal');
@@ -99,10 +210,10 @@ if (debitExpirationInput) {
 function copyPaymentCode() {
     const code = document.getElementById('paymentCode').textContent;
     navigator.clipboard.writeText(code).then(() => {
-        alert('Código copiado al portapapeles: ' + code);
+        showNotification('Código copiado: ' + code, 'success');
     }).catch(err => {
         console.error('Error al copiar:', err);
-        alert('No se pudo copiar el código');
+        showNotification('No se pudo copiar el código', 'error');
     });
 }
 
@@ -263,7 +374,7 @@ document.querySelectorAll('.fa-question-circle').forEach(icon => {
     icon.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        alert('El CVV es el código de 3 o 4 dígitos en la parte posterior de tu tarjeta');
+        showNotification('El CVV es el código de 3 o 4 dígitos en la parte posterior de tu tarjeta', 'info');
     });
 });
 

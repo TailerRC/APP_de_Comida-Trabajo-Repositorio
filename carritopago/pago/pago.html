@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Método de Pago - TechNow</title>
     <link rel="stylesheet" href="css\pago.css">
+    <link rel="stylesheet" href="../../components/page-loader/page-loader.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-        <!-- Header -->
+    <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <div class="nav-brand">
+            <div class="container navbar-container">
+                <div class="nav-brand">
                     <a href="../../main.html"><img src="images/Logo1.png" alt="TechNow Logo" class="logo-navbar"></a>
+                </div>
+                <div class="nav-icons">
+                    <a href="../../main.html" class="nav-icon-link" title="Inicio">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="../../secciones_navbar/lista_deseos/favoritos.html" class="nav-icon-link" title="Favoritos">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="../carrito/carrito.html" class="nav-icon-link cart-icon active" title="Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">3</span>
+                    </a>
+                </div>
             </div>
         </nav>
     </header>
@@ -223,17 +238,17 @@
                         <div class="summary-details">
                             <div class="summary-item">
                                 <span>Productos</span>
-                                <span>$150.00</span>
+                                <span>S/ 2,700.00</span>
                             </div>
                             <div class="summary-item">
                                 <span>Gastos de entrega</span>
-                                <span>$5.00</span>
+                                <span style="color: #27ae60; font-weight: 700;">GRATIS</span>
                             </div>
                         </div>
 
                         <div class="summary-total">
                             <span>Total</span>
-                            <span>$155.00</span>
+                            <span>S/ 2,700.00</span>
                         </div>
 
                         <!-- Action Buttons -->
@@ -296,7 +311,7 @@
             </div>
             <div class="payment-amount">
                 <p>Monto a pagar</p>
-                <h3>$155.00</h3>
+                <h3>S/ 2,700.00</h3>
             </div>
             <p class="qr-instructions">Después de realizar el pago, haz clic en "Confirmar Pago"</p>
             <button class="btn-primary" onclick="confirmQRPayment()">Confirmar Pago</button>
@@ -336,7 +351,7 @@
             </div>
             <div class="payment-summary-paypal">
                 <p>Estás pagando a <strong>TechNow</strong></p>
-                <h3>$155.00 USD</h3>
+                <h3>S/ 2,700.00</h3>
             </div>
         </div>
     </div>
@@ -421,5 +436,6 @@
     </footer>
 
     <script src="js\pago.js"></script>
+    <script src="../../components/page-loader/page-loader.js"></script>
 </body>
 </html>
