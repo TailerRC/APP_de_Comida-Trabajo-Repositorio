@@ -13,8 +13,22 @@
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
-            <div class="nav-brand">
+            <div class="container navbar-container">
+                <div class="nav-brand">
                     <a href="../../main.html"><img src="images/Logo1.png" alt="TechNow Logo" class="logo-navbar"></a>
+                </div>
+                <div class="nav-icons">
+                    <a href="../../main.html" class="nav-icon-link" title="Inicio">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="../../secciones_navbar/lista_deseos/favoritos.html" class="nav-icon-link" title="Favoritos">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="../../carritopago/carrito/carrito.html" class="nav-icon-link cart-icon" title="Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </div>
             </div>
         </nav>
     </header>
@@ -24,7 +38,15 @@
         <div class="container">
             <!-- Breadcrumb -->
             <div class="breadcrumb">
-                <a href="#">Inicio</a> > <a href="/secciones_navbar/promociones_categorias/html/categoria1.html">Smartphones</a> > <span id="product-model">iPhone 17 Pro</span>
+                <div class="breadcrumb-container">
+                    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                        <a href="../../main.html">Inicio</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="../../secciones_navbar/promociones_categorias/html/categoria1.html">Smartphones</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span id="product-model">iPhone 17 Pro</span>
+                    </nav>
+                </div>
             </div>
 
             <!-- Product Detail Section -->
@@ -63,6 +85,22 @@
                         <h1 id="product-title">Marca Modelo X 16GB RAM 512GB SSD, Negro</h1>
                         <button class="wishlist-btn" id="wishlist-btn">
                             <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <!-- Valoración del producto -->
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-score">4.5</span>
+                        <span class="rating-count">(128 valoraciones)</span>
+                        <button class="rate-btn" id="rate-product-btn">
+                            <i class="far fa-star"></i> Valorar
                         </button>
                     </div>
 
@@ -219,6 +257,56 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal de Valoración -->
+    <div id="rating-modal" class="rating-modal">
+        <div class="rating-modal-content">
+            <button class="rating-modal-close" id="close-rating-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="rating-modal-header">
+                <i class="fas fa-star rating-modal-icon"></i>
+                <h2>¿Qué te pareció este producto?</h2>
+                <p>Tu opinión nos ayuda a mejorar</p>
+            </div>
+            <div class="rating-modal-body">
+                <div class="rating-stars-input">
+                    <i class="far fa-star" data-rating="1"></i>
+                    <i class="far fa-star" data-rating="2"></i>
+                    <i class="far fa-star" data-rating="3"></i>
+                    <i class="far fa-star" data-rating="4"></i>
+                    <i class="far fa-star" data-rating="5"></i>
+                </div>
+                <span class="rating-text">Selecciona tu puntuación</span>
+                <textarea id="rating-comment" class="rating-comment" placeholder="Cuéntanos tu experiencia con este producto (opcional)..." rows="3"></textarea>
+            </div>
+            <div class="rating-modal-footer">
+                <button class="rating-cancel-btn" id="cancel-rating">Cancelar</button>
+                <button class="rating-submit-btn" id="submit-rating" disabled>
+                    <i class="fas fa-paper-plane"></i> Enviar valoración
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Agradecimiento -->
+    <div id="thank-you-modal" class="thank-you-modal">
+        <div class="thank-you-content">
+            <div class="thank-you-animation">
+                <div class="checkmark-circle">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="stars-celebration">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <h2>¡Gracias por tu valoración!</h2>
+            <p>Tu opinión es muy importante para nosotros y ayuda a otros compradores.</p>
+            <button class="thank-you-btn" id="close-thank-you">Continuar comprando</button>
+        </div>
+    </div>
 
     <script src="../../components/page-loader/page-loader.js"></script>
     <script src="js\detalle-producto.js"></script>

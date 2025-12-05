@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeWishlist();
     initializeActionButtons();
     initializeSpecifications();
+    initializeRatingSystem();
     updateCartCount();
 });
 
@@ -348,7 +349,7 @@ function showNotification(message, type = 'info') {
     
     notification.style.cssText = `
         position: fixed;
-        top: 20px;
+        bottom: 20px;
         right: 20px;
         background-color: ${bgColor};
         color: white;
@@ -409,3 +410,214 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Log product view (analytics)
 console.log('Producto visualizado:', productData);
+
+// ============================================
+// SISTEMA DE VALORACIÓN DEL PRODUCTO
+// ============================================
+
+function initializeRatingSystem() {
+    const rateProductBtn = document.getElementById('rate-product-btn');
+    const ratingModal = document.getElementById('rating-modal');
+    const closeRatingModal = document.getElementById('close-rating-modal');
+    const cancelRating = document.getElementById('cancel-rating');
+    const submitRating = document.getElementById('submit-rating');
+    const ratingStarsInput = document.querySelectorAll('.rating-stars-input i');
+    const ratingText = document.querySelector('.rating-text');
+    const thankYouModal = document.getElementById('thank-you-modal');
+    const closeThankYou = document.getElementById('close-thank-you');
+    
+    let selectedRating = 0;
+    
+    const ratingTexts = {
+        1: '😞 Muy malo',
+        2: '😕 Malo',
+        3: '😐 Regular',
+        4: '😊 Bueno',
+        5: '🤩 ¡Excelente!'
+    };
+    
+    // Abrir modal de valoración
+    rateProductBtn.addEventListener('click', () => {
+        openRatingModal();
+    });
+    
+    // Cerrar modal de valoración
+    closeRatingModal.addEventListener('click', () => {
+        closeRatingModalFunc();
+    });
+    
+    cancelRating.addEventListener('click', () => {
+        closeRatingModalFunc();
+    });
+    
+    // Cerrar al hacer clic fuera
+    ratingModal.addEventListener('click', (e) => {
+        if (e.target === ratingModal) {
+            closeRatingModalFunc();
+        }
+    });
+    
+    // Manejo de estrellas
+    ratingStarsInput.forEach((star, index) => {
+        // Hover effect
+        star.addEventListener('mouseenter', () => {
+            highlightStars(index + 1);
+            ratingText.textContent = ratingTexts[index + 1];
+        });
+        
+        star.addEventListener('mouseleave', () => {
+            highlightStars(selectedRating);
+            if (selectedRating === 0) {
+                ratingText.textContent = 'Selecciona tu puntuación';
+            } else {
+                ratingText.textContent = ratingTexts[selectedRating];
+            }
+        });
+        
+        // Click para seleccionar
+        star.addEventListener('click', () => {
+            selectedRating = index + 1;
+            highlightStars(selectedRating);
+            ratingText.textContent = ratingTexts[selectedRating];
+            submitRating.disabled = false;
+            
+            // Animación de selección
+            star.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                star.style.transform = 'scale(1)';
+            }, 200);
+        });
+    });
+    
+    // Enviar valoración
+    submitRating.addEventListener('click', () => {
+        if (selectedRating > 0) {
+            const comment = document.getElementById('rating-comment').value;
+            
+            // Guardar valoración (simulado)
+            saveRating(selectedRating, comment);
+            
+            // Cerrar modal de valoración
+            closeRatingModalFunc();
+            
+            // Mostrar modal de agradecimiento
+            setTimeout(() => {
+                openThankYouModal();
+            }, 300);
+        }
+    });
+    
+    // Cerrar modal de agradecimiento
+    closeThankYou.addEventListener('click', () => {
+        closeThankYouModal();
+    });
+    
+    thankYouModal.addEventListener('click', (e) => {
+        if (e.target === thankYouModal) {
+            closeThankYouModal();
+        }
+    });
+    
+    // Funciones auxiliares
+    function highlightStars(count) {
+        ratingStarsInput.forEach((star, index) => {
+            if (index < count) {
+                star.classList.remove('far');
+                star.classList.add('fas', 'selected');
+            } else {
+                star.classList.remove('fas', 'selected');
+                star.classList.add('far');
+            }
+        });
+    }
+    
+    function openRatingModal() {
+        ratingModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeRatingModalFunc() {
+        ratingModal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Reset
+        selectedRating = 0;
+        highlightStars(0);
+        ratingText.textContent = 'Selecciona tu puntuación';
+        document.getElementById('rating-comment').value = '';
+        submitRating.disabled = true;
+    }
+    
+    function openThankYouModal() {
+        thankYouModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeThankYouModal() {
+        thankYouModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    function saveRating(rating, comment) {
+        // Simular guardado de valoración
+        const ratingData = {
+            productId: productData.id,
+            rating: rating,
+            comment: comment,
+            date: new Date().toISOString()
+        };
+        
+        // Obtener valoraciones existentes
+        let ratings = getFromStorage('productRatings', []);
+        ratings.push(ratingData);
+        saveToStorage('productRatings', ratings);
+        
+        console.log('Valoración guardada:', ratingData);
+        
+        // Actualizar visualización de estrellas en la página
+        updateProductRatingDisplay(rating);
+    }
+    
+    function updateProductRatingDisplay(newRating) {
+        // Actualizar el score mostrado (simulación simple)
+        const ratingScore = document.querySelector('.rating-score');
+        const ratingCount = document.querySelector('.rating-count');
+        
+        if (ratingScore && ratingCount) {
+            // Simular promedio
+            const currentScore = parseFloat(ratingScore.textContent);
+            const currentCount = parseInt(ratingCount.textContent.match(/\d+/)[0]);
+            const newCount = currentCount + 1;
+            const newAverage = ((currentScore * currentCount) + newRating) / newCount;
+            
+            ratingScore.textContent = newAverage.toFixed(1);
+            ratingCount.textContent = `(${newCount} valoraciones)`;
+            
+            // Animación
+            ratingScore.style.transform = 'scale(1.2)';
+            ratingScore.style.color = '#27ae60';
+            setTimeout(() => {
+                ratingScore.style.transform = 'scale(1)';
+                ratingScore.style.color = '#333';
+            }, 500);
+        }
+    }
+}
+
+// Cerrar modales con tecla Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const ratingModal = document.getElementById('rating-modal');
+        const thankYouModal = document.getElementById('thank-you-modal');
+        
+        if (ratingModal && ratingModal.classList.contains('active')) {
+            ratingModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        if (thankYouModal && thankYouModal.classList.contains('active')) {
+            thankYouModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+});
