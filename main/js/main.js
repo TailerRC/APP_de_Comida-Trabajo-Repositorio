@@ -650,6 +650,35 @@ window.addEventListener('scroll', () => {
         scrollButton.style.opacity = '0';
         scrollButton.style.pointerEvents = 'none';
     }
+    
+    // Ocultar indicador de scroll cuando el usuario hace scroll
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    if (scrollIndicator) {
+        if (window.scrollY > 100) {
+            scrollIndicator.classList.add('hidden');
+        } else {
+            scrollIndicator.classList.remove('hidden');
+        }
+    }
 });
 
+// ============================================
+// INDICADOR DE SCROLL - Click para bajar
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            // Buscar la siguiente sección después del hero
+            const featuresSection = document.querySelector('.features');
+            if (featuresSection) {
+                featuresSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+});
 

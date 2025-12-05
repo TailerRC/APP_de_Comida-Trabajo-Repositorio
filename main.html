@@ -85,11 +85,17 @@
         <button class="carousel-control carousel-prev" onclick="carouselPrev()"><i class="fas fa-chevron-left"></i></button>
         <button class="carousel-control carousel-next" onclick="carouselNext()"><i class="fas fa-chevron-right"></i></button>
 
-        <!-- Indicadores -->
-        <div class="carousel-indicators">
-            <label for="slide1" class="carousel-indicator carousel-indicator-1"></label>
-            <label for="slide2" class="carousel-indicator carousel-indicator-2"></label>
-            <label for="slide3" class="carousel-indicator carousel-indicator-3"></label>
+        <!-- Indicadores y Scroll combinados -->
+        <div class="bottom-indicators" id="scroll-indicator">
+            <span class="scroll-text">Desliza hacia abajo</span>
+            <div class="carousel-indicators">
+                <label for="slide1" class="carousel-indicator carousel-indicator-1"></label>
+                <label for="slide2" class="carousel-indicator carousel-indicator-2"></label>
+                <label for="slide3" class="carousel-indicator carousel-indicator-3"></label>
+            </div>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
     </section>
 
