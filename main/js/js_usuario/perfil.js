@@ -275,7 +275,7 @@ function irMetodoPago() {
 }
 
 function irMisPedidos() {
-    alert('Función de Mis Pedidos - Por implementar');
+    window.location.href = 'pedidos.html';
 }
 
 function toggleSwitch(element) {
