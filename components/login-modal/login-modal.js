@@ -167,7 +167,7 @@
         if (path.includes('/admin/')) {
             return '../main/';
         }
-        // Si estamos en la raíz (main.html)
+        // Si estamos en la raíz (index.html)
         return 'main/';
     }
 

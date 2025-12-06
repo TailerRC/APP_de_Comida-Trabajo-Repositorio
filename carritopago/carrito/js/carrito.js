@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <i class="fas fa-shopping-cart" style="font-size: 64px; color: #ccc; margin-bottom: 20px;"></i>
                 <h3 style="color: #666; margin-bottom: 10px;">Tu carrito está vacío</h3>
                 <p style="color: #999; margin-bottom: 30px;">Agrega productos para comenzar tu compra</p>
-                <a href="../../main.html" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Ir a la tienda</a>
+                <a href="../../index.html" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Ir a la tienda</a>
             </div>
         `;
     }

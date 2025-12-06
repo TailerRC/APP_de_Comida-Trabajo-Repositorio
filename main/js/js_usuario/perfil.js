@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
     
     if (!currentUser) {
         alert('No hay sesión activa. Redirigiendo al inicio.');
-        window.location.href = '../main.html';
+        window.location.href = '../index.html';
         return;
     }
     
@@ -23,7 +23,7 @@ function cargarDatosUsuario() {
     
     if (!currentUser) {
         alert('No hay sesión activa. Redirigiendo al inicio.');
-        window.location.href = '../main.html';
+        window.location.href = '../index.html';
         return;
     }
 
@@ -291,7 +291,7 @@ function cerrarSesion() {
 function confirmarCerrarSesion() {
     localStorage.removeItem('currentUser');
     cerrarModal('modalCerrarSesion');
-    window.location.href = '../main.html';
+    window.location.href = '../index.html';
 }
 
 // FUNCIONES DE UTILIDAD PARA MODALES

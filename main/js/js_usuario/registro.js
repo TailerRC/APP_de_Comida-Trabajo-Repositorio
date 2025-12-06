@@ -284,7 +284,7 @@ function mostrarModalConfirmacion() {
     
     // Evento para el botón continuar
     document.getElementById('btnContinuar').addEventListener('click', function() {
-        window.location.href = '../main.html';
+        window.location.href = '../index.html';
     });
 }
 
